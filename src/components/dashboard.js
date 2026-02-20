@@ -1,15 +1,15 @@
 import React, { useState, useMemo } from 'react';
-import './Dashboard.css';
-import KPIs from './KPIs';
-import Charts from './Charts';
-import { cteData } from '../data/cteData';
+import './dashboard.css';
+import KPIs from './kpis';
+import Charts from './charts';
+import { cteData } from '../data/cte_data';
  
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
   const [loading, setLoading] = useState(false);
  
   // Dados brutos
-  const rawData = cteData;
+  const rawData = cte_data;
  
   // Aplicar filtro nos dados
   const filteredData = useMemo(() => {
@@ -121,3 +121,4 @@ const Dashboard = () => {
  
 export default Dashboard;
  
+
