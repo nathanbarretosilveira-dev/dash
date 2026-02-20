@@ -3,96 +3,25 @@
   max-width: 1400px;
   margin: 0 auto;
 }
- 
-.filters {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  background: rgba(99, 102, 241, 0.05);
-  border: 1px solid rgba(99, 102, 241, 0.15);
-  border-radius: 16px;
-  padding: 0.5rem;
-}
- 
-.filter-btn {
-  padding: 0.625rem 1.25rem;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: #94a3b8;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
- 
-.filter-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s;
-}
- 
-.filter-btn:hover::before {
-  left: 100%;
-}
- 
-.filter-btn:hover {
-  color: #f8fafc;
-  background: rgba(99, 102, 241, 0.1);
-  border-color: rgba(99, 102, 241, 0.3);
-  transform: translateY(-2px);
-}
- 
-.filter-btn.active {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  color: #ffffff;
-  border-color: transparent;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
- 
-.filter-btn.active:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
- 
-@media (max-width: 768px) {
-  .dashboard {
-    padding: 1rem;
-  }
-  
-  .filters {
-    gap: 0.5rem;
-  }
-  
-  .filter-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-  }
 
-  /* =========================
+/* =========================
    FILTROS (TOPO DO DASHBOARD)
    ========================= */
 
 .filters-container {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   padding: 12px;
   margin-bottom: 24px;
+  flex-wrap: wrap;
 
   background: linear-gradient(135deg, #0f172a, #020617);
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid rgba(99, 102, 241, 0.15);
 
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03),
-              0 8px 30px rgba(0,0,0,0.4);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.03),
+    0 8px 30px rgba(0,0,0,0.4);
 }
 
 /* Botão base */
@@ -102,7 +31,7 @@
   outline: none;
   cursor: pointer;
 
-  padding: 8px 16px;
+  padding: 10px 18px;
   border-radius: 999px;
 
   font-size: 0.75rem;
@@ -112,38 +41,45 @@
   color: #c7d2fe;
   background: rgba(255, 255, 255, 0.04);
 
-  transition: all 0.25s ease;
-
   border: 1px solid rgba(255,255,255,0.08);
+
+  transition: all 0.25s ease;
 }
 
 /* Hover */
 .filter-btn:hover {
-  background: rgba(99, 102, 241, 0.15);
-  color: #fff;
+  background: rgba(99, 102, 241, 0.18);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
 /* Ativo */
 .filter-btn.active {
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
-  color: #fff;
+  color: #ffffff;
 
   box-shadow:
     0 0 0 1px rgba(99,102,241,0.5),
     0 6px 18px rgba(99,102,241,0.45);
 }
 
-/* Mobile */
+/* =========================
+   RESPONSIVO
+   ========================= */
+
 @media (max-width: 768px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
   .filters-container {
-    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .filter-btn {
     flex: 1 1 auto;
     text-align: center;
+    padding: 8px 14px;
+    font-size: 0.7rem;
   }
 }
- 
-
