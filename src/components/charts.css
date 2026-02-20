@@ -1,265 +1,57 @@
-/* =====================================================
-   CONTAINER PRINCIPAL
-   ===================================================== */
-.charts-container {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 24px;
-}
+/* ===================================================== CONTAINER PRINCIPAL ===================================================== */ .charts-container { display: flex; flex-direction: column; gap: 24px; padding: 24px; }
 
-/* Linha com gráficos */
-.charts-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
+/* Linha com gráficos */ .charts-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
-/* =====================================================
-   CARD PADRÃO (COM DETALHE NEON NAS LATERAIS)
-   ===================================================== */
-.chart-card {
-  background: linear-gradient(135deg, #14172b 0%, #1b2140 100%);
-  border-radius: 16px;
-  padding: 20px;
-  
-  /* Borda sutil superior e inferior */
-  border-top: 1px solid rgba(124, 108, 246, 0.1);
-  border-bottom: 1px solid rgba(124, 108, 246, 0.1);
-  border-left: none;
-  border-right: none;
+/* ===================================================== CARD PADRÃO (UNIFICADO) ===================================================== */ .chart-card { background: linear-gradient(135deg, #14172b 0%, #1b2140 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(124, 108, 246, 0.15); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); display: flex; flex-direction: column; }
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  display: flex;
-  flex-direction: column;
-  position: relative; /* Necessário para os pseudo-elementos laterais */
-  overflow: hidden;
-}
+.chart-card h3 { color: #fff; font-size: 0.95rem; font-weight: 600; margin-bottom: 20px; text-align: center; letter-spacing: 0.3px; text-transform: uppercase; opacity: 0.9; }
 
-/* DETALHE DE COR - LATERAL ESQUERDA */
-.chart-card::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 20%;
-  width: 3px;
-  height: 60%;
-  background: linear-gradient(180deg, #6366f1, #a855f7);
-  border-radius: 0 4px 4px 0;
-  box-shadow: 2px 0 10px rgba(99, 102, 241, 0.5);
-}
+.chart-content { flex: 1; min-height: 260px; position: relative; display: flex; flex-direction: column; justify-content: center; }
 
-/* DETALHE DE COR - LATERAL DIREITA */
-.chart-card::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 20%;
-  width: 3px;
-  height: 60%;
-  background: linear-gradient(180deg, #a855f7, #6366f1);
-  border-radius: 4px 0 0 4px;
-  box-shadow: -2px 0 10px rgba(168, 85, 247, 0.5);
-}
+/* Timeline ocupa linha inteira */ .timeline-fullwidth { grid-column: 1 / -1; }
 
-.chart-card h3 {
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-align: center;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  opacity: 0.9;
-}
+.timeline-fullwidth .chart-content { height: 320px; justify-content: flex-end; }
 
-.chart-content {
-  flex: 1;
-  min-height: 260px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+/* ===================================================== BARRAS HORIZONTAIS (PRODUTIVIDADE / CANCELAMENTOS) ===================================================== */ .horizontal-bars { display: flex; flex-direction: column; gap: 14px; }
 
-/* Timeline ocupa linha inteira */
-.timeline-fullwidth {
-  grid-column: 1 / -1;
-}
+.bar-item { display: flex; align-items: center; gap: 12px; }
 
-.timeline-fullwidth .chart-content {
-  height: 320px;
-  justify-content: flex-end;
-}
+.bar-label { min-width: 100px; text-align: right; font-size: 0.75rem; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* =====================================================
-   BARRAS HORIZONTAIS (PRODUTIVIDADE / CANCELAMENTOS)
-   ===================================================== */
-.horizontal-bars {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
+.bar-wrapper { flex: 1; height: 24px; background: rgba(255, 255, 255, 0.06); border-radius: 6px; overflow: hidden; }
 
-.bar-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.bar-fill { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: #fff; font-size: 0.7rem; font-weight: 700; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
 
-.bar-label {
-  min-width: 100px;
-  text-align: right;
-  font-size: 0.75rem;
-  color: #94a3b8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.bar-fill.produtividade { background: linear-gradient(90deg, #7c6cf6, #9b8cff); }
 
-.bar-wrapper {
-  flex: 1;
-  height: 24px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 6px;
-  overflow: hidden;
-}
+.bar-fill.cancelamento { background: linear-gradient(90deg, #f45b69, #ef4444); }
 
-.bar-fill {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 10px;
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* ===================================================== INDICADOR DE TURNO (BARRA REAL) ==================================================== */ .turno-container { display: flex; flex-direction: column; gap: 20px; }
 
-.bar-fill.produtividade {
-  background: linear-gradient(90deg, #7c6cf6, #9b8cff);
-}
+.turno-section { display: flex; flex-direction: column; gap: 8px; }
 
-.bar-fill.cancelamento {
-  background: linear-gradient(90deg, #f45b69, #ef4444);
-}
+.turno-info { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; }
 
-/* =====================================================
-   INDICADOR DE TURNO (BARRA REAL)
-   ==================================================== */
-.turno-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+.turno-bar-wrapper { height: 32px; background: rgba(255, 255, 255, 0.06); border-radius: 8px; overflow: hidden; }
 
-.turno-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+.turno-bar { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: #fff; transition: width 0.6s ease; }
 
-.turno-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: #94a3b8;
-}
+.turno-bar.antes { background: linear-gradient(90deg, #3b82f6, #60a5fa); } .turno-bar.depois { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
 
-.turno-bar-wrapper {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  overflow: hidden;
-}
+/* ===================================================== TIMELINE DE OPERAÇÃO (CORREÇÃO HORIZONTAL) ===================================================== / .timeline-container { display: flex; flex-direction: row; align-items: flex-end; justify-content: space-between; height: 220px; width: 100%; padding: 20px 0; gap: 6px; / Ajuste fino no espaçamento entre barras */ }
 
-.turno-bar {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #fff;
-  transition: width 0.6s ease;
-}
+.timeline-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; position: relative; }
 
-.turno-bar.antes { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
-.turno-bar.depois { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.timeline-value { font-size: 0.65rem; font-weight: 700; color: #fff; margin-bottom: 6px; background: rgba(124, 108, 246, 0.2); padding: 2px 5px; border-radius: 4px; transition: opacity 0.3s; }
 
-/* =====================================================
-   TIMELINE DE OPERAÇÃO (CORREÇÃO HORIZONTAL)
-   ===================================================== */
-.timeline-container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: space-between;
-  height: 220px;
-  width: 100%;
-  padding: 20px 0;
-  gap: 6px;
-}
+.timeline-bar { width: 100%; min-width: 10px; background: linear-gradient(180deg, #7c6cf6, #5a4ad1); /* Roxo para combinar com o layout */ border-radius: 4px 4px 0 0; transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-.timeline-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  height: 100%;
-  position: relative;
-}
+/* Destaque de Pico */ .timeline-item.pico .timeline-bar { background: linear-gradient(180deg, #fbbf24, #f59e0b); box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
 
-.timeline-value {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 6px;
-  background: rgba(124, 108, 246, 0.2);
-  padding: 2px 5px;
-  border-radius: 4px;
-  transition: opacity 0.3s;
-}
+.timeline-label { font-size: 0.6rem; color: #64748b; margin-top: 12px; white-space: nowrap; transform: rotate(-45deg); font-weight: 600; }
 
-.timeline-bar {
-  width: 100%;
-  min-width: 10px;
-  background: linear-gradient(180deg, #7c6cf6, #5a4ad1);
-  border-radius: 4px 4px 0 0;
-  transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+/* Ajuste específico para o card da timeline / .timeline-fullwidth .chart-content { height: 300px; padding-bottom: 45px; / Espaço extra para os rótulos rotacionados */ }
 
-.timeline-item.pico .timeline-bar {
-  background: linear-gradient(180deg, #fbbf24, #f59e0b);
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
-}
+/* ===================================================== RESPONSIVIDADE ===================================================== */ @media (max-width: 1200px) { .charts-row { grid-template-columns: 1fr; } .chart-content { min-height: 200px; } }
 
-.timeline-label {
-  font-size: 0.6rem;
-  color: #64748b;
-  margin-top: 12px;
-  white-space: nowrap;
-  transform: rotate(-45deg);
-  font-weight: 600;
-}
-
-.timeline-fullwidth .chart-content {
-  height: 300px;
-  padding-bottom: 45px;
-}
-
-/* =====================================================
-   RESPONSIVIDADE
-   ===================================================== */
-@media (max-width: 1200px) {
-  .charts-row { grid-template-columns: 1fr; }
-  .chart-content { min-height: 200px; }
-}
-
-@media (max-width: 768px) {
-  .timeline-container { gap: 4px; }
-  .timeline-label { font-size: 0.55rem; margin-top: 15px; }
-  .bar-label { min-width: 80px; }
-}
+@media (max-width: 768px) { .timeline-container { gap: 4px; } .timeline-label { font-size: 0.55rem; margin-top: 15px; } .bar-label { min-width: 80px; } }
