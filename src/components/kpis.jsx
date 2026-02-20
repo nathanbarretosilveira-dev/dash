@@ -1,9 +1,19 @@
 import React from 'react';
 import './kpis.css';
- 
+
 const KPIs = ({ data }) => {
-  const { resumo } = data;
- 
+  if (!data || !data.resumo) return null;
+
+  const {
+    resumo,
+    emissoes_por_usuario = []
+  } = data;
+
+  // Produtividade média real
+  const totalEmissoes = resumo.total_emissoes || 0;
+  const totalUsuarios = emissoes_por_usuario.length || 1;
+  const produtividadeMedia = Math.round(totalEmissoes / totalUsuarios);
+
   const kpis = [
     {
       title: 'Total de Emissões',
@@ -26,8 +36,8 @@ const KPIs = ({ data }) => {
     {
       title: 'Taxa de Eficiência',
       value: `${resumo.taxa_eficiencia.toFixed(2)}%`,
-      trend: 'Abaixo da meta',
-      trendUp: false,
+      trend: resumo.taxa_eficiencia >= 95 ? 'Dentro da meta' : 'Abaixo da meta',
+      trendUp: resumo.taxa_eficiencia >= 95,
       detail: 'meta: 95%',
       icon: '📊',
       color: 'green',
@@ -35,20 +45,21 @@ const KPIs = ({ data }) => {
     },
     {
       title: 'Produtividade Média',
-      value: resumo.produtividade_media,
-      trend: 'CT-es/pessoa',
+      value: produtividadeMedia,
+      trend: 'CT-es / pessoa',
       trendUp: true,
-      detail: 'NATHAN.B: líder',
+      detail: `Equipe: ${totalUsuarios} usuários`,
       icon: '👥',
       color: 'orange'
     }
   ];
- 
+
   return (
     <div className="kpis-container">
       {kpis.map((kpi, index) => (
         <div key={index} className={`kpi-card ${kpi.color}`}>
           <div className="kpi-icon">{kpi.icon}</div>
+
           <div className="kpi-content">
             <div className="kpi-header">
               <span className="kpi-title">{kpi.title}</span>
@@ -56,15 +67,18 @@ const KPIs = ({ data }) => {
                 {kpi.trendUp ? '↑' : '↓'} {kpi.trend}
               </span>
             </div>
+
             <div className="kpi-value">{kpi.value}</div>
-            {kpi.progress && (
+
+            {kpi.progress !== undefined && (
               <div className="kpi-progress">
-                <div 
-                  className="kpi-progress-bar" 
+                <div
+                  className="kpi-progress-bar"
                   style={{ width: `${kpi.progress}%` }}
-                ></div>
+                />
               </div>
             )}
+
             <div className="kpi-detail">{kpi.detail}</div>
           </div>
         </div>
@@ -72,7 +86,5 @@ const KPIs = ({ data }) => {
     </div>
   );
 };
- 
-export default KPIs;
- 
 
+export default KPIs;
