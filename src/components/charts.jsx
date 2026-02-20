@@ -75,40 +75,34 @@ const Charts = ({ data }) => {
         </div>
 
         {/* Indicador de Turno */}
-        <div className="chart-card">
-          <h3 className="chart-title">Indicador de Turno (Corte 14h)</h3>
+        const TurnoIndicator = ({ antes, depois }) => {
+  const total = antes + depois;
 
-          <div className="turno-content">
-            {[
-              { label: 'Antes 14h', value: volume_por_turno.antes_14h, percent: percentAntes, color: '#06b6d4' },
-              { label: 'Depois 14h', value: volume_por_turno.depois_14h, percent: percentDepois, color: '#f59e0b' }
-            ].map((t, i) => (
-              <div key={i} className="turno-item">
-                <div className="turno-label">
-                  <span className="turno-dot" style={{ background: t.color }}></span>
-                  {t.label}
-                </div>
-                <div className="turno-value">{t.value}</div>
-                <div className="turno-percent">{t.percent}%</div>
-                <div className="turno-bar">
-                  <div
-                    className="turno-bar-fill"
-                    style={{
-                      width: `${t.percent}%`,
-                      background: `linear-gradient(90deg, ${t.color}, #ffffff)`
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
+  return (
+    <div className="card">
+      <h3>Indicador de Turno (Corte 14h)</h3>
 
-            <div className="turno-total">
-              Total: {totalTurno} CT-es
-            </div>
-          </div>
+      <div className="turno-bar">
+        <div
+          className="antes"
+          style={{ width: `${(antes / total) * 100}%` }}
+        >
+          Antes 14h ({antes})
+        </div>
+
+        <div
+          className="depois"
+          style={{ width: `${(depois / total) * 100}%` }}
+        >
+          Depois 14h ({depois})
         </div>
       </div>
 
+      <small>Total: {total} CT-es</small>
+    </div>
+  );
+};
+      
       {/* Timeline */}
       <div className="chart-card timeline-card">
         <h3 className="chart-title">Timeline de Operação</h3>
@@ -135,3 +129,4 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
+
