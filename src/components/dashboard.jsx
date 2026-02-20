@@ -12,6 +12,9 @@ const Dashboard = () => {
   const rawData = cteData ?? {};
 
   const filteredData = useMemo(() => {
+    /* =========================
+       FILTRO DE PERÍODO
+       ========================= */
     let diasFiltrados = rawData.dados_por_dia || [];
 
     if (activeFilter === 'hoje') diasFiltrados = getHoje(diasFiltrados);
@@ -19,10 +22,33 @@ const Dashboard = () => {
 
     const periodo = somarPeriodo(diasFiltrados);
 
+    /* =========================
+       FILTRO DE USUÁRIO
+       ========================= */
     const usuariosFiltrados = (rawData.emissoes_por_usuario || []).filter(u =>
       u.nome.toLowerCase().includes(userFilter.toLowerCase())
     );
 
+    const cancelamentosFiltrados = (rawData.cancelamentos_por_usuario || []).filter(u =>
+      u.nome.toLowerCase().includes(userFilter.toLowerCase())
+    );
+
+    /* =========================
+       REPROCESSA TURNO
+       ========================= */
+    const timelineFiltrada = rawData.timeline_operacao || [];
+
+    const antes14h = timelineFiltrada
+      .filter(i => Number(i.hora.split(':')[0]) < 14)
+      .reduce((acc, i) => acc + (i.emissoes ?? i.volume ?? 0), 0);
+
+    const depois14h = timelineFiltrada
+      .filter(i => Number(i.hora.split(':')[0]) >= 14)
+      .reduce((acc, i) => acc + (i.emissoes ?? i.volume ?? 0), 0);
+
+    /* =========================
+       RESULTADO FINAL
+       ========================= */
     return {
       resumo: {
         total_emissoes: periodo.emissoes,
@@ -38,12 +64,14 @@ const Dashboard = () => {
       },
 
       emissoes_por_usuario: usuariosFiltrados,
-      cancelamentos_por_usuario: (rawData.cancelamentos_por_usuario || []).filter(u =>
-        u.nome.toLowerCase().includes(userFilter.toLowerCase())
-      ),
+      cancelamentos_por_usuario: cancelamentosFiltrados,
 
-      emissoes_por_turno: rawData.emissoes_por_turno,
-      timeline: rawData.timeline_operacao
+      volume_por_turno: {
+        antes_14h: antes14h,
+        depois_14h: depois14h
+      },
+
+      timeline: timelineFiltrada
     };
   }, [activeFilter, userFilter, rawData]);
 
@@ -79,4 +107,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
