@@ -24,8 +24,11 @@ const Charts = ({ data }) => {
   const percentAntes = ((volume_por_turno.antes_14h / totalTurno) * 100).toFixed(0);
   const percentDepois = ((volume_por_turno.depois_14h / totalTurno) * 100).toFixed(0);
 
-  const maxTimeline = Math.max(...timeline.map(i => i.volume), 1);
-
+  const maxTimeline = Math.max(
+     ...timeline.map(i => i.volume ?? i.emissoes ?? 0),
+  1
+);
+  
   return (
     <div className="charts-container">
       <div className="charts-row">
@@ -130,3 +133,4 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
+
