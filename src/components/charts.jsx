@@ -115,36 +115,37 @@ const Charts = ({ data }) => {
         </div>
 
         {/* ================= TIMELINE ================= */}
-        <div className="chart-card timeline-fullwidth">
-          <h3>Timeline de Operação (07:00 - 23:00)</h3>
-          <div className="chart-content">
-            <div className="timeline-container">
-              {timeline
-                .filter(item => {
-                  const hora = parseInt(item.hora.split(':')[0]);
-                  return hora >= 7 && hora <= 23;
-                })
-                .map((item, index) => {
-                  // LENDO O VALOR FILTRADO VINDO DO DASHBOARD
-                  const valor = item.valorEfetivo ?? 0;
-                  const isPico = valor === maxTimeline && valor > 0;
-                  const alturaBarra = `${(valor / maxTimeline) * 100}%`;
+<div className="chart-card timeline-fullwidth">
+  <h3>Timeline de Operação (07:00 - 23:00)</h3>
+  <div className="chart-content">
+    <div className="timeline-container">
+      {timeline
+        .filter(item => {
+          // Extraímos a hora como número
+          const hora = parseInt(item.hora.split(':')[0]);
+          // Ajustamos para incluir EXATAMENTE o início (07) e o fim (23)
+          return hora >= 7 && hora <= 23;
+        })
+        .map((item, index) => {
+          const valor = item.valorEfetivo ?? 0;
+          const isPico = valor === maxTimeline && valor > 0;
+          const alturaBarra = `${(valor / maxTimeline) * 100}%`;
 
-                  return (
-                    <div key={index} className={`timeline-item ${isPico ? 'pico' : ''}`}>
-                      <span className="timeline-value">{valor}</span>
-                      <div className="timeline-bar" style={{ height: alturaBarra }} />
-                      <span className="timeline-label">{item.hora}</span>
-                    </div>
-                  );
-                })}
+          return (
+            <div key={index} className={`timeline-item ${isPico ? 'pico' : ''}`}>
+              <span className="timeline-value">{valor}</span>
+              <div className="timeline-bar" style={{ height: alturaBarra }} />
+              <span className="timeline-label">{item.hora}</span>
             </div>
-          </div>
-        </div>
-
+          );
+        })}
+    </div>
+  </div>
+</div>
       </div>
     </div>
   );
 };
 
 export default Charts;
+
