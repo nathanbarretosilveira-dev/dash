@@ -76,5 +76,74 @@
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
   }
+
+  /* =========================
+   FILTROS (TOPO DO DASHBOARD)
+   ========================= */
+
+.filters-container {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 24px;
+
+  background: linear-gradient(135deg, #0f172a, #020617);
+  border-radius: 14px;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03),
+              0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* Botão base */
+.filter-btn {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  color: #c7d2fe;
+  background: rgba(255, 255, 255, 0.04);
+
+  transition: all 0.25s ease;
+
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Hover */
+.filter-btn:hover {
+  background: rgba(99, 102, 241, 0.15);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Ativo */
+.filter-btn.active {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: #fff;
+
+  box-shadow:
+    0 0 0 1px rgba(99,102,241,0.5),
+    0 6px 18px rgba(99,102,241,0.45);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .filters-container {
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
 }
  
+
