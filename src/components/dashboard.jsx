@@ -65,19 +65,16 @@ const Dashboard = () => {
     const somaTimeline = timelineFiltrada.reduce((acc, curr) => acc + curr.valorEfetivo, 0);
     
     if (somaTimeline !== totalEmissoesFiltradas && totalEmissoesFiltradas > 0) {
-      // Se a soma for diferente de zero, ajustamos a escala para bater com o KPI
       const ajuste = totalEmissoesFiltradas / (somaTimeline || 1);
       timelineFiltrada = timelineFiltrada.map(t => ({
         ...t,
         valorEfetivo: Math.round(t.valorEfetivo * ajuste)
       }));
 
-      // Ajuste fino final: se ainda houver diferença de 1 ou 2 unidades por arredondamento
       let novaSoma = timelineFiltrada.reduce((acc, curr) => acc + curr.valorEfetivo, 0);
       let diferenca = totalEmissoesFiltradas - novaSoma;
       
       if (diferenca !== 0) {
-        // Adicionamos a diferença na maior barra para não distorcer o gráfico
         const maxIdx = timelineFiltrada.reduce((iMax, x, i, arr) => x.valorEfetivo > arr[iMax].valorEfetivo ? i : iMax, 0);
         timelineFiltrada[maxIdx].valorEfetivo += diferenca;
       }
@@ -103,9 +100,9 @@ const Dashboard = () => {
     };
   }, [activeFilter, userFilter, rawData]);
 
-    return (
+  return (
     <div className="dashboard">
-      {/* Adicionamos a classe filters-container para aplicar o fundo, bordas e o margin-bottom */}
+      {/* Container de filtros com a classe que aplica o espaçamento e estilo neon */}
       <div className="filters-container">
         {[
           ['todos', 'Todos'],
@@ -129,11 +126,7 @@ const Dashboard = () => {
         />
       </div>
 
-      <KPIs data={filteredData} />
-      <Charts data={filteredData} />
-    </div>
-  );
-
+      {/* Componentes de exibição de dados */}
       <KPIs data={filteredData} />
       <Charts data={filteredData} />
     </div>
@@ -141,4 +134,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
