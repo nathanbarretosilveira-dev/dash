@@ -1,57 +1,228 @@
-/* ===================================================== CONTAINER PRINCIPAL ===================================================== */ .charts-container { display: flex; flex-direction: column; gap: 24px; padding: 24px; }
+/* ===================================================== 
+   CONTAINER PRINCIPAL 
+   ===================================================== */ 
+.charts-container { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 24px; 
+  padding: 24px; 
+}
 
-/* Linha com gráficos */ .charts-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+/* Linha com gráficos */ 
+.charts-row { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 24px; 
+}
 
-/* ===================================================== CARD PADRÃO (UNIFICADO) ===================================================== */ .chart-card { background: linear-gradient(135deg, #14172b 0%, #1b2140 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(124, 108, 246, 0.15); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); display: flex; flex-direction: column; }
+/* ===================================================== 
+   CARD PADRÃO (UNIFICADO) 
+   ===================================================== */ 
+.chart-card { 
+  background: linear-gradient(135deg, #14172b 0%, #1b2140 100%); 
+  border-radius: 16px; 
+  padding: 20px; 
+  border: 1px solid rgba(124, 108, 246, 0.15); 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); 
+  display: flex; 
+  flex-direction: column; 
+}
 
-.chart-card h3 { color: #fff; font-size: 0.95rem; font-weight: 600; margin-bottom: 20px; text-align: center; letter-spacing: 0.3px; text-transform: uppercase; opacity: 0.9; }
+.chart-card h3 { 
+  color: #fff; 
+  font-size: 0.95rem; 
+  font-weight: 600; 
+  margin-bottom: 20px; 
+  text-align: center; 
+  letter-spacing: 0.3px; 
+  text-transform: uppercase; 
+  opacity: 0.9; 
+}
 
-.chart-content { flex: 1; min-height: 260px; position: relative; display: flex; flex-direction: column; justify-content: center; }
+.chart-content { 
+  flex: 1; 
+  min-height: 260px; 
+  position: relative; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+}
 
-/* Timeline ocupa linha inteira */ .timeline-fullwidth { grid-column: 1 / -1; }
+/* Timeline ocupa linha inteira */ 
+.timeline-fullwidth { 
+  grid-column: 1 / -1; 
+}
 
-.timeline-fullwidth .chart-content { height: 320px; justify-content: flex-end; }
+.timeline-fullwidth .chart-content { 
+  height: 320px; 
+  justify-content: flex-end; 
+}
 
-/* ===================================================== BARRAS HORIZONTAIS (PRODUTIVIDADE / CANCELAMENTOS) ===================================================== */ .horizontal-bars { display: flex; flex-direction: column; gap: 14px; }
+/* ===================================================== 
+   BARRAS HORIZONTAIS (PRODUTIVIDADE / CANCELAMENTOS) 
+   ===================================================== */ 
+.horizontal-bars { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px; 
+}
 
-.bar-item { display: flex; align-items: center; gap: 12px; }
+.bar-item { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
 
-.bar-label { min-width: 100px; text-align: right; font-size: 0.75rem; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-label { 
+  min-width: 100px; 
+  text-align: right; 
+  font-size: 0.75rem; 
+  color: #94a3b8; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
 
-.bar-wrapper { flex: 1; height: 24px; background: rgba(255, 255, 255, 0.06); border-radius: 6px; overflow: hidden; }
+.bar-wrapper { 
+  flex: 1; 
+  height: 24px; 
+  background: rgba(255, 255, 255, 0.06); 
+  border-radius: 6px; 
+  overflow: hidden; 
+}
 
-.bar-fill { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: #fff; font-size: 0.7rem; font-weight: 700; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.bar-fill { 
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: flex-end; 
+  padding-right: 10px; 
+  color: #fff; 
+  font-size: 0.7rem; 
+  font-weight: 700; 
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+}
 
 .bar-fill.produtividade { background: linear-gradient(90deg, #7c6cf6, #9b8cff); }
-
 .bar-fill.cancelamento { background: linear-gradient(90deg, #f45b69, #ef4444); }
 
-/* ===================================================== INDICADOR DE TURNO (BARRA REAL) ==================================================== */ .turno-container { display: flex; flex-direction: column; gap: 20px; }
+/* ===================================================== 
+   INDICADOR DE TURNO (BARRA REAL) 
+   ==================================================== */ 
+.turno-container { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 20px; 
+}
 
-.turno-section { display: flex; flex-direction: column; gap: 8px; }
+.turno-section { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; 
+}
 
-.turno-info { display: flex; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; }
+.turno-info { 
+  display: flex; 
+  justify-content: space-between; 
+  font-size: 0.8rem; 
+  color: #94a3b8; 
+}
 
-.turno-bar-wrapper { height: 32px; background: rgba(255, 255, 255, 0.06); border-radius: 8px; overflow: hidden; }
+.turno-bar-wrapper { 
+  height: 32px; 
+  background: rgba(255, 255, 255, 0.06); 
+  border-radius: 8px; 
+  overflow: hidden; 
+}
 
-.turno-bar { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: #fff; transition: width 0.6s ease; }
+.turno-bar { 
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 0.8rem; 
+  font-weight: 700; 
+  color: #fff; 
+  transition: width 0.6s ease; 
+}
 
-.turno-bar.antes { background: linear-gradient(90deg, #3b82f6, #60a5fa); } .turno-bar.depois { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.turno-bar.antes { background: linear-gradient(90deg, #3b82f6, #60a5fa); } 
+.turno-bar.depois { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
 
-/* ===================================================== TIMELINE DE OPERAÇÃO (CORREÇÃO HORIZONTAL) ===================================================== / .timeline-container { display: flex; flex-direction: row; align-items: flex-end; justify-content: space-between; height: 220px; width: 100%; padding: 20px 0; gap: 6px; / Ajuste fino no espaçamento entre barras */ }
+/* ===================================================== 
+   TIMELINE DE OPERAÇÃO (CORREÇÃO HORIZONTAL) 
+   ===================================================== */ 
+.timeline-container { 
+  display: flex; 
+  flex-direction: row; 
+  align-items: flex-end; 
+  justify-content: space-between; 
+  height: 220px; 
+  width: 100%; 
+  padding: 20px 0; 
+  gap: 6px; 
+}
 
-.timeline-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; position: relative; }
+.timeline-item { 
+  flex: 1; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: flex-end; 
+  height: 100%; 
+  position: relative; 
+}
 
-.timeline-value { font-size: 0.65rem; font-weight: 700; color: #fff; margin-bottom: 6px; background: rgba(124, 108, 246, 0.2); padding: 2px 5px; border-radius: 4px; transition: opacity 0.3s; }
+.timeline-value { 
+  font-size: 0.65rem; 
+  font-weight: 700; 
+  color: #fff; 
+  margin-bottom: 6px; 
+  background: rgba(124, 108, 246, 0.2); 
+  padding: 2px 5px; 
+  border-radius: 4px; 
+  transition: opacity 0.3s; 
+}
 
-.timeline-bar { width: 100%; min-width: 10px; background: linear-gradient(180deg, #7c6cf6, #5a4ad1); /* Roxo para combinar com o layout */ border-radius: 4px 4px 0 0; transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.timeline-bar { 
+  width: 100%; 
+  min-width: 10px; 
+  background: linear-gradient(180deg, #7c6cf6, #5a4ad1); 
+  border-radius: 4px 4px 0 0; 
+  transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
 
-/* Destaque de Pico */ .timeline-item.pico .timeline-bar { background: linear-gradient(180deg, #fbbf24, #f59e0b); box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+/* Destaque de Pico */ 
+.timeline-item.pico .timeline-bar { 
+  background: linear-gradient(180deg, #fbbf24, #f59e0b); 
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); 
+}
 
-.timeline-label { font-size: 0.6rem; color: #64748b; margin-top: 12px; white-space: nowrap; transform: rotate(-45deg); font-weight: 600; }
+.timeline-label { 
+  font-size: 0.6rem; 
+  color: #64748b; 
+  margin-top: 12px; 
+  white-space: nowrap; 
+  transform: rotate(-45deg); 
+  font-weight: 600; 
+}
 
-/* Ajuste específico para o card da timeline / .timeline-fullwidth .chart-content { height: 300px; padding-bottom: 45px; / Espaço extra para os rótulos rotacionados */ }
+/* Ajuste específico para o card da timeline */ 
+.timeline-fullwidth .chart-content { 
+  height: 300px; 
+  padding-bottom: 45px; 
+}
 
-/* ===================================================== RESPONSIVIDADE ===================================================== */ @media (max-width: 1200px) { .charts-row { grid-template-columns: 1fr; } .chart-content { min-height: 200px; } }
+/* ===================================================== 
+   RESPONSIVIDADE 
+   ===================================================== */ 
+@media (max-width: 1200px) { 
+  .charts-row { grid-template-columns: 1fr; } 
+  .chart-content { min-height: 200px; } 
+}
 
-@media (max-width: 768px) { .timeline-container { gap: 4px; } .timeline-label { font-size: 0.55rem; margin-top: 15px; } .bar-label { min-width: 80px; } }
+@media (max-width: 768px) { 
+  .timeline-container { gap: 4px; } 
+  .timeline-label { font-size: 0.55rem; margin-top: 15px; } 
+  .bar-label { min-width: 80px; } 
+}
