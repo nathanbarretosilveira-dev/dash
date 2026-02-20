@@ -1,5 +1,5 @@
 import React from 'react';
-import './Charts.css';
+import './charts.css';
  
 const Charts = ({ data }) => {
   const { emissoes_por_usuario, cancelamentos_por_usuario, volume_por_turno, timeline } = data;
@@ -131,3 +131,4 @@ const Charts = ({ data }) => {
  
 export default Charts;
  
+
