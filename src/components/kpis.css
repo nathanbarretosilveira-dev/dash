@@ -21,10 +21,10 @@
   overflow: hidden;
 }
 
-/* Barra lateral colorida */
+/* Barra lateral colorida estática */
 .kpi-card::before {
   content: '';
-  display: block;           /* garante que o ::before seja renderizado */
+  display: block;           /* precisa ser block */
   position: absolute;
   top: 0;
   left: 0;
@@ -32,55 +32,26 @@
   height: 100%;             /* ocupa todo o card verticalmente */
   border-radius: 12px 0 0 12px;
   z-index: 10;              /* acima do fundo do card */
-  transition: background 0.5s ease, background-size 0.5s ease;
 }
 
-/* Cores específicas iniciais da barra (sempre visível) */
+/* Cores específicas da barra (estática) */
 .kpi-purple::before {
-  background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+  background-color: #8b5cf6;
 }
 .kpi-red::before {
-  background: linear-gradient(to bottom, #ef4444, #f97316);
+  background-color: #ef4444;
 }
 .kpi-green::before {
-  background: linear-gradient(to bottom, #10b981, #34d399);
+  background-color: #10b981;
 }
 .kpi-orange::before {
-  background: linear-gradient(to bottom, #f59e0b, #fbbf24);
+  background-color: #fbbf24;
 }
 
-/* Efeito hover do card */
+/* Efeito hover apenas do card (sem alterar a barra) */
 .kpi-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-/* Gradiente animado ao passar o mouse */
-.kpi-card.kpi-purple:hover::before {
-  background: linear-gradient(to bottom, #6366f1, #8b5cf6, #a78bfa, #6366f1);
-  background-size: 100% 400%;
-  animation: slideGradient 3s linear infinite;
-}
-.kpi-card.kpi-red:hover::before {
-  background: linear-gradient(to bottom, #ef4444, #f97316, #fca5a5, #ef4444);
-  background-size: 100% 400%;
-  animation: slideGradient 3s linear infinite;
-}
-.kpi-card.kpi-green:hover::before {
-  background: linear-gradient(to bottom, #10b981, #34d399, #6ee7b7, #10b981);
-  background-size: 100% 400%;
-  animation: slideGradient 3s linear infinite;
-}
-.kpi-card.kpi-orange:hover::before {
-  background: linear-gradient(to bottom, #f59e0b, #fbbf24, #fde68a, #f59e0b);
-  background-size: 100% 400%;
-  animation: slideGradient 3s linear infinite;
-}
-
-/* Animação da barra */
-@keyframes slideGradient {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 100%; }
 }
 
 /* Conteúdo do card */
