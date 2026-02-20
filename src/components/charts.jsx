@@ -11,9 +11,6 @@ const Charts = ({ data }) => {
     timeline = []
   } = data;
 
-  /* =========================
-     RECÁLCULO SEMPRE QUE DATA MUDA
-     ========================= */
   const {
     maxEmissoes,
     maxCancelamentos,
@@ -45,7 +42,6 @@ const Charts = ({ data }) => {
     <div className="charts-container">
       <div className="charts-row">
         
-        {/* ================= PRODUTIVIDADE ================= */}
         <div className="chart-card">
           <h3>Produtividade por Emissor</h3>
           <div className="chart-content horizontal-bars">
@@ -65,7 +61,6 @@ const Charts = ({ data }) => {
           </div>
         </div>
 
-        {/* ================= CANCELAMENTOS ================= */}
         <div className="chart-card">
           <h3>Análise de Cancelamentos</h3>
           <div className="chart-content horizontal-bars">
@@ -85,7 +80,6 @@ const Charts = ({ data }) => {
           </div>
         </div>
 
-        {/* ================= TURNO ================= */}
         <div className="chart-card">
           <h3>Indicador de Turno (Corte 14h)</h3>
           <div className="chart-content turno-container">
@@ -116,7 +110,6 @@ const Charts = ({ data }) => {
           </div>
         </div>
 
-        {/* ================= TIMELINE ================= */}
         <div className="chart-card timeline-fullwidth">
           <h3>Timeline de Operação (07:00 - 23:00)</h3>
           <div className="chart-content timeline-container">
@@ -141,8 +134,8 @@ const Charts = ({ data }) => {
           </div>
         </div>
 
-      </div> {/* Fim da charts-row */}
-    </div> {/* Fim da charts-container */}
+      </div>
+    </div>
   );
 };
 
