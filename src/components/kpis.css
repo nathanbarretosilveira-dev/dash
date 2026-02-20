@@ -31,21 +31,26 @@
   width: 6px; /* largura da barra */
   border-radius: 12px 0 0 12px;
   z-index: 1; /* garante que fique visível sobre o fundo */
+  background: gray; /* fallback caso a cor não seja aplicada */
   transition: background 0.5s ease, background-size 0.5s ease;
 }
 
-/* Cores específicas iniciais da barra (gradientes fixos) */
+/* Cores específicas iniciais da barra */
 .kpi-purple::before {
   background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+  background-size: 100% 100%;
 }
 .kpi-red::before {
   background: linear-gradient(to bottom, #ef4444, #f97316);
+  background-size: 100% 100%;
 }
 .kpi-green::before {
   background: linear-gradient(to bottom, #10b981, #34d399);
+  background-size: 100% 100%;
 }
 .kpi-orange::before {
   background: linear-gradient(to bottom, #f59e0b, #fbbf24);
+  background-size: 100% 100%;
 }
 
 /* Efeito hover do card */
