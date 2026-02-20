@@ -82,4 +82,46 @@
     padding: 8px 14px;
     font-size: 0.7rem;
   }
+  
+  .user-filter {
+  appearance: none;
+  border: none;
+  outline: none;
+
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  color: #e0e7ff;
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  min-width: 180px;
+
+  transition: all 0.25s ease;
+
+.user-filter:hover {
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.user-filter:focus {
+  background: rgba(99, 102, 241, 0.18);
+  border-color: rgba(99,102,241,0.5);
+  box-shadow: 0 0 0 1px rgba(99,102,241,0.35);
+}
+
+.user-filter::placeholder {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .user-filter {
+    flex: 1 1 100%;
+    text-align: center;
+  }
 }
