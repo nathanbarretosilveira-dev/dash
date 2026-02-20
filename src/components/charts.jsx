@@ -111,28 +111,30 @@ const Charts = ({ data }) => {
         </div>
 
         <div className="chart-card timeline-fullwidth">
-          <h3>Timeline de Operação (07:00 - 23:00)</h3>
-          <div className="chart-content timeline-container">
-            {timeline
-              .filter(item => {
-                const hora = parseInt(item.hora.split(':')[0]);
-                return hora >= 7 && hora <= 23;
-              })
-              .map((item, index) => {
-                const valor = item.emissoes ?? item.volume ?? 0;
-                const isPico = valor === maxTimeline && valor > 0;
-                const alturaBarra = `${(valor / maxTimeline) * 100}%`;
+  <h3>Timeline de Operação (07:00 - 23:00)</h3>
+  <div className="chart-content">
+    <div className="timeline-container">
+      {timeline
+        .filter(item => {
+          const hora = parseInt(item.hora.split(':')[0]);
+          return hora >= 7 && hora <= 23;
+        })
+        .map((item, index) => {
+          const valor = item.emissoes ?? item.volume ?? 0;
+          const isPico = valor === maxTimeline && valor > 0;
+          const alturaBarra = `${(valor / maxTimeline) * 100}%`;
 
-                return (
-                  <div key={index} className={`timeline-item ${isPico ? 'pico' : ''}`}>
-                    <span className="timeline-value">{valor}</span>
-                    <div className="timeline-bar" style={{ height: alturaBarra }} />
-                    <span className="timeline-label">{item.hora}</span>
-                  </div>
-                );
-              })}
-          </div>
-        </div>
+          return (
+            <div key={index} className={`timeline-item ${isPico ? 'pico' : ''}`}>
+              <span className="timeline-value">{valor}</span>
+              <div className="timeline-bar" style={{ height: alturaBarra }} />
+              <span className="timeline-label">{item.hora}</span>
+            </div>
+          );
+        })}
+    </div>
+  </div>
+</div>
 
       </div>
     </div>
@@ -140,3 +142,4 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
+
