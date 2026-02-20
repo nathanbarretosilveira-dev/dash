@@ -14,7 +14,7 @@
 .kpi-card {
   background: rgba(30, 41, 59, 0.8);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 1.5rem; /* espaço extra à esquerda para a barra */
   border: 1px solid rgba(148, 163, 184, 0.1);
   transition: all 0.3s ease;
   position: relative;
@@ -28,8 +28,8 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 6px; /* um pouco mais larga para destaque */
-  border-radius: 12px 0 0 12px; /* arredonda apenas o topo e base da lateral */
+  width: 6px; /* largura da barra lateral */
+  border-radius: 12px 0 0 12px; /* arredonda topo e base do lado esquerdo */
 }
 
 /* Cores específicas por tipo */
