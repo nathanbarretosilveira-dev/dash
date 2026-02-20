@@ -24,10 +24,7 @@ const Charts = ({ data }) => {
   const percentAntes = ((volume_por_turno.antes_14h / totalTurno) * 100).toFixed(0);
   const percentDepois = ((volume_por_turno.depois_14h / totalTurno) * 100).toFixed(0);
 
-  const maxTimeline = Math.max(
-     ...timeline.map(i => i.volume ?? i.emissoes ?? 0),
-  1
-);
+const maxTimeline = Math.max(...timeline.map(i => i.volume), 1);
   
   return (
     <div className="charts-container">
@@ -111,28 +108,31 @@ const Charts = ({ data }) => {
 
       {/* ================= TIMELINE ================= */}
       <div className="chart-card timeline-fullwidth">
-        <h3>Timeline de Operação</h3>
-        <div className="timeline-container">
-          {timeline.map((item, index) => {
-            const valor = item.volume ?? item.emissoes ?? 0;
-            const isPico = valor === maxTimeline;
-            return (
-              <div key={index} className="timeline-item">
-                <span className="timeline-value">{item.volume}</span>
-                <div
-                  className={`timeline-bar ${isPico ? 'pico' : ''}`}
-                  style={{ height: `${(item.volume / maxTimeline) * 100}%` }}
-                />
-                <span className="timeline-label">{item.hora}</span>
-              </div>
-            );
-          })}
+  <h3>Timeline de Operação</h3>
+
+  <div className="timeline-container">
+    {timeline.map((item, index) => {
+      const valor = item.volume ?? item.emissoes ?? 0;
+      const isPico = valor === maxTimeline;
+
+      return (
+        <div key={index} className="timeline-item">
+          <span className="timeline-value">{valor}</span>
+
+          <div
+            key={`${item.hora}-${valor}`}
+            className={`timeline-bar ${isPico ? 'pico' : ''}`}
+            style={{ height: `${(valor / maxTimeline) * 100}%` }}
+          />
+
+          <span className="timeline-label">{item.hora}</span>
         </div>
-      </div>
-    </div>
-  );
-};
+      );
+    })}
+  </div>
+</div>
 
 export default Charts;
+
 
 
