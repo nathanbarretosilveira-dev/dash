@@ -103,9 +103,10 @@ const Dashboard = () => {
     };
   }, [activeFilter, userFilter, rawData]);
 
-  return (
-    <div className="dashboard-container">
-      <div className="filter-bar">
+    return (
+    <div className="dashboard">
+      {/* Adicionamos a classe filters-container para aplicar o fundo, bordas e o margin-bottom */}
+      <div className="filters-container">
         {[
           ['todos', 'Todos'],
           ['hoje', 'Hoje'],
@@ -132,6 +133,12 @@ const Dashboard = () => {
       <Charts data={filteredData} />
     </div>
   );
+
+      <KPIs data={filteredData} />
+      <Charts data={filteredData} />
+    </div>
+  );
 };
 
 export default Dashboard;
+
