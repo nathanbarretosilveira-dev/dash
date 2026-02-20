@@ -26,7 +26,8 @@ const Charts = ({ data }) => {
     const pAntes = Math.round((volume_por_turno.antes_14h / tTurno) * 100);
     const pDepois = Math.round((volume_por_turno.depois_14h / tTurno) * 100);
     
-    const mTimeline = Math.max(1, ...timeline.map(i => i.emissoes ?? i.volume ?? 0));
+    // IMPORTANTE: maxTimeline agora olha para o valorEfetivo (filtrado)
+    const mTimeline = Math.max(1, ...timeline.map(i => i.valorEfetivo ?? 0));
 
     return {
       maxEmissoes: mEmissoes,
@@ -42,6 +43,7 @@ const Charts = ({ data }) => {
     <div className="charts-container">
       <div className="charts-row">
         
+        {/* ================= PRODUTIVIDADE ================= */}
         <div className="chart-card">
           <h3>Produtividade por Emissor</h3>
           <div className="chart-content horizontal-bars">
@@ -61,6 +63,7 @@ const Charts = ({ data }) => {
           </div>
         </div>
 
+        {/* ================= CANCELAMENTOS ================= */}
         <div className="chart-card">
           <h3>Análise de Cancelamentos</h3>
           <div className="chart-content horizontal-bars">
@@ -80,6 +83,7 @@ const Charts = ({ data }) => {
           </div>
         </div>
 
+        {/* ================= TURNO ================= */}
         <div className="chart-card">
           <h3>Indicador de Turno (Corte 14h)</h3>
           <div className="chart-content turno-container">
@@ -110,31 +114,33 @@ const Charts = ({ data }) => {
           </div>
         </div>
 
+        {/* ================= TIMELINE ================= */}
         <div className="chart-card timeline-fullwidth">
-  <h3>Timeline de Operação (07:00 - 23:00)</h3>
-  <div className="chart-content">
-    <div className="timeline-container">
-      {timeline
-        .filter(item => {
-          const hora = parseInt(item.hora.split(':')[0]);
-          return hora >= 7 && hora <= 23;
-        })
-        .map((item, index) => {
-          const valor = item.emissoes ?? item.volume ?? 0;
-          const isPico = valor === maxTimeline && valor > 0;
-          const alturaBarra = `${(valor / maxTimeline) * 100}%`;
+          <h3>Timeline de Operação (07:00 - 23:00)</h3>
+          <div className="chart-content">
+            <div className="timeline-container">
+              {timeline
+                .filter(item => {
+                  const hora = parseInt(item.hora.split(':')[0]);
+                  return hora >= 7 && hora <= 23;
+                })
+                .map((item, index) => {
+                  // LENDO O VALOR FILTRADO VINDO DO DASHBOARD
+                  const valor = item.valorEfetivo ?? 0;
+                  const isPico = valor === maxTimeline && valor > 0;
+                  const alturaBarra = `${(valor / maxTimeline) * 100}%`;
 
-          return (
-            <div key={index} className={`timeline-item ${isPico ? 'pico' : ''}`}>
-              <span className="timeline-value">{valor}</span>
-              <div className="timeline-bar" style={{ height: alturaBarra }} />
-              <span className="timeline-label">{item.hora}</span>
+                  return (
+                    <div key={index} className={`timeline-item ${isPico ? 'pico' : ''}`}>
+                      <span className="timeline-value">{valor}</span>
+                      <div className="timeline-bar" style={{ height: alturaBarra }} />
+                      <span className="timeline-label">{item.hora}</span>
+                    </div>
+                  );
+                })}
             </div>
-          );
-        })}
-    </div>
-  </div>
-</div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -142,4 +148,3 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
-
