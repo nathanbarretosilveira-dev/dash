@@ -9,7 +9,6 @@ const KPIs = ({ data }) => {
     emissoes_por_usuario = []
   } = data;
 
-  // Produtividade média real
   const totalEmissoes = resumo.total_emissoes || 0;
   const totalUsuarios = emissoes_por_usuario.length || 1;
   const produtividadeMedia = Math.round(totalEmissoes / totalUsuarios);
@@ -22,7 +21,7 @@ const KPIs = ({ data }) => {
       trendUp: true,
       detail: `${resumo.total_emissoes - resumo.total_cancelamentos} válidos`,
       icon: '📄',
-      color: 'purple'
+      color: 'purple' // Isso vai virar kpi-purple
     },
     {
       title: 'Cancelamentos',
@@ -31,7 +30,7 @@ const KPIs = ({ data }) => {
       trendUp: false,
       detail: 'requer atenção',
       icon: '⚠️',
-      color: 'red'
+      color: 'red' // Isso vai virar kpi-red
     },
     {
       title: 'Taxa de Eficiência',
@@ -40,7 +39,7 @@ const KPIs = ({ data }) => {
       trendUp: resumo.taxa_eficiencia >= 95,
       detail: 'meta: 95%',
       icon: '📊',
-      color: 'green',
+      color: 'green', // Isso vai virar kpi-green
       progress: resumo.taxa_eficiencia
     },
     {
@@ -50,30 +49,30 @@ const KPIs = ({ data }) => {
       trendUp: true,
       detail: `Equipe: ${totalUsuarios} usuários`,
       icon: '👥',
-      color: 'orange'
+      color: 'orange' // Isso vai virar kpi-orange
     }
   ];
 
   return (
     <div className="kpis-container">
       {kpis.map((kpi, index) => (
-        <div key={index} className={`kpi-card ${kpi.color}`}>
-          <div className="kpi-icon">{kpi.icon}</div>
+        /* AJUSTE AQUI: Adicionamos as classes kpi-card e kpi-COR */
+        <div key={index} className={`kpi-card kpi-${kpi.color}`}>
+          <div className="kpi-header">
+            <div className="kpi-icon">{kpi.icon}</div>
+            <div className={`kpi-trend ${kpi.trendUp ? 'up' : 'down'}`}>
+              {kpi.trendUp ? '↑' : '↓'} {kpi.trend}
+            </div>
+          </div>
 
           <div className="kpi-content">
-            <div className="kpi-header">
-              <span className="kpi-title">{kpi.title}</span>
-              <span className={`kpi-trend ${kpi.trendUp ? 'up' : 'down'}`}>
-                {kpi.trendUp ? '↑' : '↓'} {kpi.trend}
-              </span>
-            </div>
-
+            <div className="kpi-title">{kpi.title}</div>
             <div className="kpi-value">{kpi.value}</div>
 
             {kpi.progress !== undefined && (
               <div className="kpi-progress">
-                <div
-                  className="kpi-progress-bar"
+                <div 
+                  className="kpi-progress-bar" 
                   style={{ width: `${kpi.progress}%` }}
                 />
               </div>
