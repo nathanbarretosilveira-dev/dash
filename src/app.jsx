@@ -1,7 +1,7 @@
 import React from 'react';
 import './app.css';
-import Header from './components/Header';
-import Dashboard from './components/Dashboard';
+import Header from './components/header';
+import Dashboard from './components/dashboard';
  
 function App() {
   return (
@@ -16,4 +16,5 @@ function App() {
  
 export default App;
  
+
 
