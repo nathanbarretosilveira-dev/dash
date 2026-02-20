@@ -3,75 +3,57 @@ import './dashboard.css';
 import KPIs from './kpis';
 import Charts from './charts';
 import cteData from '../data/cte_data.json';
+import { getHoje, getSemana, somarPeriodo } from '../utils/dataRange';
 
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
+  const [userFilter, setUserFilter] = useState('');
 
-  // Dados brutos (fallback seguro)
   const rawData = cteData ?? {};
 
   const filteredData = useMemo(() => {
-    let multiplicador = 1;
+    let diasFiltrados = rawData.dados_por_dia || [];
 
-    if (activeFilter === 'hoje') multiplicador = 0.2;
-    if (activeFilter === 'turno-manha') multiplicador = 0.46;
-    if (activeFilter === 'turno-tarde') multiplicador = 0.54;
+    if (activeFilter === 'hoje') diasFiltrados = getHoje(diasFiltrados);
+    if (activeFilter === 'semana') diasFiltrados = getSemana(diasFiltrados);
+
+    const periodo = somarPeriodo(diasFiltrados);
+
+    const usuariosFiltrados = (rawData.emissoes_por_usuario || []).filter(u =>
+      u.nome.toLowerCase().includes(userFilter.toLowerCase())
+    );
 
     return {
       resumo: {
-        total_emissoes: Math.round((rawData.resumo?.total_emissoes || 0) * multiplicador),
-        total_cancelamentos: Math.round((rawData.resumo?.total_cancelamentos || 0) * multiplicador),
-        taxa_eficiencia: rawData.resumo?.taxa_eficiencia || 0,
+        total_emissoes: periodo.emissoes,
+        total_cancelamentos: periodo.cancelamentos,
+        taxa_eficiencia:
+          periodo.emissoes > 0
+            ? ((periodo.emissoes - periodo.cancelamentos) / periodo.emissoes) * 100
+            : 0,
         produtividade_media:
-          rawData.resumo?.total_emissoes && rawData.emissoes_por_usuario?.length
-            ? Math.round(
-                (rawData.resumo.total_emissoes /
-                  rawData.emissoes_por_usuario.length) *
-                  multiplicador
-              )
+          usuariosFiltrados.length > 0
+            ? Math.round(periodo.emissoes / usuariosFiltrados.length)
             : 0
       },
 
-      emissoes_por_usuario: (rawData.emissoes_por_usuario || []).map(item => ({
-        ...item,
-        emissoes: Math.round(item.emissoes * multiplicador)
-      })),
+      emissoes_por_usuario: usuariosFiltrados,
+      cancelamentos_por_usuario: (rawData.cancelamentos_por_usuario || []).filter(u =>
+        u.nome.toLowerCase().includes(userFilter.toLowerCase())
+      ),
 
-      cancelamentos_por_usuario: (rawData.cancelamentos_por_usuario || []).map(item => ({
-        ...item,
-        total: Math.round(item.total * multiplicador)
-      })),
-
-      volume_por_turno: {
-        antes_14h:
-          activeFilter === 'turno-tarde'
-            ? 0
-            : Math.round((rawData.emissoes_por_turno?.antes_14h || 0) * multiplicador),
-
-        depois_14h:
-          activeFilter === 'turno-manha'
-            ? 0
-            : Math.round((rawData.emissoes_por_turno?.depois_14h || 0) * multiplicador)
-      },
-
-      timeline: (rawData.timeline_operacao || []).map(item => ({
-        hora: item.hora,
-        volume: Math.round(item.emissoes * multiplicador)
-      }))
+      emissoes_por_turno: rawData.emissoes_por_turno,
+      timeline: rawData.timeline_operacao
     };
-  }, [activeFilter, rawData]);
+  }, [activeFilter, userFilter, rawData]);
 
   return (
     <div className="dashboard">
-
-      {/* FILTROS */}
       <div className="filters-container">
         {[
           ['todos', 'Todos'],
           ['hoje', 'Hoje'],
           ['semana', 'Semana'],
-          ['turno-manha', 'Turno Manhã'],
-          ['turno-tarde', 'Turno Tarde'],
         ].map(([key, label]) => (
           <button
             key={key}
@@ -81,12 +63,16 @@ const Dashboard = () => {
             {label}
           </button>
         ))}
+
+        <input
+          className="user-filter"
+          placeholder="Filtrar usuário"
+          value={userFilter}
+          onChange={(e) => setUserFilter(e.target.value)}
+        />
       </div>
 
-      {/* KPIs */}
       <KPIs data={filteredData} />
-
-      {/* GRÁFICOS */}
       <Charts data={filteredData} />
     </div>
   );
