@@ -11,69 +11,70 @@ const Dashboard = () => {
 
   const rawData = cteData ?? {};
 
-  const filteredData = useMemo(() => {
-    /* =========================
-       FILTRO DE PERÍODO
-       ========================= */
-    let diasFiltrados = rawData.dados_por_dia || [];
+const filteredData = useMemo(() => {
+  let diasFiltrados = rawData.dados_por_dia || [];
 
-    if (activeFilter === 'hoje') diasFiltrados = getHoje(diasFiltrados);
-    if (activeFilter === 'semana') diasFiltrados = getSemana(diasFiltrados);
+  if (activeFilter === 'hoje') diasFiltrados = getHoje(diasFiltrados);
+  if (activeFilter === 'semana') diasFiltrados = getSemana(diasFiltrados);
 
-    const periodo = somarPeriodo(diasFiltrados);
+  const periodo = somarPeriodo(diasFiltrados);
 
-    /* =========================
-       FILTRO DE USUÁRIO
-       ========================= */
-    const usuariosFiltrados = (rawData.emissoes_por_usuario || []).filter(u =>
+  const totalOriginal = rawData.resumo?.total_emissoes || 1;
+  const fatorPeriodo = periodo.emissoes / totalOriginal;
+
+  /* =========================
+     USUÁRIOS (ESCALADOS)
+     ========================= */
+  const usuariosFiltrados = (rawData.emissoes_por_usuario || [])
+    .filter(u =>
       u.nome.toLowerCase().includes(userFilter.toLowerCase())
-    );
+    )
+    .map(u => ({
+      ...u,
+      emissoes: Math.round(u.emissoes * fatorPeriodo)
+    }));
 
-    const cancelamentosFiltrados = (rawData.cancelamentos_por_usuario || []).filter(u =>
+  const cancelamentosUsuarios = (rawData.cancelamentos_por_usuario || [])
+    .filter(u =>
       u.nome.toLowerCase().includes(userFilter.toLowerCase())
-    );
+    )
+    .map(u => ({
+      ...u,
+      total: Math.round(u.total * fatorPeriodo)
+    }));
 
-    /* =========================
-       REPROCESSA TURNO
-       ========================= */
-    const timelineFiltrada = rawData.timeline_operacao || [];
+  /* =========================
+     TURNO (ESCALADO)
+     ========================= */
+  const turno = {
+    antes_14h: Math.round(
+      (rawData.emissoes_por_turno?.antes_14h || 0) * fatorPeriodo
+    ),
+    depois_14h: Math.round(
+      (rawData.emissoes_por_turno?.depois_14h || 0) * fatorPeriodo
+    )
+  };
 
-    const antes14h = timelineFiltrada
-      .filter(i => Number(i.hora.split(':')[0]) < 14)
-      .reduce((acc, i) => acc + (i.emissoes ?? i.volume ?? 0), 0);
+  return {
+    resumo: {
+      total_emissoes: periodo.emissoes,
+      total_cancelamentos: periodo.cancelamentos,
+      taxa_eficiencia:
+        periodo.emissoes > 0
+          ? ((periodo.emissoes - periodo.cancelamentos) / periodo.emissoes) * 100
+          : 0,
+      produtividade_media:
+        usuariosFiltrados.length > 0
+          ? Math.round(periodo.emissoes / usuariosFiltrados.length)
+          : 0
+    },
 
-    const depois14h = timelineFiltrada
-      .filter(i => Number(i.hora.split(':')[0]) >= 14)
-      .reduce((acc, i) => acc + (i.emissoes ?? i.volume ?? 0), 0);
-
-    /* =========================
-       RESULTADO FINAL
-       ========================= */
-    return {
-      resumo: {
-        total_emissoes: periodo.emissoes,
-        total_cancelamentos: periodo.cancelamentos,
-        taxa_eficiencia:
-          periodo.emissoes > 0
-            ? ((periodo.emissoes - periodo.cancelamentos) / periodo.emissoes) * 100
-            : 0,
-        produtividade_media:
-          usuariosFiltrados.length > 0
-            ? Math.round(periodo.emissoes / usuariosFiltrados.length)
-            : 0
-      },
-
-      emissoes_por_usuario: usuariosFiltrados,
-      cancelamentos_por_usuario: cancelamentosFiltrados,
-
-      volume_por_turno: {
-        antes_14h: antes14h,
-        depois_14h: depois14h
-      },
-
-      timeline: timelineFiltrada
-    };
-  }, [activeFilter, userFilter, rawData]);
+    emissoes_por_usuario: usuariosFiltrados,
+    cancelamentos_por_usuario: cancelamentosUsuarios,
+    volume_por_turno: turno,
+    timeline: rawData.timeline_operacao
+  };
+}, [activeFilter, userFilter, rawData]);
 
   return (
     <div className="dashboard">
@@ -107,3 +108,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
