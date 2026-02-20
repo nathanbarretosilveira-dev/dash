@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './charts.css';
 
 const Charts = ({ data }) => {
@@ -12,34 +12,54 @@ const Charts = ({ data }) => {
   } = data;
 
   /* =========================
-     CÁLCULOS DEFENSIVOS
+     RECÁLCULO SEMPRE QUE DATA MUDA
      ========================= */
-const maxEmissoes = Math.max(
-  1,
-  ...emissoes_por_usuario.map(i => i.emissoes || 0)
-);
 
-const maxCancelamentos = Math.max(
-  1,
-  ...cancelamentos_por_usuario.map(i => i.total || 0)
-);
+  const {
+    maxEmissoes,
+    maxCancelamentos,
+    totalTurno,
+    percentAntes,
+    percentDepois,
+    maxTimeline
+  } = useMemo(() => {
+    const maxEmissoes = Math.max(
+      1,
+      ...emissoes_por_usuario.map(i => i.emissoes || 0)
+    );
 
-  const totalTurno =
-    (volume_por_turno.antes_14h || 0) +
-      (volume_por_turno.depois_14h || 0) || 1;
+    const maxCancelamentos = Math.max(
+      1,
+      ...cancelamentos_por_usuario.map(i => i.total || 0)
+    );
 
-  const percentAntes = Math.round(
-    (volume_por_turno.antes_14h / totalTurno) * 100
-  );
+    const totalTurno =
+      (volume_por_turno.antes_14h || 0) +
+      (volume_por_turno.depois_14h || 0) ||
+      1;
 
-  const percentDepois = Math.round(
-    (volume_por_turno.depois_14h / totalTurno) * 100
-  );
+    const percentAntes = Math.round(
+      (volume_por_turno.antes_14h / totalTurno) * 100
+    );
 
-  const maxTimeline = Math.max(
-    ...timeline.map(i => i.volume ?? i.emissoes ?? 0),
-    1
-  );
+    const percentDepois = Math.round(
+      (volume_por_turno.depois_14h / totalTurno) * 100
+    );
+
+    const maxTimeline = Math.max(
+      1,
+      ...timeline.map(i => i.emissoes ?? i.volume ?? 0)
+    );
+
+    return {
+      maxEmissoes,
+      maxCancelamentos,
+      totalTurno,
+      percentAntes,
+      percentDepois,
+      maxTimeline
+    };
+  }, [emissoes_por_usuario, cancelamentos_por_usuario, volume_por_turno, timeline]);
 
   return (
     <div className="charts-container">
@@ -50,8 +70,8 @@ const maxCancelamentos = Math.max(
           <h3>Produtividade por Emissor</h3>
 
           <div className="horizontal-bars">
-            {emissoes_por_usuario.map((item, index) => (
-              <div key={item.nome ?? index} className="bar-item">
+            {emissoes_por_usuario.map((item) => (
+              <div key={item.nome} className="bar-item">
                 <span className="bar-label">{item.nome}</span>
 
                 <div className="bar-wrapper">
@@ -74,8 +94,8 @@ const maxCancelamentos = Math.max(
           <h3>Análise de Cancelamentos</h3>
 
           <div className="horizontal-bars">
-            {cancelamentos_por_usuario.map((item, index) => (
-              <div key={item.nome ?? index} className="bar-item">
+            {cancelamentos_por_usuario.map((item) => (
+              <div key={item.nome} className="bar-item">
                 <span className="bar-label">{item.nome}</span>
 
                 <div className="bar-wrapper">
@@ -136,16 +156,15 @@ const maxCancelamentos = Math.max(
         <h3>Timeline de Operação</h3>
 
         <div className="timeline-container">
-          {timeline.map((item, index) => {
-            const valor = item.volume ?? item.emissoes ?? 0;
+          {timeline.map((item) => {
+            const valor = item.emissoes ?? item.volume ?? 0;
             const isPico = valor === maxTimeline;
 
             return (
-              <div key={`${item.hora}-${index}`} className="timeline-item">
+              <div key={item.hora} className="timeline-item">
                 <span className="timeline-value">{valor}</span>
 
                 <div
-                  key={`${item.hora}-${valor}`}
                   className={`timeline-bar ${isPico ? 'pico' : ''}`}
                   style={{
                     height: `${(valor / maxTimeline) * 100}%`
@@ -163,4 +182,3 @@ const maxCancelamentos = Math.max(
 };
 
 export default Charts;
-
