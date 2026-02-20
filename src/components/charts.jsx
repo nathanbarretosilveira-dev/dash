@@ -12,20 +12,35 @@ const Charts = ({ data }) => {
   } = data;
 
   /* =========================
-     CÁLCULOS
+     CÁLCULOS DEFENSIVOS
      ========================= */
-  const maxEmissoes = Math.max(...emissoes_por_usuario.map(i => i.emissoes), 1);
-  const maxCancelamentos = Math.max(...cancelamentos_por_usuario.map(i => i.total), 1);
+  const maxEmissoes = Math.max(
+    ...emissoes_por_usuario.map(i => i.emissoes || 0),
+    1
+  );
+
+  const maxCancelamentos = Math.max(
+    ...cancelamentos_por_usuario.map(i => i.total || 0),
+    1
+  );
 
   const totalTurno =
     (volume_por_turno.antes_14h || 0) +
-    (volume_por_turno.depois_14h || 0) || 1;
+      (volume_por_turno.depois_14h || 0) || 1;
 
-  const percentAntes = ((volume_por_turno.antes_14h / totalTurno) * 100).toFixed(0);
-  const percentDepois = ((volume_por_turno.depois_14h / totalTurno) * 100).toFixed(0);
+  const percentAntes = Math.round(
+    (volume_por_turno.antes_14h / totalTurno) * 100
+  );
 
-const maxTimeline = Math.max(...timeline.map(i => i.volume), 1);
-  
+  const percentDepois = Math.round(
+    (volume_por_turno.depois_14h / totalTurno) * 100
+  );
+
+  const maxTimeline = Math.max(
+    ...timeline.map(i => i.volume ?? i.emissoes ?? 0),
+    1
+  );
+
   return (
     <div className="charts-container">
       <div className="charts-row">
@@ -33,14 +48,18 @@ const maxTimeline = Math.max(...timeline.map(i => i.volume), 1);
         {/* ================= PRODUTIVIDADE ================= */}
         <div className="chart-card">
           <h3>Produtividade por Emissor</h3>
+
           <div className="horizontal-bars">
             {emissoes_por_usuario.map((item, index) => (
-              <div key={index} className="bar-item">
+              <div key={item.nome ?? index} className="bar-item">
                 <span className="bar-label">{item.nome}</span>
+
                 <div className="bar-wrapper">
                   <div
                     className="bar-fill produtividade"
-                    style={{ width: `${(item.emissoes / maxEmissoes) * 100}%` }}
+                    style={{
+                      width: `${(item.emissoes / maxEmissoes) * 100}%`
+                    }}
                   >
                     {item.emissoes}
                   </div>
@@ -53,14 +72,18 @@ const maxTimeline = Math.max(...timeline.map(i => i.volume), 1);
         {/* ================= CANCELAMENTOS ================= */}
         <div className="chart-card">
           <h3>Análise de Cancelamentos</h3>
+
           <div className="horizontal-bars">
             {cancelamentos_por_usuario.map((item, index) => (
-              <div key={index} className="bar-item">
+              <div key={item.nome ?? index} className="bar-item">
                 <span className="bar-label">{item.nome}</span>
+
                 <div className="bar-wrapper">
                   <div
                     className="bar-fill cancelamento"
-                    style={{ width: `${(item.total / maxCancelamentos) * 100}%` }}
+                    style={{
+                      width: `${(item.total / maxCancelamentos) * 100}%`
+                    }}
                   >
                     {item.total}
                   </div>
@@ -77,6 +100,7 @@ const maxTimeline = Math.max(...timeline.map(i => i.volume), 1);
           <div className="turno-container">
             <div>
               <div className="turno-label">Antes 14h</div>
+
               <div className="turno-bar-wrapper">
                 <div
                   className="turno-bar antes"
@@ -89,6 +113,7 @@ const maxTimeline = Math.max(...timeline.map(i => i.volume), 1);
 
             <div>
               <div className="turno-label">Depois 14h</div>
+
               <div className="turno-bar-wrapper">
                 <div
                   className="turno-bar depois"
@@ -108,31 +133,33 @@ const maxTimeline = Math.max(...timeline.map(i => i.volume), 1);
 
       {/* ================= TIMELINE ================= */}
       <div className="chart-card timeline-fullwidth">
-  <h3>Timeline de Operação</h3>
+        <h3>Timeline de Operação</h3>
 
-  <div className="timeline-container">
-    {timeline.map((item, index) => {
-      const valor = item.volume ?? item.emissoes ?? 0;
-      const isPico = valor === maxTimeline;
+        <div className="timeline-container">
+          {timeline.map((item, index) => {
+            const valor = item.volume ?? item.emissoes ?? 0;
+            const isPico = valor === maxTimeline;
 
-      return (
-        <div key={index} className="timeline-item">
-          <span className="timeline-value">{valor}</span>
+            return (
+              <div key={`${item.hora}-${index}`} className="timeline-item">
+                <span className="timeline-value">{valor}</span>
 
-          <div
-            key={`${item.hora}-${valor}`}
-            className={`timeline-bar ${isPico ? 'pico' : ''}`}
-            style={{ height: `${(valor / maxTimeline) * 100}%` }}
-          />
+                <div
+                  key={`${item.hora}-${valor}`}
+                  className={`timeline-bar ${isPico ? 'pico' : ''}`}
+                  style={{
+                    height: `${(valor / maxTimeline) * 100}%`
+                  }}
+                />
 
-          <span className="timeline-label">{item.hora}</span>
+                <span className="timeline-label">{item.hora}</span>
+              </div>
+            );
+          })}
         </div>
-      );
-    })}
-  </div>
-</div>
+      </div>
+    </div>
+  );
+};
 
 export default Charts;
-
-
-
