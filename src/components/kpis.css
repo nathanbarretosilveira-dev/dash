@@ -1,127 +1,124 @@
 .kpis-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 1.25rem;
   margin-bottom: 1.5rem;
 }
- 
+
 .kpis-loading {
   text-align: center;
   padding: 2rem;
   color: #94a3b8;
 }
- 
+
 .kpi-card {
-  background: rgba(30, 41, 59, 0.8);
+  background: linear-gradient(135deg, #14172b 0%, #1b2140 100%);
   border-radius: 12px;
-  padding: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  transition: all 0.3s ease;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
- 
+
+/* A BARRA LATERAL DE COR (IDENTICA À IMAGEM) */
 .kpi-card::before {
   content: '';
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 4px;
+  width: 5px; /* Espessura da barra lateral */
+  border-radius: 4px 0 0 4px;
 }
- 
-.kpi-purple::before { background: linear-gradient(to bottom, #6366f1, #8b5cf6); }
-.kpi-red::before { background: linear-gradient(to bottom, #ef4444, #f97316); }
-.kpi-green::before { background: linear-gradient(to bottom, #10b981, #34d399); }
-.kpi-orange::before { background: linear-gradient(to bottom, #f59e0b, #fbbf24); }
- 
+
+/* VARIAÇÕES DE CORES CONFORME SOLICITADO */
+
+/* TOTAL DE EMISSÕES (AZUL) */
+.kpi-azul::before { 
+  background: #3b82f6; 
+  box-shadow: 3px 0 12px rgba(59, 130, 246, 0.6);
+}
+.kpi-azul .kpi-value { color: #60a5fa; }
+
+/* CANCELAMENTOS (LARANJA/VERMELHO) */
+.kpi-red::before { 
+  background: #f97316; 
+  box-shadow: 3px 0 12px rgba(249, 115, 22, 0.6);
+}
+.kpi-red .kpi-value { color: #fb923c; }
+
+/* TAXA DE EFICIÊNCIA (VERDE) */
+.kpi-green::before { 
+  background: #10b981; 
+  box-shadow: 3px 0 12px rgba(16, 185, 129, 0.6);
+}
+.kpi-green .kpi-value { color: #34d399; }
+
+/* PRODUTIVIDADE MÉDIA (AMARELO) */
+.kpi-orange::before { 
+  background: #eab308; 
+  box-shadow: 3px 0 12px rgba(234, 179, 8, 0.6);
+}
+.kpi-orange .kpi-value { color: #fde047; }
+
 .kpi-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.1);
 }
- 
+
 .kpi-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.75rem;
 }
- 
+
 .kpi-icon {
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
+  font-size: 1.25rem;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
+  color: #fff;
 }
- 
-.kpi-trend {
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-}
- 
-.kpi-trend.up {
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
-}
- 
-.kpi-trend.down {
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
-}
- 
+
 .kpi-content {
-  padding-left: 0.5rem;
+  padding-left: 0.25rem;
 }
- 
+
 .kpi-title {
-  font-size: 0.875rem;
-  color: #94a3b8;
-  margin-bottom: 0.25rem;
-}
- 
-.kpi-value {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #f8fafc;
-  margin-bottom: 0.5rem;
-}
- 
-.kpi-progress {
-  width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
- 
-.kpi-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #10b981, #34d399);
-  border-radius: 3px;
-  transition: width 0.5s ease;
-}
- 
-.kpi-detail {
   font-size: 0.75rem;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.kpi-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.5px;
+}
+
+.kpi-detail {
+  font-size: 0.7rem;
   color: #64748b;
+  font-weight: 500;
 }
- 
+
+/* RESPONSIVIDADE */
 @media (max-width: 1200px) {
-  .kpis-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .kpis-container { grid-template-columns: repeat(2, 1fr); }
 }
- 
+
 @media (max-width: 768px) {
-  .kpis-container {
-    grid-template-columns: 1fr;
-  }
+  .kpis-container { grid-template-columns: 1fr; }
 }
- 
