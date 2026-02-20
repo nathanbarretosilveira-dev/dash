@@ -114,7 +114,8 @@ const Charts = ({ data }) => {
         <h3>Timeline de Operação</h3>
         <div className="timeline-container">
           {timeline.map((item, index) => {
-            const isPico = item.volume === maxTimeline;
+            const valor = item.volume ?? item.emissoes ?? 0;
+            const isPico = valor === maxTimeline;
             return (
               <div key={index} className="timeline-item">
                 <span className="timeline-value">{item.volume}</span>
@@ -133,4 +134,5 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
+
 
