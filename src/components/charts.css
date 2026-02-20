@@ -155,15 +155,17 @@
 .turno-bar.depois { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
 
 /* =====================================================
-   TIMELINE DE OPERAÇÃO (MELHORADA)
+   TIMELINE DE OPERAÇÃO (CORREÇÃO HORIZONTAL)
    ===================================================== */
 .timeline-container {
   display: flex;
-  align-items: flex-end;
+  flex-direction: row; /* Garante a horizontalidade */
+  align-items: flex-end; /* Alinha as barras na base */
   justify-content: space-between;
-  height: 240px;
-  gap: 8px;
-  padding-top: 20px;
+  height: 200px; /* Altura fixa para o gráfico */
+  width: 100%;
+  padding: 20px 0;
+  gap: 4px;
 }
 
 .timeline-item {
@@ -171,60 +173,51 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
   justify-content: flex-end;
+  height: 100%;
+  position: relative;
 }
 
 .timeline-value {
   font-size: 0.65rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2px 5px;
-  border-radius: 4px;
-  opacity: 0; /* Escondido por padrão, aparece no hover ou se for pico */
-  transition: opacity 0.3s;
-}
-
-.timeline-item:hover .timeline-value,
-.timeline-item.pico .timeline-value {
-  opacity: 1;
+  margin-bottom: 5px;
+  background: rgba(124, 108, 246, 0.3);
+  padding: 2px 4px;
+  border-radius: 3px;
+  /* Opcional: mostrar apenas no hover para não poluir */
+  opacity: 0.8; 
 }
 
 .timeline-bar {
   width: 100%;
-  min-width: 12px;
-  max-width: 40px;
-  border-radius: 4px 4px 0 0;
+  min-width: 8px;
   background: linear-gradient(180deg, #2bd67b, #16a34a);
-  transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.4s ease;
 }
 
-/* Estilo para Horário de Pico */
+/* Destaque de Pico */
 .timeline-item.pico .timeline-bar {
-  background: linear-gradient(180deg, #f59e0b, #d97706);
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
-}
-
-.timeline-item.pico .timeline-bar::after {
-  content: 'PICO';
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.55rem;
-  color: #fbbf24;
-  font-weight: 800;
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
 }
 
 .timeline-label {
   font-size: 0.6rem;
-  color: #64748b;
-  margin-top: 10px;
-  font-weight: 600;
+  color: #94a3b8;
+  margin-top: 8px;
   white-space: nowrap;
+  /* Rotacionar levemente se houver muitos horários para não sobrepor */
+  transform: rotate(-45deg);
+  height: 20px;
+}
+
+/* Ajuste específico para o card da timeline */
+.timeline-fullwidth .chart-content {
+  height: 280px;
+  padding-bottom: 30px; /* Espaço para os rótulos rotacionados */
 }
 
 /* =====================================================
@@ -240,3 +233,4 @@
   .timeline-label { font-size: 0.5rem; transform: rotate(-45deg); margin-top: 15px; }
   .bar-label { min-width: 80px; }
 }
+
