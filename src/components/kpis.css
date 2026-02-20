@@ -14,42 +14,38 @@
 .kpi-card {
   background: rgba(30, 41, 59, 0.8);
   border-radius: 12px;
-  padding: 1rem 1rem 1rem 1.5rem; /* deixa espaço para a faixa lateral */
+  padding: 1rem;
   border: 1px solid rgba(148, 163, 184, 0.1);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* Faixa lateral colorida */
+/* Barra lateral colorida */
 .kpi-card::before {
   content: '';
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 6px; /* largura da faixa lateral */
-  border-radius: 12px 0 0 12px; /* arredonda somente o lado da faixa */
+  width: 6px; /* um pouco mais larga para destaque */
+  border-radius: 12px 0 0 12px; /* arredonda apenas o topo e base da lateral */
 }
 
-/* Cores da faixa lateral */
+/* Cores específicas por tipo */
 .kpi-purple::before {
   background: linear-gradient(to bottom, #6366f1, #8b5cf6);
 }
-
 .kpi-red::before {
   background: linear-gradient(to bottom, #ef4444, #f97316);
 }
-
 .kpi-green::before {
   background: linear-gradient(to bottom, #10b981, #34d399);
 }
-
 .kpi-orange::before {
   background: linear-gradient(to bottom, #f59e0b, #fbbf24);
 }
 
-/* Efeito hover */
 .kpi-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
@@ -128,7 +124,6 @@
   color: #64748b;
 }
 
-/* Responsivo */
 @media (max-width: 1200px) {
   .kpis-container {
     grid-template-columns: repeat(2, 1fr);
