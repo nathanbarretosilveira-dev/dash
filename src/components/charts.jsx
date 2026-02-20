@@ -152,33 +152,41 @@ const Charts = ({ data }) => {
       </div>
 
       {/* ================= TIMELINE ================= */}
-      <div className="chart-card timeline-fullwidth">
-        <h3>Timeline de Operação</h3>
+<div className="timeline-container">
+  <h3>Timeline de Operação (07:00 - 23:00)</h3>
 
-        <div className="timeline-container">
-          {timeline.map((item) => {
-            const valor = item.emissoes ?? item.volume ?? 0;
-            const isPico = valor === maxTimeline;
+  <div className="timeline-chart">
+    {timeline
+      .filter(item => {
+        const hora = parseInt(item.hora.split(':')[0]);
+        return hora >= 7 && hora <= 23;
+      })
+      .map((item, index) => {
+        const valor = item.emissoes ?? item.volume ?? 0;
+        const isPico = valor === maxTimeline && valor > 0;
+        
+        // Cálculo da altura proporcional (0 a 100%)
+        const alturaBarra = `${(valor / maxTimeline) * 100}%`;
 
-            return (
-              <div key={item.hora} className="timeline-item">
-                <span className="timeline-value">{valor}</span>
+        return (
+          <div key={index} className={`timeline-item ${isPico ? 'pico' : ''}`}>
+            <span className="valor-tooltip">{valor}</span>
+            
+            <div 
+              className="barra-volumetrica" 
+              style={{ height: alturaBarra }}
+            >
+              {isPico && <span className="pico-label">PICO</span>}
+            </div>
 
-                <div
-                  className={`timeline-bar ${isPico ? 'pico' : ''}`}
-                  style={{
-                    height: `${(valor / maxTimeline) * 100}%`
-                  }}
-                />
-
-                <span className="timeline-label">{item.hora}</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
+            <span className="hora-label">{item.hora}</span>
+          </div>
+        );
+      })}
+  </div>
+</div>
   );
 };
 
 export default Charts;
+
