@@ -55,7 +55,7 @@
 
 .timeline-fullwidth .chart-content {
   height: 320px;
-  justify-content: flex-end; /* Alinha barras na base */
+  justify-content: flex-end;
 }
 
 /* =====================================================
@@ -159,13 +159,13 @@
    ===================================================== */
 .timeline-container {
   display: flex;
-  flex-direction: row; /* Garante a horizontalidade */
-  align-items: flex-end; /* Alinha as barras na base */
+  flex-direction: row;
+  align-items: flex-end;
   justify-content: space-between;
-  height: 200px; /* Altura fixa para o gráfico */
+  height: 220px;
   width: 100%;
   padding: 20px 0;
-  gap: 4px;
+  gap: 6px; /* Ajuste fino no espaçamento entre barras */
 }
 
 .timeline-item {
@@ -182,42 +182,40 @@
   font-size: 0.65rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 5px;
-  background: rgba(124, 108, 246, 0.3);
-  padding: 2px 4px;
-  border-radius: 3px;
-  /* Opcional: mostrar apenas no hover para não poluir */
-  opacity: 0.8; 
+  margin-bottom: 6px;
+  background: rgba(124, 108, 246, 0.2);
+  padding: 2px 5px;
+  border-radius: 4px;
+  transition: opacity 0.3s;
 }
 
 .timeline-bar {
   width: 100%;
-  min-width: 8px;
-  background: linear-gradient(180deg, #2bd67b, #16a34a);
+  min-width: 10px;
+  background: linear-gradient(180deg, #7c6cf6, #5a4ad1); /* Roxo para combinar com o layout */
   border-radius: 4px 4px 0 0;
-  transition: height 0.4s ease;
+  transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* Destaque de Pico */
 .timeline-item.pico .timeline-bar {
   background: linear-gradient(180deg, #fbbf24, #f59e0b);
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
 }
 
 .timeline-label {
   font-size: 0.6rem;
-  color: #94a3b8;
-  margin-top: 8px;
+  color: #64748b;
+  margin-top: 12px;
   white-space: nowrap;
-  /* Rotacionar levemente se houver muitos horários para não sobrepor */
   transform: rotate(-45deg);
-  height: 20px;
+  font-weight: 600;
 }
 
 /* Ajuste específico para o card da timeline */
 .timeline-fullwidth .chart-content {
-  height: 280px;
-  padding-bottom: 30px; /* Espaço para os rótulos rotacionados */
+  height: 300px;
+  padding-bottom: 45px; /* Espaço extra para os rótulos rotacionados */
 }
 
 /* =====================================================
@@ -230,7 +228,6 @@
 
 @media (max-width: 768px) {
   .timeline-container { gap: 4px; }
-  .timeline-label { font-size: 0.5rem; transform: rotate(-45deg); margin-top: 15px; }
+  .timeline-label { font-size: 0.55rem; margin-top: 15px; }
   .bar-label { min-width: 80px; }
 }
-
