@@ -14,15 +14,15 @@ const Charts = ({ data }) => {
   /* =========================
      CÁLCULOS DEFENSIVOS
      ========================= */
-  const maxEmissoes = Math.max(
-    ...emissoes_por_usuario.map(i => i.emissoes || 0),
-    1
-  );
+const maxEmissoes = Math.max(
+  1,
+  ...emissoes_por_usuario.map(i => i.emissoes || 0)
+);
 
-  const maxCancelamentos = Math.max(
-    ...cancelamentos_por_usuario.map(i => i.total || 0),
-    1
-  );
+const maxCancelamentos = Math.max(
+  1,
+  ...cancelamentos_por_usuario.map(i => i.total || 0)
+);
 
   const totalTurno =
     (volume_por_turno.antes_14h || 0) +
@@ -163,3 +163,4 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
+
