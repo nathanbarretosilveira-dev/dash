@@ -1,5 +1,5 @@
 import React from 'react';
-import './KPIs.css';
+import './kpis.css';
  
 const KPIs = ({ data }) => {
   const { resumo } = data;
@@ -75,3 +75,4 @@ const KPIs = ({ data }) => {
  
 export default KPIs;
  
+
