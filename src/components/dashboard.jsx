@@ -3,7 +3,7 @@ import './dashboard.css';
 import KPIs from './kpis';
 import Charts from './charts';
 import cteData from '../data/cte_data.json';
-import { getHoje, getSemana, somarPeriodo } from '../utils/dataRange';
+import { getHoje, getSemana, somarPeriodo } from '../utils/dataRange.js';
 
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
@@ -79,3 +79,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
