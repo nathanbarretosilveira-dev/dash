@@ -36,7 +36,7 @@ const KPIs = ({ data }) => {
       value: resumo.total_cancelamentos,
       trend: formatarTendencia(tendenciaCancelamento.variacao),
       trendUp: tendenciaCancelamento.subiu,
-      detail: 'Taxa de cancelamento (média móvel 7d)',
+      detail: 'Cancelamentos brutos (média móvel 7d)',
       icon: '⚠️',
       color: 'red', // Isso vai virar kpi-red
       invertTrendColor: true
@@ -44,9 +44,9 @@ const KPIs = ({ data }) => {
     {
       title: 'Taxa de Eficiência',
       value: `${resumo.taxa_eficiencia.toFixed(2)}%`,
-      trend: resumo.taxa_eficiencia >= 95 ? 'Dentro da meta' : 'Abaixo da meta',
-      trendUp: resumo.taxa_eficiencia >= 95,
-      detail: 'meta: 95%',
+      trend: resumo.taxa_eficiencia >= 90 ? 'Dentro da meta' : 'Abaixo da meta',
+      trendUp: resumo.taxa_eficiencia >= 90,
+      detail: 'meta: 90%',
       icon: '📊',
       color: 'green', // Isso vai virar kpi-green
       progress: resumo.taxa_eficiencia
