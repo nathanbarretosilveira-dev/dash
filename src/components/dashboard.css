@@ -10,6 +10,7 @@
 
 .filters-container {
   display: flex;
+  justify-content: space-between;
   gap: 12px;
   padding: 12px;
   margin-bottom: 24px;
@@ -25,6 +26,18 @@
     0 8px 30px rgba(0,0,0,0.4);
 }
 
+.filters-left,
+.filters-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filters-right {
+  margin-left: auto;
+}
+
 /* =========================
    BOTÕES DE FILTRO
    ========================= */
@@ -35,7 +48,7 @@
   outline: none;
   cursor: pointer;
 
-  padding: 10px 22px; /* Aumentado levemente para acomodar o detalhe */
+  padding: 10px 22px;
   border-radius: 999px;
 
   font-size: 0.75rem;
@@ -46,20 +59,18 @@
   background: rgba(255, 255, 255, 0.04);
 
   border: 1px solid rgba(255,255,255,0.08);
-  position: relative; /* Necessário para o detalhe inferior */
-  overflow: hidden; /* Garante que o brilho não escape do arredondado */
+  position: relative;
+  overflow: hidden;
 
   transition: all 0.25s ease;
 }
 
-/* Hover */
 .filter-btn:hover {
   background: rgba(99, 102, 241, 0.18);
   color: #ffffff;
   transform: translateY(-1px);
 }
 
-/* Ativo - Com detalhe de cor inferior */
 .filter-btn.active {
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
   color: #ffffff;
@@ -70,7 +81,6 @@
     0 6px 18px rgba(99,102,241,0.45);
 }
 
-/* O DETALHE DE COR (Borda Inferior Neon) */
 .filter-btn.active::after {
   content: '';
   position: absolute;
@@ -78,17 +88,18 @@
   left: 25%;
   width: 50%;
   height: 3px;
-  background: #fff; /* Cor de destaque branca ou ciano claro */
+  background: #fff;
   border-radius: 4px 4px 0 0;
   box-shadow: 0 0 10px #fff, 0 0 5px #6366f1;
   opacity: 0.9;
 }
 
 /* =========================
-   INPUT – FILTRO POR USUÁRIO
+   INPUTS – FILTROS
    ========================= */
 
-.user-filter {
+.user-filter,
+.date-filter {
   appearance: none;
   border: none;
   outline: none;
@@ -104,29 +115,31 @@
   background: rgba(255, 255, 255, 0.04);
 
   border: 1px solid rgba(255,255,255,0.08);
-
   min-width: 180px;
-  margin-left: auto; /* Alinha o input à direita em telas grandes */
 
   transition: all 0.25s ease;
 }
 
-/* Hover */
-.user-filter:hover {
+.user-filter:hover,
+.date-filter:hover {
   background: rgba(99, 102, 241, 0.12);
 }
 
-/* Focus */
-.user-filter:focus {
+.user-filter:focus,
+.date-filter:focus {
   background: rgba(99, 102, 241, 0.18);
   border-color: rgba(99,102,241,0.5);
   box-shadow: 0 0 0 1px rgba(99,102,241,0.35);
 }
 
-/* Placeholder */
 .user-filter::placeholder {
   color: #94a3b8;
   font-weight: 500;
+}
+
+.date-filter::-webkit-calendar-picker-indicator {
+  filter: invert(88%) sepia(9%) saturate(522%) hue-rotate(196deg) brightness(98%) contrast(92%);
+  cursor: pointer;
 }
 
 /* =========================
@@ -138,22 +151,24 @@
     padding: 1rem;
   }
 
-  .filters-container {
+  .filters-container,
+  .filters-left,
+  .filters-right {
     gap: 8px;
   }
 
-  .filter-btn {
-    flex: 1 1 auto;
-    text-align: center;
-    padding: 8px 14px;
-    font-size: 0.7rem;
+  .filters-left,
+  .filters-right {
+    width: 100%;
   }
 
-  .user-filter {
-    flex: 1 1 100%;
+  .filter-btn,
+  .user-filter,
+  .date-filter {
+    flex: 1 1 calc(50% - 8px);
     text-align: center;
     padding: 8px 14px;
     font-size: 0.7rem;
-    margin-left: 0;
+    min-width: 0;
   }
 }
