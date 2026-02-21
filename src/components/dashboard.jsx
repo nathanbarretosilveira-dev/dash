@@ -3,7 +3,7 @@ import './dashboard.css';
 import KPIs from './kpis';
 import Charts from './charts';
 import cteData from '../data/cte_data.json';
-import { getHoje, getSemana, somarPeriodo } from '../utils/dataRange.js';
+import { getHoje, getMesAtual, getSemana, somarPeriodo } from '../utils/dataRange.js';
 
 const normalizarData = (valor) => {
   const [dia = '', mes = ''] = String(valor || '').trim().split('/');
@@ -11,9 +11,17 @@ const normalizarData = (valor) => {
   return `${dia.padStart(2, '0')}/${mes.padStart(2, '0')}`;
 };
 
+const normalizarDataInput = (valorISO) => {
+  if (!valorISO) return '';
+  const [ano = '', mes = '', dia = ''] = String(valorISO).split('-');
+  if (!ano || !mes || !dia) return '';
+  return `${dia}/${mes}`;
+};
+
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
   const [userFilter, setUserFilter] = useState('');
+  const [dateFilter, setDateFilter] = useState('');
 
   const rawData = cteData ?? {};
 
@@ -22,7 +30,13 @@ const Dashboard = () => {
     let diasFiltrados = rawData.dados_por_dia || [];
 
     if (activeFilter === 'hoje') diasFiltrados = getHoje(diasFiltrados);
+    if (activeFilter === 'mes') diasFiltrados = getMesAtual(diasFiltrados);
     if (activeFilter === 'semana') diasFiltrados = getSemana(diasFiltrados);
+
+    if (dateFilter) {
+      const dataSelecionada = normalizarDataInput(dateFilter);
+      diasFiltrados = diasFiltrados.filter((dia) => normalizarData(dia.data) === dataSelecionada);
+    }
 
     const periodo = somarPeriodo(diasFiltrados);
     const datasPeriodo = new Set(diasFiltrados.map((dia) => normalizarData(dia.data)));
@@ -32,7 +46,10 @@ const Dashboard = () => {
 
     dadosUsuariosPorDia.forEach((dia) => {
       const dataNormalizada = normalizarData(dia.data);
-      const considerarData = activeFilter === 'todos' || datasPeriodo.has(dataNormalizada);
+      const considerarData = activeFilter === 'todos'
+        ? (!dateFilter || datasPeriodo.has(dataNormalizada))
+        : datasPeriodo.has(dataNormalizada);
+
       if (!considerarData) return;
 
       (dia.usuarios || []).forEach((usuario) => {
@@ -59,7 +76,7 @@ const Dashboard = () => {
 
     const temAgregadoPorDia = dadosUsuariosPorDia.length > 0;
 
-    if (!temAgregadoPorDia || activeFilter === 'todos') {
+    if ((!temAgregadoPorDia || activeFilter === 'todos') && !dateFilter) {
       usuariosFiltrados = (rawData.emissoes_por_usuario || [])
         .filter((u) => u.nome.toLowerCase().includes(termoUsuario))
         .map((u) => ({ ...u }))
@@ -74,11 +91,11 @@ const Dashboard = () => {
     const totalEmissoesFiltradas = usuariosFiltrados.reduce((acc, curr) => acc + curr.emissoes, 0);
     const totalCancelamentosFiltrados = cancelamentosUsuarios.reduce((acc, curr) => acc + curr.total, 0);
 
-    const totalBasePeriodo = activeFilter === 'todos'
+    const totalBasePeriodo = activeFilter === 'todos' && !dateFilter
       ? rawData.resumo?.total_emissoes || totalEmissoesFiltradas
       : periodo.emissoes;
 
-    const totalBaseCancelamentos = activeFilter === 'todos'
+    const totalBaseCancelamentos = activeFilter === 'todos' && !dateFilter
       ? rawData.resumo?.total_cancelamentos || totalCancelamentosFiltrados
       : periodo.cancelamentos;
 
@@ -132,35 +149,45 @@ const Dashboard = () => {
       volume_por_turno: turno,
       timeline: timelineFiltrada
     };
-  }, [activeFilter, userFilter, rawData]);
+  }, [activeFilter, userFilter, dateFilter, rawData]);
 
   return (
     <div className="dashboard">
-      {/* Container de filtros com a classe que aplica o espaçamento e estilo neon */}
       <div className="filters-container">
-        {[
-          ['todos', 'Todos'],
-          ['hoje', 'Hoje'],
-          ['semana', 'Semana'],
-        ].map(([key, label]) => (
-          <button
-            key={key}
-            className={`filter-btn ${activeFilter === key ? 'active' : ''}`}
-            onClick={() => setActiveFilter(key)}
-          >
-            {label}
-          </button>
-        ))}
+        <div className="filters-left">
+          {[
+            ['todos', 'Todos'],
+            ['mes', 'Mês'],
+            ['semana', 'Semana'],
+            ['hoje', 'Hoje'],
+          ].map(([key, label]) => (
+            <button
+              key={key}
+              className={`filter-btn ${activeFilter === key ? 'active' : ''}`}
+              onClick={() => setActiveFilter(key)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
 
-        <input
-          className="user-filter"
-          placeholder="Filtrar usuário"
-          value={userFilter}
-          onChange={(e) => setUserFilter(e.target.value)}
-        />
+        <div className="filters-right">
+          <input
+            className="user-filter"
+            placeholder="Filtrar usuário"
+            value={userFilter}
+            onChange={(e) => setUserFilter(e.target.value)}
+          />
+          <input
+            className="date-filter"
+            type="date"
+            value={dateFilter}
+            onChange={(e) => setDateFilter(e.target.value)}
+            aria-label="Filtrar data"
+          />
+        </div>
       </div>
 
-      {/* Componentes de exibição de dados */}
       <KPIs data={filteredData} />
       <Charts data={filteredData} />
     </div>
