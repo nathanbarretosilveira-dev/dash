@@ -9,6 +9,14 @@ const KPIs = ({ data }) => {
     emissoes_por_usuario = []
   } = data;
 
+  const tendenciaEmissoes = resumo.tendencia_emissoes_7d || { variacao: 0, subiu: false };
+  const tendenciaCancelamento = resumo.tendencia_taxa_cancelamento_7d || { variacao: 0, subiu: false };
+
+  const formatarTendencia = (valor) => {
+    const sinal = valor > 0 ? '+' : '';
+    return `${sinal}${valor.toFixed(1)}%`;
+  };
+
   const totalEmissoes = resumo.total_emissoes || 0;
   const totalUsuarios = emissoes_por_usuario.length || 1;
   const produtividadeMedia = Math.round(totalEmissoes / totalUsuarios);
@@ -17,18 +25,18 @@ const KPIs = ({ data }) => {
     {
       title: 'Total de Emissões',
       value: resumo.total_emissoes,
-      trend: '+12.5%',
-      trendUp: true,
-      detail: `${resumo.total_emissoes - resumo.total_cancelamentos} válidos`,
+      trend: formatarTendencia(tendenciaEmissoes.variacao),
+      trendUp: tendenciaEmissoes.subiu,
+      detail: `Média móvel 7d (${resumo.total_emissoes - resumo.total_cancelamentos} válidos)`,
       icon: '📄',
       color: 'purple' // Isso vai virar kpi-purple
     },
     {
       title: 'Cancelamentos',
       value: resumo.total_cancelamentos,
-      trend: '7.3%',
-      trendUp: false,
-      detail: 'requer atenção',
+      trend: formatarTendencia(tendenciaCancelamento.variacao),
+      trendUp: tendenciaCancelamento.subiu,
+      detail: 'Taxa de cancelamento (média móvel 7d)',
       icon: '⚠️',
       color: 'red' // Isso vai virar kpi-red
     },
@@ -71,8 +79,8 @@ const KPIs = ({ data }) => {
 
             {kpi.progress !== undefined && (
               <div className="kpi-progress">
-                <div 
-                  className="kpi-progress-bar" 
+                <div
+                  className="kpi-progress-bar"
                   style={{ width: `${kpi.progress}%` }}
                 />
               </div>
