@@ -50,7 +50,7 @@ function Header() {
         </div>
 
         <div className="header-datetime" aria-live="polite">
-          <span className="header-datetime-label">Brasília (GMT-3)</span>
+          <span className="header-datetime-label">Horário de Brasília</span>
           <strong>{horaFormatada}</strong>
           <span className="header-datetime-date">{dataFormatada}</span>
         </div>
@@ -60,3 +60,4 @@ function Header() {
 }
 
 export default Header;
+
