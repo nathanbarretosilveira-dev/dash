@@ -3,7 +3,22 @@ import './dashboard.css';
 import KPIs from './kpis';
 import Charts from './charts';
 import cteData from '../data/cte_data.json';
-import { getHoje, getMesAtual, getSemana, somarPeriodo } from '../utils/dataRange.js';
+import { getHoje, getSemana, somarPeriodo } from '../utils/dataRange.js';
+
+const MESES = [
+  { value: '01', label: 'Janeiro' },
+  { value: '02', label: 'Fevereiro' },
+  { value: '03', label: 'Março' },
+  { value: '04', label: 'Abril' },
+  { value: '05', label: 'Maio' },
+  { value: '06', label: 'Junho' },
+  { value: '07', label: 'Julho' },
+  { value: '08', label: 'Agosto' },
+  { value: '09', label: 'Setembro' },
+  { value: '10', label: 'Outubro' },
+  { value: '11', label: 'Novembro' },
+  { value: '12', label: 'Dezembro' }
+];
 
 const normalizarData = (valor) => {
   const [dia = '', mes = ''] = String(valor || '').trim().split('/');
@@ -18,10 +33,17 @@ const normalizarDataInput = (valorISO) => {
   return `${dia}/${mes}`;
 };
 
+const extrairMes = (dataDiaMes) => {
+  const [, mes = ''] = normalizarData(dataDiaMes).split('/');
+  return mes;
+};
+
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
   const [userFilter, setUserFilter] = useState('');
   const [dateFilter, setDateFilter] = useState('');
+  const [isMonthListOpen, setIsMonthListOpen] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState('');
 
   const rawData = cteData ?? {};
 
@@ -30,7 +52,9 @@ const Dashboard = () => {
     let diasFiltrados = rawData.dados_por_dia || [];
 
     if (activeFilter === 'hoje') diasFiltrados = getHoje(diasFiltrados);
-    if (activeFilter === 'mes') diasFiltrados = getMesAtual(diasFiltrados);
+    if (activeFilter === 'mes' && selectedMonth) {
+      diasFiltrados = diasFiltrados.filter((dia) => extrairMes(dia.data) === selectedMonth);
+    }
     if (activeFilter === 'semana') diasFiltrados = getSemana(diasFiltrados);
 
     if (dateFilter) {
@@ -149,26 +173,85 @@ const Dashboard = () => {
       volume_por_turno: turno,
       timeline: timelineFiltrada
     };
-  }, [activeFilter, userFilter, dateFilter, rawData]);
+  }, [activeFilter, userFilter, dateFilter, rawData, selectedMonth]);
+
+  const onMonthFilterClick = () => {
+    setActiveFilter('mes');
+    setIsMonthListOpen((prev) => !prev);
+  };
+
+  const onSelectMonth = (monthValue) => {
+    setSelectedMonth(monthValue);
+    setIsMonthListOpen(false);
+  };
+
+  const selectedMonthLabel = MESES.find((mes) => mes.value === selectedMonth)?.label || 'Selecionar mês';
 
   return (
     <div className="dashboard">
       <div className="filters-container">
         <div className="filters-left">
-          {[
-            ['todos', 'Todos'],
-            ['mes', 'Mês'],
-            ['semana', 'Semana'],
-            ['hoje', 'Hoje'],
-          ].map(([key, label]) => (
+          <button
+            className={`filter-btn ${activeFilter === 'todos' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveFilter('todos');
+              setIsMonthListOpen(false);
+            }}
+          >
+            Todos
+          </button>
+
+          <div className="month-filter-wrapper">
             <button
-              key={key}
-              className={`filter-btn ${activeFilter === key ? 'active' : ''}`}
-              onClick={() => setActiveFilter(key)}
+              className={`filter-btn ${activeFilter === 'mes' ? 'active' : ''}`}
+              onClick={onMonthFilterClick}
             >
-              {label}
+              Mês
             </button>
-          ))}
+
+            {activeFilter === 'mes' && (
+              <button
+                className="month-selected-btn"
+                onClick={() => setIsMonthListOpen((prev) => !prev)}
+              >
+                {selectedMonthLabel}
+              </button>
+            )}
+
+            {activeFilter === 'mes' && isMonthListOpen && (
+              <div className="month-list" role="listbox" aria-label="Lista de meses">
+                {MESES.map((mes) => (
+                  <button
+                    key={mes.value}
+                    className={`month-item ${selectedMonth === mes.value ? 'active' : ''}`}
+                    onClick={() => onSelectMonth(mes.value)}
+                  >
+                    {mes.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <button
+            className={`filter-btn ${activeFilter === 'semana' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveFilter('semana');
+              setIsMonthListOpen(false);
+            }}
+          >
+            Semana
+          </button>
+
+          <button
+            className={`filter-btn ${activeFilter === 'hoje' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveFilter('hoje');
+              setIsMonthListOpen(false);
+            }}
+          >
+            Hoje
+          </button>
         </div>
 
         <div className="filters-right">
