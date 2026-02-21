@@ -145,8 +145,10 @@ const Charts = ({ data }) => {
 
                 return (
                   <div key={index} className={`timeline-item ${isPico ? 'pico' : ''}`}>
-                    <span className="timeline-value">{valor}</span>
-                    <div className="timeline-bar" style={{ height: alturaBarra }} />
+                    <div className="timeline-bar-track">
+                      <span className="timeline-value">{valor}</span>
+                      <div className="timeline-bar" style={{ height: alturaBarra }} />
+                    </div>
                     <span className={`timeline-label ${index % 2 ? 'is-muted' : ''}`}>{item.hora}</span>
                   </div>
                 );
