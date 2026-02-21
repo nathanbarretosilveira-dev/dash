@@ -38,7 +38,8 @@ const KPIs = ({ data }) => {
       trendUp: tendenciaCancelamento.subiu,
       detail: 'Taxa de cancelamento (média móvel 7d)',
       icon: '⚠️',
-      color: 'red' // Isso vai virar kpi-red
+      color: 'red', // Isso vai virar kpi-red
+      invertTrendColor: true
     },
     {
       title: 'Taxa de Eficiência',
@@ -68,7 +69,7 @@ const KPIs = ({ data }) => {
         <div key={index} className={`kpi-card kpi-${kpi.color}`}>
           <div className="kpi-header">
             <div className="kpi-icon">{kpi.icon}</div>
-            <div className={`kpi-trend ${kpi.trendUp ? 'up' : 'down'}`}>
+            <div className={`kpi-trend ${kpi.trendUp ? 'up' : 'down'} ${kpi.invertTrendColor ? 'is-risk' : ''}`}>
               {kpi.trendUp ? '↑' : '↓'} {kpi.trend}
             </div>
           </div>
@@ -79,8 +80,8 @@ const KPIs = ({ data }) => {
 
             {kpi.progress !== undefined && (
               <div className="kpi-progress">
-                <div
-                  className="kpi-progress-bar"
+                <div 
+                  className="kpi-progress-bar" 
                   style={{ width: `${kpi.progress}%` }}
                 />
               </div>
