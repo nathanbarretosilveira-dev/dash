@@ -1,6 +1,33 @@
+const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
+
+const normalizarDataDiaMes = (valor) => {
+  if (!valor) return '';
+
+  const [dia = '', mes = ''] = String(valor)
+    .trim()
+    .split('/');
+
+  if (!dia || !mes) return '';
+
+  return `${dia.padStart(2, '0')}/${mes.padStart(2, '0')}`;
+};
+
+const obterHojeBrasilia = () => {
+  const formatter = new Intl.DateTimeFormat('pt-BR', {
+    timeZone: BRASILIA_TIMEZONE,
+    day: '2-digit',
+    month: '2-digit'
+  });
+
+  return formatter.format(new Date());
+};
+
 export const getHoje = (dadosPorDia) => {
   if (!dadosPorDia?.length) return [];
-  return [dadosPorDia[dadosPorDia.length - 1]];
+
+  const hoje = obterHojeBrasilia();
+
+  return dadosPorDia.filter((dia) => normalizarDataDiaMes(dia.data) === hoje);
 };
 
 export const getSemana = (dadosPorDia) => {
