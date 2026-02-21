@@ -39,7 +39,7 @@ function Header() {
       <div className="header-content">
         <div className="header-main">
           <img
-            src="https://potencial1-my.sharepoint.com/personal/nathan_g_grpotencial_com_br/Documents/BWT%20-%20Logotipo-01%20(1).png"
+            src="https://i.imgur.com/ECjnZeK.png"
             alt="BWT Transporte"
             className="header-logo"
           />
@@ -60,5 +60,6 @@ function Header() {
 }
 
 export default Header;
+
 
 
