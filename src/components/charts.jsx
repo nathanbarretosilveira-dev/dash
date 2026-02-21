@@ -63,7 +63,7 @@ const Charts = ({ data }) => {
     <div className="charts-container">
       <div className="charts-row">
         <div className="chart-card">
-          <h3>Produtividade por Emissor</h3>
+          <h3>Produtividade</h3>
           <div className="chart-content horizontal-bars">
             {emissoes_por_usuario.map((item, idx) => (
               <div key={idx} className="bar-item">
@@ -83,7 +83,7 @@ const Charts = ({ data }) => {
         </div>
 
         <div className="chart-card">
-          <h3>Análise de Cancelamentos</h3>
+          <h3>Cancelamentos</h3>
           <div className="chart-content horizontal-bars">
             {cancelamentos_por_usuario.map((item, idx) => (
               <div key={idx} className="bar-item">
@@ -103,7 +103,7 @@ const Charts = ({ data }) => {
         </div>
 
         <div className="chart-card">
-          <h3>Indicador de Turno (Corte 14h)</h3>
+          <h3>Emissões por Turno</h3>
           <div className="chart-content turno-container">
             <div className="turno-grid">
               <div className="turno-section">
