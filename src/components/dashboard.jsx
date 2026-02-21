@@ -38,6 +38,29 @@ const extrairMes = (dataDiaMes) => {
   return mes;
 };
 
+const calcularVariacaoMediaMovel7d = (dadosPorDia, selector) => {
+  if (!Array.isArray(dadosPorDia) || dadosPorDia.length < 14) {
+    return { variacao: 0, subiu: false };
+  }
+
+  const serie = dadosPorDia.map((dia) => Number(selector(dia)) || 0);
+  const janelaAtual = serie.slice(-7);
+  const janelaAnterior = serie.slice(-14, -7);
+
+  const mediaAtual = janelaAtual.reduce((acc, val) => acc + val, 0) / 7;
+  const mediaAnterior = janelaAnterior.reduce((acc, val) => acc + val, 0) / 7;
+
+  if (mediaAnterior === 0) {
+    return { variacao: 0, subiu: mediaAtual > 0 };
+  }
+
+  const variacao = ((mediaAtual - mediaAnterior) / mediaAnterior) * 100;
+  return {
+    variacao: Number(variacao.toFixed(1)),
+    subiu: variacao >= 0
+  };
+};
+
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
   const [userFilter, setUserFilter] = useState('');
@@ -61,6 +84,20 @@ const Dashboard = () => {
       const dataSelecionada = normalizarDataInput(dateFilter);
       diasFiltrados = diasFiltrados.filter((dia) => normalizarData(dia.data) === dataSelecionada);
     }
+
+    const baseTendencia = (rawData.dados_por_dia || []);
+    const tendenciaEmissoes = calcularVariacaoMediaMovel7d(
+      baseTendencia,
+      (dia) => dia.emissoes
+    );
+    const tendenciaTaxaCancelamento = calcularVariacaoMediaMovel7d(
+      baseTendencia,
+      (dia) => {
+        const emiss = Number(dia.emissoes) || 0;
+        const canc = Number(dia.cancelamentos) || 0;
+        return emiss > 0 ? (canc / emiss) * 100 : 0;
+      }
+    );
 
     const periodo = somarPeriodo(diasFiltrados);
     const datasPeriodo = new Set(diasFiltrados.map((dia) => normalizarData(dia.data)));
@@ -163,6 +200,8 @@ const Dashboard = () => {
       resumo: {
         total_emissoes: totalEmissoes,
         total_cancelamentos: totalCancelamentos,
+        tendencia_emissoes_7d: tendenciaEmissoes,
+        tendencia_taxa_cancelamento_7d: tendenciaTaxaCancelamento,
         taxa_eficiencia:
           totalEmissoes > 0 ? ((totalEmissoes - totalCancelamentos) / totalEmissoes) * 100 : 0,
         produtividade_media:
