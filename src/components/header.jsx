@@ -36,17 +36,27 @@ function Header() {
 
   return (
     <header className="dashboard-header">
+      <img
+        src="https://i.imgur.com/ywpSp8k.jpeg"
+        alt=""
+        aria-hidden="true"
+        referrerPolicy="no-referrer"
+        className="header-background-image"
+      />
+      <div className="header-background-overlay" aria-hidden="true" />
+
       <div className="header-content">
-        <div className="header-main">
-          <img
-            src="https://i.imgur.com/ECjnZeK.png"
-            alt="BWT Transporte"
-            className="header-logo"
-          />
-          <div className="header-title">
-            <h1>Dashboard CT-es Logística</h1>
-            <p>Acompanhamento de Emissões de Conhecimento de Transporte</p>
-          </div>
+        <img
+          src="https://i.imgur.com/ECjnZeK.png"
+          alt=""
+          aria-label="BWT Transporte"
+          referrerPolicy="no-referrer"
+          className="header-logo"
+        />
+
+        <div className="header-title">
+          <h1>Dashboard CT-es Logística</h1>
+          <p>Acompanhamento de Emissões de Conhecimento de Transporte</p>
         </div>
 
         <div className="header-datetime" aria-live="polite">
@@ -60,6 +70,3 @@ function Header() {
 }
 
 export default Header;
-
-
-
