@@ -85,18 +85,14 @@ const Dashboard = () => {
       diasFiltrados = diasFiltrados.filter((dia) => normalizarData(dia.data) === dataSelecionada);
     }
 
-    const baseTendencia = (rawData.dados_por_dia || []);
+    const baseTendencia = diasFiltrados;
     const tendenciaEmissoes = calcularVariacaoMediaMovel7d(
       baseTendencia,
       (dia) => dia.emissoes
     );
     const tendenciaTaxaCancelamento = calcularVariacaoMediaMovel7d(
       baseTendencia,
-      (dia) => {
-        const emiss = Number(dia.emissoes) || 0;
-        const canc = Number(dia.cancelamentos) || 0;
-        return emiss > 0 ? (canc / emiss) * 100 : 0;
-      }
+      (dia) => dia.cancelamentos
     );
 
     const periodo = somarPeriodo(diasFiltrados);
