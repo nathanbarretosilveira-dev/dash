@@ -63,7 +63,7 @@ const Charts = ({ data }) => {
     <div className="charts-container">
       <div className="charts-row">
         <div className="chart-card">
-          <h3>Produtividade</h3>
+          <h3>Produtividade por Emissor</h3>
           <div className="chart-content horizontal-bars">
             {emissoes_por_usuario.map((item, idx) => (
               <div key={idx} className="bar-item">
@@ -83,7 +83,7 @@ const Charts = ({ data }) => {
         </div>
 
         <div className="chart-card">
-          <h3>Cancelamentos</h3>
+          <h3>Análise de Cancelamentos</h3>
           <div className="chart-content horizontal-bars">
             {cancelamentos_por_usuario.map((item, idx) => (
               <div key={idx} className="bar-item">
@@ -103,7 +103,7 @@ const Charts = ({ data }) => {
         </div>
 
         <div className="chart-card">
-          <h3>Emissões por Turno</h3>
+          <h3>Indicador de Turno (Corte 14h)</h3>
           <div className="chart-content turno-container">
             <div className="turno-grid">
               <div className="turno-section">
@@ -112,7 +112,7 @@ const Charts = ({ data }) => {
                   <span>{percentAntes}%</span>
                 </div>
                 <div className="turno-bar-wrapper">
-                  <div className="turno-bar antes" style={{ width: `${percentAntes}%` }}>
+                  <div className="turno-bar antes" style={{ height: `${percentAntes}%` }}>
                     {volume_por_turno.antes_14h}
                   </div>
                 </div>
@@ -124,7 +124,7 @@ const Charts = ({ data }) => {
                   <span>{percentDepois}%</span>
                 </div>
                 <div className="turno-bar-wrapper">
-                  <div className="turno-bar depois" style={{ width: `${percentDepois}%` }}>
+                  <div className="turno-bar depois" style={{ height: `${percentDepois}%` }}>
                     {volume_por_turno.depois_14h}
                   </div>
                 </div>
