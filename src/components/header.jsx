@@ -1,11 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import cteDataUrl from '../data/cte_data.json?url';
 import './header.css';
 
 const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
-const getMetadataUrl = () => {
-  const baseUrl = import.meta.env.BASE_URL || '/';
-  return new URL('api/cte-data-metadata', window.location.origin + baseUrl).toString();
-};
 
 function Header() {
   const [now, setNow] = useState(() => new Date());
@@ -25,11 +22,11 @@ function Header() {
 
     const carregarMetadados = async () => {
       try {
-        const response = await fetch(getMetadataUrl(), { cache: 'no-store' });
+        const response = await fetch(cteDataUrl, { method: 'HEAD', cache: 'no-store' });
         if (!response.ok) throw new Error('Falha ao buscar metadados');
-
-        const payload = await response.json();
-        const dataAtualizacao = payload?.atualizadoEm ? new Date(payload.atualizadoEm) : null;
+        
+        const lastModifiedHeader = response.headers.get('last-modified');
+        const dataAtualizacao = lastModifiedHeader ? new Date(lastModifiedHeader) : null;
 
         if (!ativo) return;
 
@@ -121,5 +118,6 @@ function Header() {
 }
 
 export default Header;
+
 
 
