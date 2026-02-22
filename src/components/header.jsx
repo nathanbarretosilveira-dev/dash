@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import './header.css';
 
 const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
+const API_METADATA_PATH = `${import.meta.env.BASE_URL}api/cte-data-metadata`.replace(/([^:]\/)\/+/g, '$1');
 
 function Header() {
   const [now, setNow] = useState(() => new Date());
@@ -21,7 +22,7 @@ function Header() {
 
     const carregarMetadados = async () => {
       try {
-        const response = await fetch('/api/cte-data-metadata');
+        const API_METADATA_PATH = `${import.meta.env.BASE_URL}api/cte-data-metadata`.replace(/([^:]\/)\/+/g, '$1');
         if (!response.ok) throw new Error('Falha ao buscar metadados');
 
         const payload = await response.json();
@@ -41,6 +42,7 @@ function Header() {
           year: 'numeric',
           hour: '2-digit',
           minute: '2-digit',
+          second: '2-digit',
           hour12: false
         });
 
@@ -116,3 +118,4 @@ function Header() {
 }
 
 export default Header;
+
