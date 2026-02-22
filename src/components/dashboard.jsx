@@ -151,17 +151,18 @@ const Dashboard = () => {
 
     const periodo = somarPeriodo(diasFiltrados);
     const datasPeriodo = new Set(diasFiltrados.map((dia) => normalizarData(dia.data)));
+    const deveConsiderarData = (data) => {
+      const dataNormalizada = normalizarData(data);
+      return activeFilter === 'todos'
+        ? (!dateFilter || datasPeriodo.has(dataNormalizada))
+        : datasPeriodo.has(dataNormalizada);
+    };
 
     const dadosUsuariosPorDia = rawData.emissoes_por_usuario_por_dia || [];
     const agregadosPorUsuario = new Map();
 
     dadosUsuariosPorDia.forEach((dia) => {
-      const dataNormalizada = normalizarData(dia.data);
-      const considerarData = activeFilter === 'todos'
-        ? (!dateFilter || datasPeriodo.has(dataNormalizada))
-        : datasPeriodo.has(dataNormalizada);
-
-      if (!considerarData) return;
+      if (!deveConsiderarData(dia.data)) return;
 
       (dia.usuarios || []).forEach((usuario) => {
         const nome = usuario.nome || '';
@@ -227,10 +228,26 @@ const Dashboard = () => {
       ? totalEmissoes / (rawData.resumo?.total_emissoes || 1)
       : 0;
 
-    const turno = {
-      antes_14h: Math.round((rawData.emissoes_por_turno?.antes_14h || 0) * fatorPeriodo),
-      depois_14h: Math.round((rawData.emissoes_por_turno?.depois_14h || 0) * fatorPeriodo)
-    };
+    const dadosTurnoPorDia = rawData.emissoes_por_turno_por_dia || [];
+    const temTurnoPorDia = Array.isArray(dadosTurnoPorDia) && dadosTurnoPorDia.length > 0;
+
+    const turnoFiltradoPorDia = dadosTurnoPorDia.reduce((acc, dia) => {
+      if (!deveConsiderarData(dia.data)) return acc;
+
+      const antes14h = Number(dia.antes_14h ?? dia.antes_14h_emissoes ?? dia.turno?.antes_14h) || 0;
+      const depois14h = Number(dia.depois_14h ?? dia.depois_14h_emissoes ?? dia.turno?.depois_14h) || 0;
+
+      acc.antes_14h += antes14h;
+      acc.depois_14h += depois14h;
+      return acc;
+    }, { antes_14h: 0, depois_14h: 0 });
+
+    const turno = temTurnoPorDia
+      ? turnoFiltradoPorDia
+      : {
+          antes_14h: Math.round((rawData.emissoes_por_turno?.antes_14h || 0) * fatorPeriodo),
+          depois_14h: Math.round((rawData.emissoes_por_turno?.depois_14h || 0) * fatorPeriodo)
+        };
 
     let timelineFiltrada = (rawData.timeline_operacao || []).map((item) => ({
       ...item,
@@ -415,7 +432,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-
-
-
