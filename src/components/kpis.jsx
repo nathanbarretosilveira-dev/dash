@@ -36,7 +36,7 @@ const KPIs = ({ data }) => {
       value: resumo.total_cancelamentos,
       trend: formatarTendencia(tendenciaCancelamento.variacao),
       trendUp: tendenciaCancelamento.subiu,
-      detail: '',
+      detail: 'Homologados SEFAZ',
       icon: '⚠️',
       color: 'red', // Isso vai virar kpi-red
       invertTrendColor: true
@@ -96,4 +96,5 @@ const KPIs = ({ data }) => {
 };
 
 export default KPIs;
+
 
