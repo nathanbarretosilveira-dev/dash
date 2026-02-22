@@ -155,7 +155,7 @@ const Dashboard = () => {
     const dadosUsuariosPorDia = rawData.emissoes_por_usuario_por_dia || [];
     const agregadosPorUsuario = new Map();
 
-    dadosUsuariosPorDia.forEach((dia) => {
+    dadosUsuariosPorDia.forEach((dia) => {␊
       const dataNormalizada = normalizarData(dia.data);
       const considerarData = activeFilter === 'todos'
         ? (!dateFilter || datasPeriodo.has(dataNormalizada))
@@ -172,8 +172,13 @@ const Dashboard = () => {
         }
 
         const atual = agregadosPorUsuario.get(nome);
-        atual.emissoes += Number(usuario.emissoes) || 0;
-        atual.total += Number(usuario.cancelamentos) || 0;
+        const emissoesLiquidas = Number(usuario.emissoes) || 0;
+        const cancelamentosUsuario = Number(usuario.cancelamentos) || 0;
+
+        // Emissões no JSON de resumo já consideram os documentos cancelados.
+        // Para manter consistência em TODOS os filtros, somamos ambos aqui.
+        atual.emissoes += emissoesLiquidas + cancelamentosUsuario;
+        atual.total += cancelamentosUsuario;
       });
     });
 
@@ -205,9 +210,11 @@ const Dashboard = () => {
     const usarResumoComoBase =
       (activeFilter === 'todos' && !dateFilter) || (activeFilter === 'mes' && filtroCobreBaseCompleta);
 
+    const totalEmissoesPeriodo = periodo.emissoes + periodo.cancelamentos;
+
     const totalBasePeriodo = usarResumoComoBase
       ? rawData.resumo?.total_emissoes || totalEmissoesFiltradas
-      : periodo.emissoes;
+      : totalEmissoesPeriodo;
 
     const totalBaseCancelamentos = usarResumoComoBase
       ? rawData.resumo?.total_cancelamentos || totalCancelamentosFiltrados
@@ -408,5 +415,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
 
