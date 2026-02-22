@@ -298,7 +298,9 @@ const Dashboard = () => {
             <button
               className={`filter-btn ${activeFilter === 'mes' ? 'active' : ''}`}
               onClick={() => {
-                setActiveFilter('mes');
+                if (selectedMonth) {
+                  setActiveFilter('mes');
+                }
                 setIsMonthListOpen((prev) => !prev);
               }}
             >
@@ -406,3 +408,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
