@@ -1,4 +1,5 @@
 import express from 'express';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
  
@@ -11,6 +12,24 @@ const port = process.env.PORT || 7067;
 // Middleware para parse JSON
 app.use(express.json());
  
+
+const cteDataPath = path.join(__dirname, 'src', 'data', 'cte_data.json');
+
+app.get('/api/cte-data-metadata', (_req, res) => {
+  fs.stat(cteDataPath, (err, stats) => {
+    if (err) {
+      res.status(500).json({ error: 'Não foi possível obter metadados do arquivo cte_data.json.' });
+      return;
+    }
+
+    res.json({
+      arquivo: 'cte_data.json',
+      criadoEm: stats.birthtime?.toISOString?.() || null,
+      atualizadoEm: stats.mtime?.toISOString?.() || null
+    });
+  });
+});
+
 // Servir arquivos estáticos do build do Vite
 app.use(express.static(path.join(__dirname, 'dist')));
  
