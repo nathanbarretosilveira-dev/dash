@@ -155,7 +155,7 @@ const Dashboard = () => {
     const dadosUsuariosPorDia = rawData.emissoes_por_usuario_por_dia || [];
     const agregadosPorUsuario = new Map();
 
-    dadosUsuariosPorDia.forEach((dia) => {␊
+    dadosUsuariosPorDia.forEach((dia) => {
       const dataNormalizada = normalizarData(dia.data);
       const considerarData = activeFilter === 'todos'
         ? (!dateFilter || datasPeriodo.has(dataNormalizada))
@@ -415,6 +415,7 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
 
 
