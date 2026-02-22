@@ -203,7 +203,7 @@ const Dashboard = () => {
     const totalCancelamentosFiltrados = cancelamentosUsuarios.reduce((acc, curr) => acc + curr.total, 0);
 
     const usarResumoComoBase =
-      activeFilter === 'todos' || (activeFilter === 'mes' && filtroCobreBaseCompleta);
+      (activeFilter === 'todos' && !dateFilter) || (activeFilter === 'mes' && filtroCobreBaseCompleta);
 
     const totalBasePeriodo = usarResumoComoBase
       ? rawData.resumo?.total_emissoes || totalEmissoesFiltradas
@@ -408,4 +408,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
