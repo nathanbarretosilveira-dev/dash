@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import cteDataUrl from '../data/cte_data.json?url';
 import './header.css';
 
 const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
@@ -21,13 +20,26 @@ function Header() {
     let ativo = true;
 
     const carregarMetadados = async () => {
-      try {
-        const response = await fetch(cteDataUrl, { method: 'HEAD', cache: 'no-store' });
-        if (!response.ok) throw new Error('Falha ao buscar metadados');
-        
-        const lastModifiedHeader = response.headers.get('last-modified');
-        const dataAtualizacao = lastModifiedHeader ? new Date(lastModifiedHeader) : null;
+      const obterDataDaApi = async () => {
+        const response = await fetch('/api/cte-data-metadata', { cache: 'no-store' });
+        if (!response.ok) return null;
+        const payload = await response.json();
+        return payload?.atualizadoEm ? new Date(payload.atualizadoEm) : null;
+      };
 
+      const obterDataDoArquivoDev = async () => {
+        const response = await fetch('/src/data/cte_data.json?import', { method: 'HEAD', cache: 'no-store' });
+        if (!response.ok) return null;
+        const lastModifiedHeader = response.headers.get('last-modified');
+        return lastModifiedHeader ? new Date(lastModifiedHeader) : null;
+      };
+
+      try {
+        let dataAtualizacao = await obterDataDaApi();
+        if (!(dataAtualizacao instanceof Date) || Number.isNaN(dataAtualizacao.getTime())) {
+          dataAtualizacao = await obterDataDoArquivoDev();
+        }
+        
         if (!ativo) return;
 
         if (!(dataAtualizacao instanceof Date) || Number.isNaN(dataAtualizacao.getTime())) {
@@ -118,6 +130,7 @@ function Header() {
 }
 
 export default Header;
+
 
 
 
