@@ -27,7 +27,7 @@ const KPIs = ({ data }) => {
       value: resumo.total_emissoes,
       trend: formatarTendencia(tendenciaEmissoes.variacao),
       trendUp: tendenciaEmissoes.subiu,
-      detail: `Média móvel 7d (${resumo.total_emissoes - resumo.total_cancelamentos} válidos)`,
+      detail: `(${resumo.total_emissoes - resumo.total_cancelamentos} válidos)`,
       icon: '📄',
       color: 'purple' // Isso vai virar kpi-purple
     },
@@ -36,7 +36,7 @@ const KPIs = ({ data }) => {
       value: resumo.total_cancelamentos,
       trend: formatarTendencia(tendenciaCancelamento.variacao),
       trendUp: tendenciaCancelamento.subiu,
-      detail: 'Cancelamentos brutos (média móvel 7d)',
+      detail: 'Homologados SEFAZ',
       icon: '⚠️',
       color: 'red', // Isso vai virar kpi-red
       invertTrendColor: true
@@ -96,3 +96,4 @@ const KPIs = ({ data }) => {
 };
 
 export default KPIs;
+
