@@ -107,6 +107,14 @@
   font-size: 0.78rem;
 }
 
+
+.header-last-update {
+  color: rgba(226, 232, 240, 0.95);
+  font-size: 0.74rem;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
 @media (max-width: 768px) {
   .dashboard-header {
     padding: 1.1rem 1rem;
