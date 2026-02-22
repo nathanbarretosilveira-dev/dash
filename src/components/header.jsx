@@ -5,6 +5,7 @@ const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
 
 function Header() {
   const [now, setNow] = useState(() => new Date());
+  const [ultimaAtualizacao, setUltimaAtualizacao] = useState('Carregando...');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -12,6 +13,50 @@ function Header() {
     }, 1000);
 
     return () => clearInterval(interval);
+  }, []);
+
+
+  useEffect(() => {
+    let ativo = true;
+
+    const carregarMetadados = async () => {
+      try {
+        const response = await fetch('/api/cte-data-metadata');
+        if (!response.ok) throw new Error('Falha ao buscar metadados');
+
+        const payload = await response.json();
+        const dataAtualizacao = payload?.atualizadoEm ? new Date(payload.atualizadoEm) : null;
+
+        if (!ativo) return;
+
+        if (!(dataAtualizacao instanceof Date) || Number.isNaN(dataAtualizacao.getTime())) {
+          setUltimaAtualizacao('Não disponível');
+          return;
+        }
+
+        const formato = new Intl.DateTimeFormat('pt-BR', {
+          timeZone: BRASILIA_TIMEZONE,
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        });
+
+        setUltimaAtualizacao(formato.format(dataAtualizacao));
+      } catch {
+        if (ativo) {
+          setUltimaAtualizacao('Não disponível');
+        }
+      }
+    };
+
+    carregarMetadados();
+
+    return () => {
+      ativo = false;
+    };
   }, []);
 
   const { dataFormatada, horaFormatada } = useMemo(() => {
@@ -63,6 +108,7 @@ function Header() {
           <span className="header-datetime-label">Horário de Brasília</span>
           <strong>{horaFormatada}</strong>
           <span className="header-datetime-date">{dataFormatada}</span>
+          <span className="header-last-update">Última atualização: {ultimaAtualizacao}</span>
         </div>
       </div>
     </header>
