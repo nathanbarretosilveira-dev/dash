@@ -190,11 +190,18 @@ const Dashboard = () => {
     const totalEmissoesFiltradas = usuariosFiltrados.reduce((acc, curr) => acc + curr.emissoes, 0);
     const totalCancelamentosFiltrados = cancelamentosUsuarios.reduce((acc, curr) => acc + curr.total, 0);
 
-    const totalBasePeriodo = activeFilter === 'todos' && !dateFilter
+    const filtroCobreBaseCompleta =
+      !dateFilter &&
+      (rawData.dados_por_dia || []).length > 0 &&
+      diasFiltrados.length === (rawData.dados_por_dia || []).length;
+
+    const usarResumoComoBase = activeFilter === 'todos' || filtroCobreBaseCompleta;
+
+    const totalBasePeriodo = usarResumoComoBase
       ? rawData.resumo?.total_emissoes || totalEmissoesFiltradas
       : periodo.emissoes;
 
-    const totalBaseCancelamentos = activeFilter === 'todos' && !dateFilter
+    const totalBaseCancelamentos = usarResumoComoBase
       ? rawData.resumo?.total_cancelamentos || totalCancelamentosFiltrados
       : periodo.cancelamentos;
 
