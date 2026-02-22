@@ -1,7 +1,10 @@
 .dashboard {
-  padding: 1.5rem;
+  padding: 0;
   max-width: 1400px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .filters-container {
@@ -9,7 +12,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 0;
   flex-wrap: wrap;
   align-items: center;
   background: linear-gradient(135deg, #0f172a, #020617);
@@ -177,7 +180,7 @@
 
 
 .dashboard-footer {
-  margin-top: 1.75rem;
+  margin-top: 0;
   padding: 0.85rem 1rem;
   text-align: center;
   color: #94a3b8;
