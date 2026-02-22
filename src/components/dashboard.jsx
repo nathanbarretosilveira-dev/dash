@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import './dashboard.css';
 import KPIs from './kpis';
 import Charts from './charts';
@@ -28,8 +28,8 @@ const normalizarData = (valor) => {
 
 const normalizarDataInput = (valorISO) => {
   if (!valorISO) return '';
-  const [ano = '', mes = '', dia = ''] = String(valorISO).split('-');
-  if (!ano || !mes || !dia) return '';
+  const [, mes = '', dia = ''] = String(valorISO).split('-');
+  if (!mes || !dia) return '';
   return `${dia}/${mes}`;
 };
 
@@ -61,7 +61,6 @@ const calcularVariacaoMediaMovel7d = (dadosPorDia, selector) => {
   };
 };
 
-
 const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   if (!Array.isArray(dadosCompletos) || dadosCompletos.length === 0) return [];
   if (Array.isArray(diasFiltrados) && diasFiltrados.length >= 14) return diasFiltrados;
@@ -78,15 +77,49 @@ const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
 
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
-  const [userFilter, setUserFilter] = useState('');
   const [dateFilter, setDateFilter] = useState('');
   const [isMonthListOpen, setIsMonthListOpen] = useState(false);
+  const [isUserListOpen, setIsUserListOpen] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState('');
+  const [selectedUser, setSelectedUser] = useState('');
+
+  const monthRef = useRef(null);
+  const userRef = useRef(null);
 
   const rawData = cteData ?? {};
 
+  const usuariosDisponiveis = useMemo(
+    () => (rawData.emissoes_por_usuario || []).map((u) => u.nome).sort((a, b) => a.localeCompare(b)),
+    [rawData]
+  );
+
+  useEffect(() => {
+    const onClickOutside = (event) => {
+      if (monthRef.current && !monthRef.current.contains(event.target)) {
+        setIsMonthListOpen(false);
+      }
+      if (userRef.current && !userRef.current.contains(event.target)) {
+        setIsUserListOpen(false);
+      }
+    };
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsMonthListOpen(false);
+        setIsUserListOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', onClickOutside);
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, []);
+
   const filteredData = useMemo(() => {
-    const termoUsuario = userFilter.trim().toLowerCase();
     let diasFiltrados = rawData.dados_por_dia || [];
 
     if (activeFilter === 'hoje') diasFiltrados = getHoje(diasFiltrados);
@@ -101,14 +134,8 @@ const Dashboard = () => {
     }
 
     const baseTendencia = montarJanelaTendencia(rawData.dados_por_dia || [], diasFiltrados);
-    const tendenciaEmissoes = calcularVariacaoMediaMovel7d(
-      baseTendencia,
-      (dia) => dia.emissoes
-    );
-    const tendenciaTaxaCancelamento = calcularVariacaoMediaMovel7d(
-      baseTendencia,
-      (dia) => dia.cancelamentos
-    );
+    const tendenciaEmissoes = calcularVariacaoMediaMovel7d(baseTendencia, (dia) => dia.emissoes);
+    const tendenciaTaxaCancelamento = calcularVariacaoMediaMovel7d(baseTendencia, (dia) => dia.cancelamentos);
 
     const periodo = somarPeriodo(diasFiltrados);
     const datasPeriodo = new Set(diasFiltrados.map((dia) => normalizarData(dia.data)));
@@ -126,7 +153,7 @@ const Dashboard = () => {
 
       (dia.usuarios || []).forEach((usuario) => {
         const nome = usuario.nome || '';
-        if (termoUsuario && !nome.toLowerCase().includes(termoUsuario)) return;
+        if (selectedUser && nome !== selectedUser) return;
 
         if (!agregadosPorUsuario.has(nome)) {
           agregadosPorUsuario.set(nome, { nome, emissoes: 0, total: 0 });
@@ -150,12 +177,12 @@ const Dashboard = () => {
 
     if ((!temAgregadoPorDia || activeFilter === 'todos') && !dateFilter) {
       usuariosFiltrados = (rawData.emissoes_por_usuario || [])
-        .filter((u) => u.nome.toLowerCase().includes(termoUsuario))
+        .filter((u) => (selectedUser ? u.nome === selectedUser : true))
         .map((u) => ({ ...u }))
         .sort((a, b) => b.emissoes - a.emissoes);
 
       cancelamentosUsuarios = (rawData.cancelamentos_por_usuario || [])
-        .filter((u) => u.nome.toLowerCase().includes(termoUsuario))
+        .filter((u) => (selectedUser ? u.nome === selectedUser : true))
         .map((u) => ({ ...u }))
         .sort((a, b) => b.total - a.total);
     }
@@ -171,8 +198,8 @@ const Dashboard = () => {
       ? rawData.resumo?.total_cancelamentos || totalCancelamentosFiltrados
       : periodo.cancelamentos;
 
-    const totalEmissoes = termoUsuario ? totalEmissoesFiltradas : totalBasePeriodo;
-    const totalCancelamentos = termoUsuario ? totalCancelamentosFiltrados : totalBaseCancelamentos;
+    const totalEmissoes = selectedUser ? totalEmissoesFiltradas : totalBasePeriodo;
+    const totalCancelamentos = selectedUser ? totalCancelamentosFiltrados : totalBaseCancelamentos;
 
     const fatorPeriodo = (rawData.resumo?.total_emissoes || 0) > 0
       ? totalEmissoes / (rawData.resumo?.total_emissoes || 1)
@@ -223,19 +250,20 @@ const Dashboard = () => {
       volume_por_turno: turno,
       timeline: timelineFiltrada
     };
-  }, [activeFilter, userFilter, dateFilter, rawData, selectedMonth]);
+  }, [activeFilter, dateFilter, rawData, selectedMonth, selectedUser]);
 
-  const onMonthFilterClick = () => {
-    setActiveFilter('mes');
-    setIsMonthListOpen((prev) => !prev);
-  };
-
-  const onSelectMonth = (monthValue) => {
-    setSelectedMonth(monthValue);
+  const limparFiltros = () => {
+    setActiveFilter('todos');
+    setDateFilter('');
+    setSelectedMonth('');
+    setSelectedUser('');
     setIsMonthListOpen(false);
+    setIsUserListOpen(false);
   };
 
-  const selectedMonthLabel = MESES.find((mes) => mes.value === selectedMonth)?.label || 'Selecionar mês';
+  const selectedMonthLabel = MESES.find((mes) => mes.value === selectedMonth)?.label;
+  const monthButtonLabel = selectedMonthLabel ? `Mês: ${selectedMonthLabel}` : 'Mês';
+  const userButtonLabel = selectedUser ? `Usuário: ${selectedUser}` : 'Filtrar usuário';
 
   return (
     <div className="dashboard">
@@ -251,30 +279,28 @@ const Dashboard = () => {
             Todos
           </button>
 
-          <div className="month-filter-wrapper">
+          <div className="dropdown-wrapper" ref={monthRef}>
             <button
               className={`filter-btn ${activeFilter === 'mes' ? 'active' : ''}`}
-              onClick={onMonthFilterClick}
+              onClick={() => {
+                setActiveFilter('mes');
+                setIsMonthListOpen((prev) => !prev);
+              }}
             >
-              Mês
+              {monthButtonLabel}
             </button>
 
-            {activeFilter === 'mes' && (
-              <button
-                className="month-selected-btn"
-                onClick={() => setIsMonthListOpen((prev) => !prev)}
-              >
-                {selectedMonthLabel}
-              </button>
-            )}
-
-            {activeFilter === 'mes' && isMonthListOpen && (
-              <div className="month-list" role="listbox" aria-label="Lista de meses">
+            {isMonthListOpen && (
+              <div className="dropdown-list" role="listbox" aria-label="Lista de meses">
                 {MESES.map((mes) => (
                   <button
                     key={mes.value}
-                    className={`month-item ${selectedMonth === mes.value ? 'active' : ''}`}
-                    onClick={() => onSelectMonth(mes.value)}
+                    className={`dropdown-item ${selectedMonth === mes.value ? 'active' : ''}`}
+                    onClick={() => {
+                      setActiveFilter('mes');
+                      setSelectedMonth(mes.value);
+                      setIsMonthListOpen(false);
+                    }}
                   >
                     {mes.label}
                   </button>
@@ -305,12 +331,45 @@ const Dashboard = () => {
         </div>
 
         <div className="filters-right">
-          <input
-            className="user-filter"
-            placeholder="Filtrar usuário"
-            value={userFilter}
-            onChange={(e) => setUserFilter(e.target.value)}
-          />
+          <button className="clear-filters-btn" onClick={limparFiltros}>
+            Limpar filtros
+          </button>
+
+          <div className="dropdown-wrapper" ref={userRef}>
+            <button
+              className={`filter-select-btn ${selectedUser ? 'active' : ''}`}
+              onClick={() => setIsUserListOpen((prev) => !prev)}
+            >
+              {userButtonLabel}
+            </button>
+
+            {isUserListOpen && (
+              <div className="dropdown-list" role="listbox" aria-label="Lista de usuários">
+                <button
+                  className={`dropdown-item ${selectedUser === '' ? 'active' : ''}`}
+                  onClick={() => {
+                    setSelectedUser('');
+                    setIsUserListOpen(false);
+                  }}
+                >
+                  Todos os usuários
+                </button>
+                {usuariosDisponiveis.map((nome) => (
+                  <button
+                    key={nome}
+                    className={`dropdown-item ${selectedUser === nome ? 'active' : ''}`}
+                    onClick={() => {
+                      setSelectedUser(nome);
+                      setIsUserListOpen(false);
+                    }}
+                  >
+                    {nome}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           <input
             className="date-filter"
             type="date"
@@ -323,9 +382,12 @@ const Dashboard = () => {
 
       <KPIs data={filteredData} />
       <Charts data={filteredData} />
+
+      <footer className="dashboard-footer">
+        © 2026 — Desenvolvido por Nathan Gabriel.
+      </footer>
     </div>
   );
 };
 
 export default Dashboard;
-
