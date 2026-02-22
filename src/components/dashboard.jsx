@@ -61,6 +61,21 @@ const calcularVariacaoMediaMovel7d = (dadosPorDia, selector) => {
   };
 };
 
+
+const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
+  if (!Array.isArray(dadosCompletos) || dadosCompletos.length === 0) return [];
+  if (Array.isArray(diasFiltrados) && diasFiltrados.length >= 14) return diasFiltrados;
+  if (!Array.isArray(diasFiltrados) || diasFiltrados.length === 0) return dadosCompletos;
+
+  const dataReferencia = normalizarData(diasFiltrados[diasFiltrados.length - 1]?.data);
+  const indiceReferencia = dadosCompletos.findIndex((dia) => normalizarData(dia.data) === dataReferencia);
+
+  if (indiceReferencia < 0) return dadosCompletos;
+
+  const inicio = Math.max(0, indiceReferencia - 13);
+  return dadosCompletos.slice(inicio, indiceReferencia + 1);
+};
+
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
   const [userFilter, setUserFilter] = useState('');
@@ -85,7 +100,7 @@ const Dashboard = () => {
       diasFiltrados = diasFiltrados.filter((dia) => normalizarData(dia.data) === dataSelecionada);
     }
 
-    const baseTendencia = diasFiltrados;
+    const baseTendencia = montarJanelaTendencia(rawData.dados_por_dia || [], diasFiltrados);
     const tendenciaEmissoes = calcularVariacaoMediaMovel7d(
       baseTendencia,
       (dia) => dia.emissoes
@@ -313,3 +328,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
