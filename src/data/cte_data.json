@@ -1,8 +1,8 @@
 {
   "resumo": {
-    "total_emissoes": 388,
-    "total_cancelamentos": 41,
-    "taxa_eficiencia": 89.43
+    "total_emissoes": 392,
+    "total_cancelamentos": 43,
+    "taxa_eficiencia": 89.03
   },
   "emissoes_por_usuario": [
     {
@@ -12,8 +12,8 @@
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 112,
-      "cancelamentos": 8
+      "emissoes": 115,
+      "cancelamentos": 10
     },
     {
       "nome": "IURI.C",
@@ -22,7 +22,7 @@
     },
     {
       "nome": "MANOEL.F",
-      "emissoes": 30,
+      "emissoes": 31,
       "cancelamentos": 3
     },
     {
@@ -43,7 +43,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "total": 8
+      "total": 10
     },
     {
       "nome": "IURI.C",
@@ -63,8 +63,8 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 136,
-    "depois_14h": 211
+    "antes_14h": 137,
+    "depois_14h": 212
   },
   "timeline_operacao": [
     {
@@ -81,7 +81,7 @@
     },
     {
       "hora": "10:00",
-      "emissoes": 21
+      "emissoes": 22
     },
     {
       "hora": "11:00",
@@ -109,7 +109,7 @@
     },
     {
       "hora": "17:00",
-      "emissoes": 29
+      "emissoes": 30
     },
     {
       "hora": "18:00",
@@ -241,6 +241,11 @@
       "data": "21/02/26",
       "emissoes": 18,
       "cancelamentos": 1
+    },
+    {
+      "data": "22/02/26",
+      "emissoes": 2,
+      "cancelamentos": 2
     }
   ],
   "emissoes_por_usuario_por_dia": [
@@ -666,6 +671,21 @@
           "nome": "WENDRYO.G",
           "emissoes": 9,
           "cancelamentos": 1
+        }
+      ]
+    },
+    {
+      "data": "22/02/26",
+      "usuarios": [
+        {
+          "nome": "CLEITON.C",
+          "emissoes": 1,
+          "cancelamentos": 2
+        },
+        {
+          "nome": "MANOEL.F",
+          "emissoes": 1,
+          "cancelamentos": 0
         }
       ]
     }
