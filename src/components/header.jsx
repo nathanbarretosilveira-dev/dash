@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import cteData from '../data/cte_data.json';
 import './header.css';
 
 const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
@@ -17,60 +18,32 @@ function Header() {
 
 
   useEffect(() => {
-    let ativo = true;
+    const valorCriadoEm = cteData?.criado_em;
 
-    const carregarMetadados = async () => {
-      const obterDataDaApi = async () => {
-        const response = await fetch('/api/cte-data-metadata', { cache: 'no-store' });
-        if (!response.ok) return null;
-        const payload = await response.json();
-        return payload?.atualizadoEm ? new Date(payload.atualizadoEm) : null;
-      };
+    if (!valorCriadoEm) {
+      setUltimaAtualizacao('Não disponível');
+      return;
+    }
 
-      const obterDataDoArquivoDev = async () => {
-        const response = await fetch('/src/data/cte_data.json?import', { method: 'HEAD', cache: 'no-store' });
-        if (!response.ok) return null;
-        const lastModifiedHeader = response.headers.get('last-modified');
-        return lastModifiedHeader ? new Date(lastModifiedHeader) : null;
-      };
+    const dataAtualizacao = new Date(valorCriadoEm);
 
-      try {
-        let dataAtualizacao = await obterDataDaApi();
-        if (!(dataAtualizacao instanceof Date) || Number.isNaN(dataAtualizacao.getTime())) {
-          dataAtualizacao = await obterDataDoArquivoDev();
-        }
-        
-        if (!ativo) return;
+    if (Number.isNaN(dataAtualizacao.getTime())) {
+      setUltimaAtualizacao(String(valorCriadoEm));
+      return;
+    }
 
-        if (!(dataAtualizacao instanceof Date) || Number.isNaN(dataAtualizacao.getTime())) {
-          setUltimaAtualizacao('Não disponível');
-          return;
-        }
+    const formato = new Intl.DateTimeFormat('pt-BR', {
+      timeZone: BRASILIA_TIMEZONE,
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
 
-        const formato = new Intl.DateTimeFormat('pt-BR', {
-          timeZone: BRASILIA_TIMEZONE,
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false
-        });
-
-        setUltimaAtualizacao(formato.format(dataAtualizacao));
-      } catch {
-        if (ativo) {
-          setUltimaAtualizacao('Não disponível');
-        }
-      }
-    };
-
-    carregarMetadados();
-
-    return () => {
-      ativo = false;
-    };
+    setUltimaAtualizacao(formato.format(dataAtualizacao));
   }, []);
 
   const { dataFormatada, horaFormatada } = useMemo(() => {
@@ -130,6 +103,7 @@ function Header() {
 }
 
 export default Header;
+
 
 
 
