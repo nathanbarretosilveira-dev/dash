@@ -133,6 +133,18 @@ const Dashboard = () => {
       diasFiltrados = diasFiltrados.filter((dia) => normalizarData(dia.data) === dataSelecionada);
     }
 
+    const mesesDistintosNaBase = new Set(
+      (rawData.dados_por_dia || []).map((dia) => extrairMes(dia.data)).filter(Boolean)
+    ).size;
+
+    const filtroCobreBaseCompleta =
+      activeFilter === 'mes' &&
+      !!selectedMonth &&
+      !dateFilter &&
+      (rawData.dados_por_dia || []).length > 0 &&
+      diasFiltrados.length === (rawData.dados_por_dia || []).length &&
+      mesesDistintosNaBase === 1;
+
     const baseTendencia = montarJanelaTendencia(rawData.dados_por_dia || [], diasFiltrados);
     const tendenciaEmissoes = calcularVariacaoMediaMovel7d(baseTendencia, (dia) => dia.emissoes);
     const tendenciaTaxaCancelamento = calcularVariacaoMediaMovel7d(baseTendencia, (dia) => dia.cancelamentos);
@@ -175,7 +187,7 @@ const Dashboard = () => {
 
     const temAgregadoPorDia = dadosUsuariosPorDia.length > 0;
 
-    if ((!temAgregadoPorDia || activeFilter === 'todos') && !dateFilter) {
+    if ((!temAgregadoPorDia || activeFilter === 'todos' || filtroCobreBaseCompleta) && !dateFilter) {
       usuariosFiltrados = (rawData.emissoes_por_usuario || [])
         .filter((u) => (selectedUser ? u.nome === selectedUser : true))
         .map((u) => ({ ...u }))
@@ -190,12 +202,8 @@ const Dashboard = () => {
     const totalEmissoesFiltradas = usuariosFiltrados.reduce((acc, curr) => acc + curr.emissoes, 0);
     const totalCancelamentosFiltrados = cancelamentosUsuarios.reduce((acc, curr) => acc + curr.total, 0);
 
-    const filtroCobreBaseCompleta =
-      !dateFilter &&
-      (rawData.dados_por_dia || []).length > 0 &&
-      diasFiltrados.length === (rawData.dados_por_dia || []).length;
-
-    const usarResumoComoBase = activeFilter === 'todos' || filtroCobreBaseCompleta;
+    const usarResumoComoBase =
+      activeFilter === 'todos' || (activeFilter === 'mes' && filtroCobreBaseCompleta);
 
     const totalBasePeriodo = usarResumoComoBase
       ? rawData.resumo?.total_emissoes || totalEmissoesFiltradas
