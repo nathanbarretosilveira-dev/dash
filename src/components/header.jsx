@@ -88,7 +88,7 @@ function Header({ isTvMode = false, onToggleTvMode }) {
 
 
         <div className="header-title">
-          <h1>Dashboard CT-es Logística</h1>
+          <h1>Dashboard CT-es Logística 2025</h1>
           <p>Acompanhamento de Emissões de Conhecimento de Transporte</p>
         </div>
 
@@ -113,3 +113,4 @@ function Header({ isTvMode = false, onToggleTvMode }) {
 }
 
 export default Header;
+
