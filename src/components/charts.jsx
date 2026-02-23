@@ -59,6 +59,10 @@ const Charts = ({ data }) => {
     };
   }, [emissoes_por_usuario, cancelamentos_por_usuario, volume_por_turno, timeline]);
 
+
+  const antesEhDestaque = percentAntes >= percentDepois;
+  const depoisEhDestaque = percentDepois >= percentAntes;
+
   return (
     <div className="charts-container">
       <div className="charts-row">
@@ -112,7 +116,7 @@ const Charts = ({ data }) => {
                   <span>{percentAntes}%</span>
                 </div>
                 <div className="turno-bar-wrapper">
-                  <div className="turno-bar antes" style={{ height: `${percentAntes}%` }}>
+                  <div className={`turno-bar antes ${antesEhDestaque ? 'destaque' : ''}`} style={{ height: `${percentAntes}%` }}>
                     {volume_por_turno.antes_14h}
                   </div>
                 </div>
@@ -124,7 +128,7 @@ const Charts = ({ data }) => {
                   <span>{percentDepois}%</span>
                 </div>
                 <div className="turno-bar-wrapper">
-                  <div className="turno-bar depois" style={{ height: `${percentDepois}%` }}>
+                  <div className={`turno-bar depois ${depoisEhDestaque ? 'destaque' : ''}`} style={{ height: `${percentDepois}%` }}>
                     {volume_por_turno.depois_14h}
                   </div>
                 </div>
@@ -162,4 +166,3 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
-
