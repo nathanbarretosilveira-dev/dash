@@ -28,11 +28,14 @@ body {
 
 
 .app.tv-mode .main-content {
-  max-width: 1820px;
-  padding: 12px 14px;
+  max-width: none;
+  width: 100%;
+  padding: 10px 10px;
 }
 
 .app.tv-mode .dashboard {
+  max-width: none;
+  width: 100%;
   gap: 14px;
 }
 
@@ -66,4 +69,10 @@ body {
 
 .app.tv-mode .timeline-fullwidth .chart-content {
   height: 260px;
+}
+
+
+.app.tv-mode .header-content {
+  max-width: none;
+  width: 100%;
 }
