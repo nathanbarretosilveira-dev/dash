@@ -1,9 +1,9 @@
 {
-  "criado_em": "22/02/2026 20:28:19",
+  "criado_em": "22/02/2026 21:20:25",
   "resumo": {
-    "total_emissoes": 392,
-    "total_cancelamentos": 43,
-    "taxa_eficiencia": 89.03
+    "total_emissoes": 435,
+    "total_cancelamentos": 86,
+    "taxa_eficiencia": 80.23
   },
   "emissoes_por_usuario": [
     {
@@ -13,28 +13,28 @@
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 115,
-      "cancelamentos": 10
+      "emissoes": 119,
+      "cancelamentos": 14
     },
     {
       "nome": "IURI.C",
-      "emissoes": 5,
-      "cancelamentos": 1
+      "emissoes": 6,
+      "cancelamentos": 2
     },
     {
       "nome": "MANOEL.F",
-      "emissoes": 31,
-      "cancelamentos": 3
+      "emissoes": 39,
+      "cancelamentos": 11
     },
     {
       "nome": "NATHAN.B",
-      "emissoes": 90,
-      "cancelamentos": 10
+      "emissoes": 108,
+      "cancelamentos": 28
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 91,
-      "cancelamentos": 9
+      "emissoes": 103,
+      "cancelamentos": 21
     }
   ],
   "cancelamentos_por_usuario": [
@@ -44,23 +44,23 @@
     },
     {
       "nome": "CLEITON.C",
-      "total": 10
+      "total": 14
     },
     {
       "nome": "IURI.C",
-      "total": 1
+      "total": 2
     },
     {
       "nome": "MANOEL.F",
-      "total": 3
+      "total": 11
     },
     {
       "nome": "NATHAN.B",
-      "total": 10
+      "total": 28
     },
     {
       "nome": "WENDRYO.G",
-      "total": 9
+      "total": 21
     }
   ],
   "emissoes_por_turno": {
@@ -253,37 +253,37 @@
     {
       "data": "01/02/26",
       "emissoes": 3,
-      "cancelamentos": 5
+      "cancelamentos": 11
     },
     {
       "data": "02/02/26",
       "emissoes": 17,
-      "cancelamentos": 1
+      "cancelamentos": 9
     },
     {
       "data": "03/02/26",
       "emissoes": 24,
-      "cancelamentos": 3
+      "cancelamentos": 8
     },
     {
       "data": "04/02/26",
       "emissoes": 17,
-      "cancelamentos": 3
+      "cancelamentos": 5
     },
     {
       "data": "05/02/26",
       "emissoes": 18,
-      "cancelamentos": 0
+      "cancelamentos": 4
     },
     {
       "data": "06/02/26",
       "emissoes": 22,
-      "cancelamentos": 1
+      "cancelamentos": 5
     },
     {
       "data": "07/02/26",
       "emissoes": 11,
-      "cancelamentos": 2
+      "cancelamentos": 5
     },
     {
       "data": "08/02/26",
@@ -308,12 +308,12 @@
     {
       "data": "12/02/26",
       "emissoes": 24,
-      "cancelamentos": 0
+      "cancelamentos": 4
     },
     {
       "data": "13/02/26",
       "emissoes": 26,
-      "cancelamentos": 3
+      "cancelamentos": 5
     },
     {
       "data": "14/02/26",
@@ -328,7 +328,7 @@
     {
       "data": "16/02/26",
       "emissoes": 17,
-      "cancelamentos": 0
+      "cancelamentos": 5
     },
     {
       "data": "17/02/26",
@@ -373,12 +373,12 @@
         {
           "nome": "MANOEL.F",
           "emissoes": 2,
-          "cancelamentos": 2
+          "cancelamentos": 5
         },
         {
           "nome": "NATHAN.B",
           "emissoes": 1,
-          "cancelamentos": 2
+          "cancelamentos": 5
         }
       ]
     },
@@ -388,22 +388,22 @@
         {
           "nome": "IURI.C",
           "emissoes": 4,
-          "cancelamentos": 0
+          "cancelamentos": 1
         },
         {
           "nome": "MANOEL.F",
           "emissoes": 3,
-          "cancelamentos": 1
+          "cancelamentos": 3
         },
         {
           "nome": "NATHAN.B",
           "emissoes": 6,
-          "cancelamentos": 0
+          "cancelamentos": 3
         },
         {
           "nome": "WENDRYO.G",
           "emissoes": 4,
-          "cancelamentos": 0
+          "cancelamentos": 2
         }
       ]
     },
@@ -418,12 +418,12 @@
         {
           "nome": "NATHAN.B",
           "emissoes": 22,
-          "cancelamentos": 3
+          "cancelamentos": 6
         },
         {
           "nome": "WENDRYO.G",
           "emissoes": 1,
-          "cancelamentos": 0
+          "cancelamentos": 2
         }
       ]
     },
@@ -433,7 +433,7 @@
         {
           "nome": "MANOEL.F",
           "emissoes": 1,
-          "cancelamentos": 0
+          "cancelamentos": 2
         },
         {
           "nome": "NATHAN.B",
@@ -453,12 +453,12 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 1,
-          "cancelamentos": 0
+          "cancelamentos": 1
         },
         {
           "nome": "NATHAN.B",
           "emissoes": 14,
-          "cancelamentos": 0
+          "cancelamentos": 3
         },
         {
           "nome": "WENDRYO.G",
@@ -478,7 +478,7 @@
         {
           "nome": "NATHAN.B",
           "emissoes": 14,
-          "cancelamentos": 1
+          "cancelamentos": 5
         },
         {
           "nome": "WENDRYO.G",
@@ -498,12 +498,12 @@
         {
           "nome": "NATHAN.B",
           "emissoes": 3,
-          "cancelamentos": 1
+          "cancelamentos": 3
         },
         {
           "nome": "WENDRYO.G",
           "emissoes": 4,
-          "cancelamentos": 1
+          "cancelamentos": 2
         }
       ]
     },
@@ -593,7 +593,7 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 11,
-          "cancelamentos": 0
+          "cancelamentos": 1
         },
         {
           "nome": "MANOEL.F",
@@ -603,7 +603,7 @@
         {
           "nome": "WENDRYO.G",
           "emissoes": 10,
-          "cancelamentos": 0
+          "cancelamentos": 3
         }
       ]
     },
@@ -628,7 +628,7 @@
         {
           "nome": "WENDRYO.G",
           "emissoes": 4,
-          "cancelamentos": 1
+          "cancelamentos": 3
         }
       ]
     },
@@ -678,12 +678,17 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 9,
-          "cancelamentos": 0
+          "cancelamentos": 2
+        },
+        {
+          "nome": "MANOEL.F",
+          "emissoes": 0,
+          "cancelamentos": 1
         },
         {
           "nome": "WENDRYO.G",
           "emissoes": 4,
-          "cancelamentos": 0
+          "cancelamentos": 2
         }
       ]
     },
