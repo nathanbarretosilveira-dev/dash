@@ -115,6 +115,32 @@
   font-variant-numeric: tabular-nums;
 }
 
+
+
+.tv-mode-btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  padding: 0.42rem 0.8rem;
+  margin-top: 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #e2e8f0;
+  background: rgba(15, 23, 42, 0.72);
+  cursor: pointer;
+}
+
+.tv-mode-btn.active {
+  color: #ffffff;
+  border-color: rgba(29, 155, 240, 0.9);
+  background: linear-gradient(90deg, #005bbb, #1d9bf0);
+}
+
+.header-datetime .tv-mode-btn {
+  align-self: flex-end;
+}
+
 @media (max-width: 768px) {
   .dashboard-header {
     padding: 1.1rem 1rem;
@@ -127,6 +153,15 @@
   .header-content {
     grid-template-columns: 1fr;
     row-gap: 0.9rem;
+  }
+
+
+  .tv-mode-btn {
+    width: 100%;
+  }
+
+  .header-datetime .tv-mode-btn {
+    align-self: stretch;
   }
 
   .header-title {
