@@ -59,6 +59,12 @@ body {
   gap: 14px;
 }
 
+
+.app.tv-mode .horizontal-bars {
+  max-width: none;
+  width: 100%;
+}
+
 .app.tv-mode .chart-card {
   padding: 14px;
 }
@@ -76,3 +82,4 @@ body {
   max-width: none;
   width: 100%;
 }
+
