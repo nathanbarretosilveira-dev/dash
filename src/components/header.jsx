@@ -4,7 +4,7 @@ import './header.css';
 
 const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
 
-function Header() {
+function Header({ isTvMode = false, onToggleTvMode }) {
   const [now, setNow] = useState(() => new Date());
   const [ultimaAtualizacao, setUltimaAtualizacao] = useState('Carregando...');
 
@@ -86,6 +86,7 @@ function Header() {
           className="header-logo"
         />
 
+
         <div className="header-title">
           <h1>Dashboard CT-es Logística</h1>
           <p>Acompanhamento de Emissões de Conhecimento de Transporte</p>
@@ -96,6 +97,15 @@ function Header() {
           <strong>{horaFormatada}</strong>
           <span className="header-datetime-date">{dataFormatada}</span>
           <span className="header-last-update">Última atualização: {ultimaAtualizacao}</span>
+
+          <button
+            type="button"
+            className={`tv-mode-btn ${isTvMode ? 'active' : ''}`}
+            onClick={onToggleTvMode}
+            aria-pressed={isTvMode}
+          >
+            {isTvMode ? 'Modo TV: ON' : 'Modo TV: OFF'}
+          </button>
         </div>
       </div>
     </header>
@@ -103,8 +113,3 @@ function Header() {
 }
 
 export default Header;
-
-
-
-
-
