@@ -24,41 +24,60 @@ body {
   margin: 0 auto;
   width: 100%;
 }
- 
-
 
 .app.tv-mode .main-content {
   max-width: none;
   width: 100%;
-  padding: 10px 10px;
+  padding: 18px;
 }
 
 .app.tv-mode .dashboard {
   max-width: none;
   width: 100%;
-  gap: 14px;
+  gap: 22px;
 }
 
 .app.tv-mode .filters-container {
-  padding: 10px;
+  padding: 16px;
+}
+
+.app.tv-mode .filter-btn,
+.app.tv-mode .filter-select-btn,
+.app.tv-mode .clear-filters-btn,
+.app.tv-mode .date-filter {
+  font-size: 0.96rem;
+  padding: 13px 20px;
+}
+
+.app.tv-mode .dropdown-item {
+  font-size: 0.9rem;
+  padding: 10px 12px;
 }
 
 .app.tv-mode .kpis-container {
-  gap: 0.7rem;
+  gap: 1rem;
 }
 
 .app.tv-mode .kpi-card {
-  padding: 0.85rem 0.85rem 0.85rem 1.2rem;
+  padding: 1.1rem 1.2rem 1.1rem 1.45rem;
+}
+
+.app.tv-mode .kpi-title {
+  font-size: 1rem;
 }
 
 .app.tv-mode .kpi-value {
-  font-size: 1.45rem;
+  font-size: 2.05rem;
+}
+
+.app.tv-mode .kpi-detail,
+.app.tv-mode .kpi-trend {
+  font-size: 0.86rem;
 }
 
 .app.tv-mode .charts-row {
-  gap: 14px;
+  gap: 20px;
 }
-
 
 .app.tv-mode .horizontal-bars {
   max-width: none;
@@ -66,20 +85,73 @@ body {
 }
 
 .app.tv-mode .chart-card {
-  padding: 14px;
+  padding: 20px;
+}
+
+.app.tv-mode .chart-card h3 {
+  font-size: 1.08rem;
 }
 
 .app.tv-mode .chart-content {
-  min-height: 220px;
+  min-height: 290px;
 }
 
 .app.tv-mode .timeline-fullwidth .chart-content {
-  height: 260px;
+  height: 340px;
 }
 
+.app.tv-mode .bar-label {
+  font-size: 0.96rem;
+}
+
+.app.tv-mode .bar-metric {
+  font-size: 0.88rem;
+}
+
+.app.tv-mode .turno-info,
+.app.tv-mode .turno-total {
+  font-size: 0.92rem;
+}
+
+.app.tv-mode .timeline-label {
+  font-size: 0.72rem;
+}
+
+.app.tv-mode .timeline-value {
+  font-size: 0.82rem;
+}
 
 .app.tv-mode .header-content {
   max-width: none;
   width: 100%;
 }
 
+.app.tv-mode .header-title h1 {
+  font-size: clamp(2rem, 2.7vw, 3rem);
+}
+
+.app.tv-mode .header-title p {
+  font-size: clamp(1rem, 1.45vw, 1.4rem);
+}
+
+.app.tv-mode .header-datetime {
+  min-width: 310px;
+  padding: 0.95rem 1.2rem;
+}
+
+.app.tv-mode .header-datetime strong {
+  font-size: 1.8rem;
+}
+
+.app.tv-mode .header-datetime-label,
+.app.tv-mode .header-last-update,
+.app.tv-mode .header-datetime-date,
+.app.tv-mode .tv-mode-btn {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 1280px) {
+  .app.tv-mode .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
