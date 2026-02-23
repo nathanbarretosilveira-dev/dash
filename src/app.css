@@ -25,3 +25,45 @@ body {
   width: 100%;
 }
  
+
+
+.app.tv-mode .main-content {
+  max-width: 1820px;
+  padding: 12px 14px;
+}
+
+.app.tv-mode .dashboard {
+  gap: 14px;
+}
+
+.app.tv-mode .filters-container {
+  padding: 10px;
+}
+
+.app.tv-mode .kpis-container {
+  gap: 0.7rem;
+}
+
+.app.tv-mode .kpi-card {
+  padding: 0.85rem 0.85rem 0.85rem 1.2rem;
+}
+
+.app.tv-mode .kpi-value {
+  font-size: 1.45rem;
+}
+
+.app.tv-mode .charts-row {
+  gap: 14px;
+}
+
+.app.tv-mode .chart-card {
+  padding: 14px;
+}
+
+.app.tv-mode .chart-content {
+  min-height: 220px;
+}
+
+.app.tv-mode .timeline-fullwidth .chart-content {
+  height: 260px;
+}
