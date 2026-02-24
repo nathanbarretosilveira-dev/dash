@@ -37,6 +37,22 @@ const extrairMes = (dataDiaMes) => {
   return mes;
 };
 
+const obterTimestampData = (dataDiaMesAno) => {
+  const [dia = '', mes = '', ano = ''] = String(dataDiaMesAno || '').trim().split('/');
+  const diaNum = Number(dia);
+  const mesNum = Number(mes);
+  const anoNum = Number(ano);
+
+  if (!Number.isFinite(diaNum) || !Number.isFinite(mesNum) || !Number.isFinite(anoNum)) {
+    return Number.NEGATIVE_INFINITY;
+  }
+
+  const anoCompleto = anoNum < 100 ? 2000 + anoNum : anoNum;
+  return new Date(anoCompleto, mesNum - 1, diaNum).getTime();
+};
+
+const ordenarPorData = (a, b) => obterTimestampData(a?.data) - obterTimestampData(b?.data);
+
 const calcularVariacaoMediaMovel7d = (dadosPorDia, selector) => {
   if (!Array.isArray(dadosPorDia) || dadosPorDia.length < 14) {
     return { variacao: 0, subiu: false };
@@ -62,16 +78,22 @@ const calcularVariacaoMediaMovel7d = (dadosPorDia, selector) => {
 
 const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   if (!Array.isArray(dadosCompletos) || dadosCompletos.length === 0) return [];
-  if (Array.isArray(diasFiltrados) && diasFiltrados.length >= 14) return diasFiltrados;
-  if (!Array.isArray(diasFiltrados) || diasFiltrados.length === 0) return dadosCompletos;
+  
+  const dadosOrdenados = [...dadosCompletos].sort(ordenarPorData);
 
-  const dataReferencia = normalizarData(diasFiltrados[diasFiltrados.length - 1]?.data);
-  const indiceReferencia = dadosCompletos.findIndex((dia) => normalizarData(dia.data) === dataReferencia);
+  if (Array.isArray(diasFiltrados) && diasFiltrados.length >= 14) {
+    return [...diasFiltrados].sort(ordenarPorData);
+  }
+  if (!Array.isArray(diasFiltrados) || diasFiltrados.length === 0) return dadosOrdenados;
 
-  if (indiceReferencia < 0) return dadosCompletos;
+  const diasFiltradosOrdenados = [...diasFiltrados].sort(ordenarPorData);
+  const dataReferencia = normalizarData(diasFiltradosOrdenados[diasFiltradosOrdenados.length - 1]?.data);
+  const indiceReferencia = dadosOrdenados.findIndex((dia) => normalizarData(dia.data) === dataReferencia);
+
+  if (indiceReferencia < 0) return dadosOrdenados;
 
   const inicio = Math.max(0, indiceReferencia - 13);
-  return dadosCompletos.slice(inicio, indiceReferencia + 1);
+  return dadosOrdenados.slice(inicio, indiceReferencia + 1);
 };
 
 const Dashboard = ({ cteData = {} }) => {
@@ -119,7 +141,7 @@ const Dashboard = ({ cteData = {} }) => {
   }, []);
 
   const filteredData = useMemo(() => {
-    let diasFiltrados = rawData.dados_por_dia || [];
+    let diasFiltrados = [...(rawData.dados_por_dia || [])].sort(ordenarPorData);
 
     if (activeFilter === 'hoje') diasFiltrados = getHoje(diasFiltrados);
     if (activeFilter === 'mes' && selectedMonth) {
@@ -145,7 +167,10 @@ const Dashboard = ({ cteData = {} }) => {
       mesesDistintosNaBase === 1;
 
     const baseTendencia = montarJanelaTendencia(rawData.dados_por_dia || [], diasFiltrados);
-    const tendenciaEmissoes = calcularVariacaoMediaMovel7d(baseTendencia, (dia) => dia.emissoes);
+    const tendenciaEmissoes = calcularVariacaoMediaMovel7d(
+      baseTendencia,
+      (dia) => (Number(dia.emissoes) || 0) + (Number(dia.cancelamentos) || 0)
+    );
     const tendenciaTaxaCancelamento = calcularVariacaoMediaMovel7d(baseTendencia, (dia) => dia.cancelamentos);
 
     const periodo = somarPeriodo(diasFiltrados);
@@ -453,5 +478,6 @@ const Dashboard = ({ cteData = {} }) => {
 };
 
 export default Dashboard;
+
 
 
