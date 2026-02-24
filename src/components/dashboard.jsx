@@ -96,7 +96,7 @@ const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   return dadosOrdenados.slice(inicio, indiceReferencia + 1);
 };
 
-const TV_FILTER_CYCLE_MS = 5 * 60 * 1000;
+const TV_FILTER_CYCLE_MS = 1 * 60 * 1000;
 const TV_MODE_FILTER_KEY = 'dashboard_tv_active_filter';
 
 const Dashboard = ({ cteData = {}, isTvMode = false }) => {
@@ -574,3 +574,4 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
+
