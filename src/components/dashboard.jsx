@@ -233,7 +233,7 @@ const Dashboard = ({ cteData = {} }) => {
     const usarResumoComoBase =
       (activeFilter === 'todos' && !dateFilter) || (activeFilter === 'mes' && filtroCobreBaseCompleta);
 
-    const totalEmissoesPeriodo = periodo.emissoes + periodo.cancelamentos;
+    const totalEmissoesPeriodo = periodo.emissoes;
 
     const totalBasePeriodo = usarResumoComoBase
       ? rawData.resumo?.total_emissoes || totalEmissoesFiltradas
@@ -506,6 +506,7 @@ const Dashboard = ({ cteData = {} }) => {
 };
 
 export default Dashboard;
+
 
 
 
