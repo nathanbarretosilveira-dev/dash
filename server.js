@@ -12,6 +12,18 @@ const port = process.env.PORT || 7067;
  
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
+  return next();
+});
+
 const cteSpreadsheetPath = path.join(__dirname, 'src', 'data', 'J1BNFE.xlsx');
 const cteJsonPath = path.join(__dirname, 'src', 'data', 'cte_data.json');
 
