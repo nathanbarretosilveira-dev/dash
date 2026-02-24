@@ -92,12 +92,13 @@ function App() {
       <main className="main-content">
         {loadingData ? <p>Carregando dados da planilha...</p> : null}
         {errorData ? <p>Erro: {errorData}</p> : null}
-        {!loadingData && !errorData ? <Dashboard cteData={cteData} /> : null}
+        {!loadingData && !errorData ? <Dashboard cteData={cteData} isTvMode={isTvMode} /> : null}
       </main>
     </div>
   );
 }
  
 export default App;
+
 
 
