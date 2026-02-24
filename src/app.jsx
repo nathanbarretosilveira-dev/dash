@@ -13,43 +13,6 @@ function App() {
       return false;
     }
   });
-  const [cteData, setCteData] = useState(null);
-  const [loadingData, setLoadingData] = useState(true);
-  const [errorData, setErrorData] = useState('');
-
-  useEffect(() => {
-    let ativo = true;
-
-    const carregarDados = async () => {
-      setLoadingData(true);
-      setErrorData('');
-
-      try {
-        const resposta = await fetch('/api/cte-data');
-        if (!resposta.ok) {
-          throw new Error(`Falha ao carregar dados (${resposta.status})`);
-        }
-
-        const dados = await resposta.json();
-        if (ativo) {
-          setCteData(dados);
-        }
-      } catch (erro) {
-        if (ativo) {
-          setErrorData(erro.message || 'Erro ao carregar dados da planilha.');
-        }
-      } finally {
-        if (ativo) {
-          setLoadingData(false);
-        }
-      }
-    };
-
-    carregarDados();
-    return () => {
-      ativo = false;
-    };
-  }, []);
 
   useEffect(() => {
     try {
@@ -63,11 +26,9 @@ function App() {
 
   return (
     <div className={`app ${isTvMode ? 'tv-mode' : ''}`}>
-      <Header isTvMode={isTvMode} onToggleTvMode={alternarTvMode} cteData={cteData} />
+      <Header isTvMode={isTvMode} onToggleTvMode={alternarTvMode} />
       <main className="main-content">
-        {loadingData ? <p>Carregando dados da planilha...</p> : null}
-        {errorData ? <p>Erro: {errorData}</p> : null}
-        {!loadingData && !errorData ? <Dashboard cteData={cteData} /> : null}
+        <Dashboard />
       </main>
     </div>
   );
