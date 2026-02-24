@@ -55,7 +55,8 @@ function App() {
         if (ativo) {
           setCteData({
             ...dados,
-            atualizado_em: metadata?.atualizadoEm || dados?.atualizado_em || dados?.criado_em
+            atualizado_em: dados?.atualizado_em || metadata?.atualizadoEm || dados?.criado_em,
+            atualizado_em_br: dados?.atualizado_em_br || metadata?.atualizadoEmBr || null
           });
         }
       } catch (erro) {
@@ -98,4 +99,5 @@ function App() {
 }
  
 export default App;
+
 
