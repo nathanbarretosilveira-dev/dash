@@ -62,7 +62,9 @@ const Charts = ({ data }) => {
 
   const antesEhDestaque = percentAntes >= percentDepois;
   const depoisEhDestaque = percentDepois >= percentAntes;
-
+  const totalAntesTurno = toNumber(volume_por_turno.antes_14h);
+  const totalDepoisTurno = toNumber(volume_por_turno.depois_14h);
+  
   return (
     <div className="charts-container">
       <div className="charts-row">
@@ -117,9 +119,10 @@ const Charts = ({ data }) => {
                 </div>
                 <div className="turno-bar-wrapper">
                   <div className={`turno-bar antes ${antesEhDestaque ? 'destaque' : ''}`} style={{ height: `${percentAntes}%` }}>
-                    {volume_por_turno.antes_14h}
+                    {percentAntes > 0 ? totalAntesTurno : ''}
                   </div>
                 </div>
+                {percentAntes === 0 && <div className="turno-zero-value">{totalAntesTurno}</div>}
               </div>
 
               <div className="turno-section">
@@ -129,9 +132,10 @@ const Charts = ({ data }) => {
                 </div>
                 <div className="turno-bar-wrapper">
                   <div className={`turno-bar depois ${depoisEhDestaque ? 'destaque' : ''}`} style={{ height: `${percentDepois}%` }}>
-                    {volume_por_turno.depois_14h}
+                    {percentDepois > 0 ? totalDepoisTurno : ''}
                   </div>
                 </div>
+                {percentDepois === 0 && <div className="turno-zero-value">{totalDepoisTurno}</div>}
               </div>
             </div>
             <div className="turno-total">Total: {totalTurno} CT-es</div>
@@ -166,3 +170,4 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
+
