@@ -236,6 +236,15 @@
   font-weight: 600;
 }
 
+.turno-zero-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #f8fafc;
+  line-height: 1;
+  min-height: 14px;
+}
+
+
 /* =====================================================
    TIMELINE
    ===================================================== */
@@ -342,3 +351,4 @@
     height: 156px;
   }
 }
+
