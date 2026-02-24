@@ -156,6 +156,7 @@ const montarDadosPlanilha = (xlsxPath) => {
   const porDiaUsuario = new Map();
   const porDiaTurno = new Map();
   const timelineHora = new Map();
+  const timelineOperacaoDetalhada = [];
 
   for (const r of registros) {
     if (!porUsuario.has(r.criadoPor)) porUsuario.set(r.criadoPor, { nome: r.criadoPor, emissoes: 0, cancelamentos: 0 });
@@ -184,6 +185,11 @@ const montarDadosPlanilha = (xlsxPath) => {
 
       const faixaHora = `${String(horaNum).padStart(2, '0')}:00`;
       timelineHora.set(faixaHora, (timelineHora.get(faixaHora) || 0) + 1);
+      timelineOperacaoDetalhada.push({
+        data: r.data,
+        hora: r.hora,
+        usuario: r.criadoPor
+      });
     }
   }
 
@@ -235,6 +241,7 @@ const montarDadosPlanilha = (xlsxPath) => {
     }, { antes_14h: 0, depois_14h: 0 }),
     emissoes_por_turno_por_dia,
     timeline_operacao,
+    timeline_operacao_detalhada: timelineOperacaoDetalhada,
     dados_por_dia,
     emissoes_por_usuario_por_dia
   };
@@ -316,4 +323,5 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
+
 
