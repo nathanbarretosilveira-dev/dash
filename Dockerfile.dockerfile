@@ -31,6 +31,7 @@ COPY --from=builder /app/dist ./dist
  
 # Copiar o servidor Express
 COPY server.js ./
+COPY src/data ./src/data
  
 # Variável de ambiente para a porta
 ENV PORT=7067
