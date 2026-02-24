@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import cteData from '../data/cte_data.json';
 import './header.css';
 
 const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
 
-function Header({ isTvMode = false, onToggleTvMode, cteData = {} }) {
+function Header({ isTvMode = false, onToggleTvMode }) {
   const [now, setNow] = useState(() => new Date());
   const [ultimaAtualizacao, setUltimaAtualizacao] = useState('Carregando...');
 
@@ -43,7 +44,7 @@ function Header({ isTvMode = false, onToggleTvMode, cteData = {} }) {
     });
 
     setUltimaAtualizacao(formato.format(dataAtualizacao));
-  }, [cteData]);
+  }, []);
 
   const { dataFormatada, horaFormatada } = useMemo(() => {
     const dataFormatada = new Intl.DateTimeFormat('pt-BR', {
