@@ -3,6 +3,24 @@ import './header.css';
 
 const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
 
+const parseDataHora = (valor) => {
+  if (!valor) return null;
+
+  const dataIso = new Date(valor);
+  if (!Number.isNaN(dataIso.getTime())) return dataIso;
+
+  const matchBr = String(valor)
+    .trim()
+    .match(/^(\d{2})\/(\d{2})\/(\d{2,4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/);
+
+  if (!matchBr) return null;
+
+  const [, dd, mm, yyyyRaw, hh = '00', mi = '00', ss = '00'] = matchBr;
+  const yyyy = yyyyRaw.length === 2 ? `20${yyyyRaw}` : yyyyRaw;
+
+  return new Date(`${yyyy}-${mm}-${dd}T${hh}:${mi}:${ss}`);
+};
+
 function Header({ isTvMode = false, onToggleTvMode, cteData = {} }) {
   const [now, setNow] = useState(() => new Date());
   const [ultimaAtualizacao, setUltimaAtualizacao] = useState('Carregando...');
@@ -17,17 +35,17 @@ function Header({ isTvMode = false, onToggleTvMode, cteData = {} }) {
 
 
   useEffect(() => {
-    const valorCriadoEm = cteData?.criado_em;
+    const valorAtualizacao = cteData?.atualizado_em || cteData?.criado_em;
 
-    if (!valorCriadoEm) {
+    if (!valorAtualizacao) {
       setUltimaAtualizacao('Não disponível');
       return;
     }
 
-    const dataAtualizacao = new Date(valorCriadoEm);
+    const dataAtualizacao = parseDataHora(valorAtualizacao);
 
-    if (Number.isNaN(dataAtualizacao.getTime())) {
-      setUltimaAtualizacao(String(valorCriadoEm));
+    if (!dataAtualizacao || Number.isNaN(dataAtualizacao.getTime())) {
+      setUltimaAtualizacao(String(valorAtualizacao));
       return;
     }
 
