@@ -1,14 +1,14 @@
 {
-  "criado_em": "24/02/2026 12:42:13",
+  "criado_em": "24/02/2026 14:17:27",
   "resumo": {
-    "total_emissoes": 421,
+    "total_emissoes": 422,
     "total_cancelamentos": 46,
-    "taxa_eficiencia": 89.07
+    "taxa_eficiencia": 89.1
   },
   "emissoes_por_usuario": [
     {
       "nome": "ANA.V",
-      "emissoes": 69,
+      "emissoes": 70,
       "cancelamentos": 11
     },
     {
@@ -64,7 +64,7 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 155,
+    "antes_14h": 156,
     "depois_14h": 220
   },
   "emissoes_por_turno_por_dia": [
@@ -185,7 +185,7 @@
     },
     {
       "data": "24/02/26",
-      "antes_14h": 9,
+      "antes_14h": 10,
       "depois_14h": 0
     }
   ],
@@ -216,7 +216,7 @@
     },
     {
       "hora": "13:00",
-      "emissoes": 10
+      "emissoes": 11
     },
     {
       "hora": "14:00",
@@ -377,7 +377,7 @@
     },
     {
       "data": "24/02/26",
-      "emissoes": 9,
+      "emissoes": 10,
       "cancelamentos": 1
     }
   ],
@@ -852,7 +852,7 @@
       "usuarios": [
         {
           "nome": "ANA.V",
-          "emissoes": 4,
+          "emissoes": 5,
           "cancelamentos": 0
         },
         {
