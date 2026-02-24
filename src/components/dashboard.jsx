@@ -78,7 +78,7 @@ const calcularVariacaoMediaMovel7d = (dadosPorDia, selector) => {
 
 const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   if (!Array.isArray(dadosCompletos) || dadosCompletos.length === 0) return [];
-  
+
   const dadosOrdenados = [...dadosCompletos].sort(ordenarPorData);
 
   if (Array.isArray(diasFiltrados) && diasFiltrados.length >= 14) {
@@ -246,15 +246,13 @@ const Dashboard = ({ cteData = {} }) => {
     const totalEmissoes = selectedUser ? totalEmissoesFiltradas : totalBasePeriodo;
     const totalCancelamentos = selectedUser ? totalCancelamentosFiltrados : totalBaseCancelamentos;
 
-        const totalEfetivoPeriodo = Math.max(0, periodo.emissoes - periodo.cancelamentos);
-    const totalEfetivoUsuarios = Math.max(0, totalEmissoesFiltradas - totalCancelamentosFiltrados);
-    const totalEfetivoTurnoEsperado = selectedUser ? totalEfetivoUsuarios : totalEfetivoPeriodo;
+    const totalEfetivoTurnoEsperado = Math.max(0, totalEmissoes - totalCancelamentos);
 
     const fatorPeriodo = (rawData.resumo?.total_emissoes || 0) > 0
       ? totalEmissoes / (rawData.resumo?.total_emissoes || 1)
       : 0;
 
-        const timelineDetalhada = rawData.timeline_operacao_detalhada || [];
+    const timelineDetalhada = rawData.timeline_operacao_detalhada || [];
     const temTimelineDetalhada = Array.isArray(timelineDetalhada) && timelineDetalhada.length > 0;
 
     const dadosTurnoPorDia = rawData.emissoes_por_turno_por_dia || [];
@@ -271,7 +269,7 @@ const Dashboard = ({ cteData = {} }) => {
       return acc;
     }, { antes_14h: 0, depois_14h: 0 });
 
-const turnoFiltradoPorUsuarioTimeline = timelineDetalhada.reduce((acc, item) => {
+    const turnoFiltradoPorUsuarioTimeline = timelineDetalhada.reduce((acc, item) => {
       if (!deveConsiderarData(item.data)) return acc;
       if (selectedUser && item.usuario !== selectedUser) return acc;
 
@@ -508,8 +506,5 @@ const turnoFiltradoPorUsuarioTimeline = timelineDetalhada.reduce((acc, item) => 
 };
 
 export default Dashboard;
-
-
-
 
 
