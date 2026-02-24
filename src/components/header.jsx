@@ -35,13 +35,19 @@ function Header({ isTvMode = false, onToggleTvMode, cteData = {} }) {
 
 
   useEffect(() => {
-    const valorAtualizacao = cteData?.atualizado_em || cteData?.criado_em;
+    const valorAtualizacaoBr = cteData?.atualizado_em_br;
+    const valorAtualizacao = valorAtualizacaoBr || cteData?.atualizado_em || cteData?.criado_em;
 
     if (!valorAtualizacao) {
       setUltimaAtualizacao('Não disponível');
       return;
     }
-
+    
+    if (valorAtualizacaoBr) {
+      setUltimaAtualizacao(String(valorAtualizacaoBr));
+      return;
+    }
+    
     const dataAtualizacao = parseDataHora(valorAtualizacao);
 
     if (!dataAtualizacao || Number.isNaN(dataAtualizacao.getTime())) {
@@ -130,3 +136,4 @@ function Header({ isTvMode = false, onToggleTvMode, cteData = {} }) {
 }
 
 export default Header;
+
