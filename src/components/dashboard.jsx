@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useState, useEffect } from 'react';
 import './dashboard.css';
 import KPIs from './kpis';
 import Charts from './charts';
+import cteData from '../data/cte_data.json';
 import { getHoje, getSemana, somarPeriodo } from '../utils/dataRange.js';
 
 const MESES = [
@@ -74,7 +75,7 @@ const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   return dadosCompletos.slice(inicio, indiceReferencia + 1);
 };
 
-const Dashboard = ({ cteData = {} }) => {
+const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
   const [dateFilter, setDateFilter] = useState('');
   const [isMonthListOpen, setIsMonthListOpen] = useState(false);
