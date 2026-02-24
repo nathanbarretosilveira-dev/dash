@@ -160,20 +160,20 @@ const montarDadosPlanilha = (xlsxPath) => {
   for (const r of registros) {
     if (!porUsuario.has(r.criadoPor)) porUsuario.set(r.criadoPor, { nome: r.criadoPor, emissoes: 0, cancelamentos: 0 });
     const pu = porUsuario.get(r.criadoPor);
+    pu.emissoes += 1;
     if (r.estornado) pu.cancelamentos += 1;
-    else pu.emissoes += 1;
 
     if (!porDia.has(r.data)) porDia.set(r.data, { data: r.data, emissoes: 0, cancelamentos: 0 });
     const pd = porDia.get(r.data);
+    pd.emissoes += 1;
     if (r.estornado) pd.cancelamentos += 1;
-    else pd.emissoes += 1;
 
     if (!porDiaUsuario.has(r.data)) porDiaUsuario.set(r.data, new Map());
     const mapaUsuarios = porDiaUsuario.get(r.data);
     if (!mapaUsuarios.has(r.criadoPor)) mapaUsuarios.set(r.criadoPor, { nome: r.criadoPor, emissoes: 0, cancelamentos: 0 });
     const pdu = mapaUsuarios.get(r.criadoPor);
+    pdu.emissoes += 1;
     if (r.estornado) pdu.cancelamentos += 1;
-    else pdu.emissoes += 1;
 
     if (!porDiaTurno.has(r.data)) porDiaTurno.set(r.data, { data: r.data, antes_14h: 0, depois_14h: 0 });
     if (!r.estornado && r.hora !== '00:00:00') {
@@ -316,3 +316,4 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
+
