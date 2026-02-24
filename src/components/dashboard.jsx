@@ -250,6 +250,9 @@ const Dashboard = ({ cteData = {} }) => {
       ? totalEmissoes / (rawData.resumo?.total_emissoes || 1)
       : 0;
 
+        const timelineDetalhada = rawData.timeline_operacao_detalhada || [];
+    const temTimelineDetalhada = Array.isArray(timelineDetalhada) && timelineDetalhada.length > 0;
+
     const dadosTurnoPorDia = rawData.emissoes_por_turno_por_dia || [];
     const temTurnoPorDia = Array.isArray(dadosTurnoPorDia) && dadosTurnoPorDia.length > 0;
 
@@ -264,15 +267,30 @@ const Dashboard = ({ cteData = {} }) => {
       return acc;
     }, { antes_14h: 0, depois_14h: 0 });
 
-    const turno = temTurnoPorDia
-      ? turnoFiltradoPorDia
-      : {
-          antes_14h: Math.round((rawData.emissoes_por_turno?.antes_14h || 0) * fatorPeriodo),
-          depois_14h: Math.round((rawData.emissoes_por_turno?.depois_14h || 0) * fatorPeriodo)
-        };
+const turnoFiltradoPorUsuarioTimeline = timelineDetalhada.reduce((acc, item) => {
+      if (!deveConsiderarData(item.data)) return acc;
+      if (selectedUser && item.usuario !== selectedUser) return acc;
 
-    const timelineDetalhada = rawData.timeline_operacao_detalhada || [];
-    const temTimelineDetalhada = Array.isArray(timelineDetalhada) && timelineDetalhada.length > 0;
+      const horaBruta = String(item.hora || '');
+      if (!/^\d{2}:\d{2}:\d{2}$/.test(horaBruta)) return acc;
+
+      const horaNum = Number(horaBruta.slice(0, 2));
+      if (!Number.isFinite(horaNum)) return acc;
+
+      if (horaNum < 14) acc.antes_14h += 1;
+      else acc.depois_14h += 1;
+
+      return acc;
+    }, { antes_14h: 0, depois_14h: 0 });
+
+    const turno = (selectedUser && temTimelineDetalhada)
+      ? turnoFiltradoPorUsuarioTimeline
+      : temTurnoPorDia
+        ? turnoFiltradoPorDia
+        : {
+            antes_14h: Math.round((rawData.emissoes_por_turno?.antes_14h || 0) * fatorPeriodo),
+            depois_14h: Math.round((rawData.emissoes_por_turno?.depois_14h || 0) * fatorPeriodo)
+          };
 
     let timelineFiltrada = [];
 
@@ -478,6 +496,7 @@ const Dashboard = ({ cteData = {} }) => {
 };
 
 export default Dashboard;
+
 
 
 
