@@ -20,17 +20,34 @@ function App() {
   useEffect(() => {
     let ativo = true;
 
+    const carregarDadosDaApi = async (url) => {
+      const resposta = await fetch(url);
+      if (!resposta.ok) {
+        throw new Error(`Falha ao carregar dados (${resposta.status})`);
+      }
+
+      const contentType = resposta.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        throw new Error('A API retornou um conteúdo inválido. Verifique se o backend está ativo.');
+      }
+
+      return resposta.json();
+    };
+
     const carregarDados = async () => {
       setLoadingData(true);
       setErrorData('');
 
       try {
-        const resposta = await fetch('/api/cte-data');
-        if (!resposta.ok) {
-          throw new Error(`Falha ao carregar dados (${resposta.status})`);
+        let dados;
+
+        try {
+          dados = await carregarDadosDaApi('/api/cte-data');
+        } catch (erroLocal) {
+          if (!import.meta.env.DEV) throw erroLocal;
+          dados = await carregarDadosDaApi('http://localhost:7067/api/cte-data');
         }
 
-        const dados = await resposta.json();
         if (ativo) {
           setCteData(dados);
         }
