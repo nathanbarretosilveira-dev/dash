@@ -127,7 +127,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       setIsUserListOpen(false);
     };
 
-    const intervalo = setInterval(alternarFiltrosTv, 5 * 60 * 1000);
+    const intervalo = setInterval(alternarFiltrosTv, 1 * 60 * 1000);
     return () => clearInterval(intervalo);
   }, [isTvMode]);
   
@@ -523,6 +523,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
+
 
 
 
