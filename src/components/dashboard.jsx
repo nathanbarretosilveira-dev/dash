@@ -246,7 +246,7 @@ const Dashboard = ({ cteData = {} }) => {
     const totalEmissoes = selectedUser ? totalEmissoesFiltradas : totalBasePeriodo;
     const totalCancelamentos = selectedUser ? totalCancelamentosFiltrados : totalBaseCancelamentos;
 
-    const totalEfetivoTurnoEsperado = Math.max(0, totalEmissoes - totalCancelamentos);
+    const totalEfetivoTurnoEsperado = Math.max(0, totalEmissoes);
 
     const fatorPeriodo = (rawData.resumo?.total_emissoes || 0) > 0
       ? totalEmissoes / (rawData.resumo?.total_emissoes || 1)
@@ -506,5 +506,6 @@ const Dashboard = ({ cteData = {} }) => {
 };
 
 export default Dashboard;
+
 
 
