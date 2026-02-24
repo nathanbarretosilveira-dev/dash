@@ -96,7 +96,7 @@ const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   return dadosOrdenados.slice(inicio, indiceReferencia + 1);
 };
 
-const Dashboard = ({ cteData = {} }) => {
+const Dashboard = ({ cteData = {}, isTvMode = false }) => {
   const [activeFilter, setActiveFilter] = useState('todos');
   const [dateFilter, setDateFilter] = useState('');
   const [isMonthListOpen, setIsMonthListOpen] = useState(false);
@@ -114,6 +114,23 @@ const Dashboard = ({ cteData = {} }) => {
     [rawData]
   );
 
+  
+  useEffect(() => {
+    if (!isTvMode) return undefined;
+
+    const alternarFiltrosTv = () => {
+      setActiveFilter((prev) => (prev === 'todos' ? 'hoje' : 'todos'));
+      setDateFilter('');
+      setSelectedMonth('');
+      setSelectedUser('');
+      setIsMonthListOpen(false);
+      setIsUserListOpen(false);
+    };
+
+    const intervalo = setInterval(alternarFiltrosTv, 5 * 60 * 1000);
+    return () => clearInterval(intervalo);
+  }, [isTvMode]);
+  
   useEffect(() => {
     const onClickOutside = (event) => {
       if (monthRef.current && !monthRef.current.contains(event.target)) {
@@ -506,6 +523,7 @@ const Dashboard = ({ cteData = {} }) => {
 };
 
 export default Dashboard;
+
 
 
 
