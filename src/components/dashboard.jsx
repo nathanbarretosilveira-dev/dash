@@ -401,20 +401,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       }
     }
 
-    const cancelamentosPorUsuario = new Map(
-      cancelamentosUsuarios.map((usuario) => [usuario.nome, Number(usuario.total) || 0])
-    );
-
-    const totalEmissoesLiquidasUsuarios = usuariosFiltrados.reduce((acc, usuario) => {
-      const emissoesUsuario = Number(usuario.emissoes) || 0;
-      const cancelamentosUsuario = cancelamentosPorUsuario.get(usuario.nome) || 0;
-      return acc + Math.max(0, emissoesUsuario - cancelamentosUsuario);
-    }, 0);
-
     const totalEmissoesLiquidas = Math.max(0, totalEmissoes - totalCancelamentos);
-    const produtividadeMediaBase = usuariosFiltrados.length > 0
-      ? Math.round(totalEmissoesLiquidasUsuarios / usuariosFiltrados.length)
-      : 0;
 
     return {
       resumo: {
@@ -424,7 +411,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
         tendencia_taxa_cancelamento_7d: tendenciaTaxaCancelamento,
         taxa_eficiencia:
           totalEmissoes > 0 ? ((totalEmissoesLiquidas) / totalEmissoes) * 100 : 0,
-        produtividade_media: produtividadeMediaBase
+          usuariosFiltrados.length > 0 ? Math.round(totalEmissoesLiquidas / usuariosFiltrados.length) : 0
       },
       emissoes_por_usuario: usuariosFiltrados,
       cancelamentos_por_usuario: cancelamentosUsuarios,
