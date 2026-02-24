@@ -96,6 +96,9 @@ const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   return dadosOrdenados.slice(inicio, indiceReferencia + 1);
 };
 
+const TV_FILTER_CYCLE_MS = 5 * 60 * 1000;
+const TV_MODE_FILTER_KEY = 'dashboard_tv_active_filter';
+
 const Dashboard = ({ cteData = {}, isTvMode = false }) => {
   const [activeFilter, setActiveFilter] = useState('todos');
   const [dateFilter, setDateFilter] = useState('');
@@ -103,34 +106,68 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
   const [isUserListOpen, setIsUserListOpen] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedUser, setSelectedUser] = useState('');
+  const tvCycleRemainingMsRef = useRef(TV_FILTER_CYCLE_MS);
 
   const monthRef = useRef(null);
   const userRef = useRef(null);
+  const activeFilterRef = useRef(activeFilter);
 
   const rawData = cteData ?? {};
+
+
+  useEffect(() => {
+    activeFilterRef.current = activeFilter;
+  }, [activeFilter]);
+
+  useEffect(() => {
+    if (!isTvMode) return;
+
+    const filtroSalvo = window.localStorage.getItem(TV_MODE_FILTER_KEY);
+    if (filtroSalvo === 'todos' || filtroSalvo === 'hoje') {
+      setActiveFilter(filtroSalvo);
+    }
+  }, [isTvMode]);
 
   const usuariosDisponiveis = useMemo(
     () => (rawData.emissoes_por_usuario || []).map((u) => u.nome).sort((a, b) => a.localeCompare(b)),
     [rawData]
   );
 
-  
+
   useEffect(() => {
-    if (!isTvMode) return undefined;
+    if (!isTvMode) {
+      tvCycleRemainingMsRef.current = TV_FILTER_CYCLE_MS;
+      return undefined;
+    }
+
+    tvCycleRemainingMsRef.current = TV_FILTER_CYCLE_MS;
 
     const alternarFiltrosTv = () => {
-      setActiveFilter((prev) => (prev === 'todos' ? 'hoje' : 'todos'));
+      const proximoFiltro = activeFilterRef.current === 'todos' ? 'hoje' : 'todos';
+
+      window.localStorage.setItem(TV_MODE_FILTER_KEY, proximoFiltro);
+      setActiveFilter(proximoFiltro);
       setDateFilter('');
       setSelectedMonth('');
       setSelectedUser('');
       setIsMonthListOpen(false);
       setIsUserListOpen(false);
+
+      window.location.reload();
     };
 
-    const intervalo = setInterval(alternarFiltrosTv, 1 * 60 * 1000);
+    const intervalo = setInterval(() => {
+      if (tvCycleRemainingMsRef.current <= 1000) {
+        alternarFiltrosTv();
+        tvCycleRemainingMsRef.current = TV_FILTER_CYCLE_MS;
+      } else {
+        tvCycleRemainingMsRef.current -= 1000;
+      }
+    }, 1000);
+
     return () => clearInterval(intervalo);
   }, [isTvMode]);
-  
+
   useEffect(() => {
     const onClickOutside = (event) => {
       if (monthRef.current && !monthRef.current.contains(event.target)) {
@@ -217,7 +254,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
         const emissoesLiquidas = Number(usuario.emissoes) || 0;
         const cancelamentosUsuario = Number(usuario.cancelamentos) || 0;
 
-        atual.emissoes += emissoesLiquidas - cancelamentosUsuario;
+        atual.emissoes += emissoesLiquidas;
         atual.total += cancelamentosUsuario;
       });
     });
@@ -364,7 +401,8 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       }
     }
 
-    
+    const totalEmissoesLiquidas = Math.max(0, totalEmissoes - totalCancelamentos);
+
     return {
       resumo: {
         total_emissoes: totalEmissoes,
@@ -374,7 +412,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
         taxa_eficiencia:
           totalEmissoes > 0 ? ((totalEmissoes - totalCancelamentos) / totalEmissoes) * 100 : 0,
         produtividade_media:
-          usuariosFiltrados.length > 0 ? Math.round(totalEmissoes / usuariosFiltrados.length) : 0
+          usuariosFiltrados.length > 0 ? Math.round(totalEmissoesLiquidas / usuariosFiltrados.length) : 0
       },
       emissoes_por_usuario: usuariosFiltrados,
       cancelamentos_por_usuario: cancelamentosUsuarios,
@@ -517,11 +555,10 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       <Charts data={filteredData} />
 
       <footer className="dashboard-footer">
-        © 2026 — Desenvolvido por Nathan Gabriel.
+        <span>© 2026 — Desenvolvido por Nathan Gabriel.</span>
       </footer>
     </div>
   );
 };
 
 export default Dashboard;
-
