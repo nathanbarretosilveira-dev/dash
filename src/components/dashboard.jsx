@@ -246,27 +246,51 @@ const Dashboard = ({ cteData = {} }) => {
           depois_14h: Math.round((rawData.emissoes_por_turno?.depois_14h || 0) * fatorPeriodo)
         };
 
-    let timelineFiltrada = (rawData.timeline_operacao || []).map((item) => ({
-      ...item,
-      valorEfetivo: Math.round((item.emissoes ?? item.volume ?? 0) * fatorPeriodo)
-    }));
+    const timelineDetalhada = rawData.timeline_operacao_detalhada || [];
+    const temTimelineDetalhada = Array.isArray(timelineDetalhada) && timelineDetalhada.length > 0;
 
-    const somaTimeline = timelineFiltrada.reduce((acc, curr) => acc + curr.valorEfetivo, 0);
-    if (somaTimeline !== totalEmissoes && totalEmissoes > 0) {
-      const ajuste = totalEmissoes / (somaTimeline || 1);
-      timelineFiltrada = timelineFiltrada.map((t) => ({
-        ...t,
-        valorEfetivo: Math.round(t.valorEfetivo * ajuste)
+    let timelineFiltrada = [];
+
+    if (temTimelineDetalhada) {
+      const timelinePorHora = new Map();
+
+      timelineDetalhada.forEach((item) => {
+        if (!deveConsiderarData(item.data)) return;
+        if (selectedUser && item.usuario !== selectedUser) return;
+
+        const horaBruta = String(item.hora || '');
+        if (!/^\d{2}:\d{2}:\d{2}$/.test(horaBruta)) return;
+
+        const faixaHora = `${horaBruta.slice(0, 2)}:00`;
+        timelinePorHora.set(faixaHora, (timelinePorHora.get(faixaHora) || 0) + 1);
+      });
+
+      timelineFiltrada = Array.from(timelinePorHora.entries())
+        .map(([hora, valorEfetivo]) => ({ hora, valorEfetivo, emissoes: valorEfetivo }))
+        .sort((a, b) => a.hora.localeCompare(b.hora));
+    } else {
+      timelineFiltrada = (rawData.timeline_operacao || []).map((item) => ({
+        ...item,
+        valorEfetivo: Math.round((item.emissoes ?? item.volume ?? 0) * fatorPeriodo)
       }));
 
-      const novaSoma = timelineFiltrada.reduce((acc, curr) => acc + curr.valorEfetivo, 0);
-      const diferenca = totalEmissoes - novaSoma;
-      if (diferenca !== 0 && timelineFiltrada.length > 0) {
-        const maxIdx = timelineFiltrada.reduce(
-          (iMax, x, i, arr) => (x.valorEfetivo > arr[iMax].valorEfetivo ? i : iMax),
-          0
-        );
-        timelineFiltrada[maxIdx].valorEfetivo += diferenca;
+      const somaTimeline = timelineFiltrada.reduce((acc, curr) => acc + curr.valorEfetivo, 0);
+      if (somaTimeline !== totalEmissoes && totalEmissoes > 0) {
+        const ajuste = totalEmissoes / (somaTimeline || 1);
+        timelineFiltrada = timelineFiltrada.map((t) => ({
+          ...t,
+          valorEfetivo: Math.round(t.valorEfetivo * ajuste)
+        }));
+
+        const novaSoma = timelineFiltrada.reduce((acc, curr) => acc + curr.valorEfetivo, 0);
+        const diferenca = totalEmissoes - novaSoma;
+        if (diferenca !== 0 && timelineFiltrada.length > 0) {
+          const maxIdx = timelineFiltrada.reduce(
+            (iMax, x, i, arr) => (x.valorEfetivo > arr[iMax].valorEfetivo ? i : iMax),
+            0
+          );
+          timelineFiltrada[maxIdx].valorEfetivo += diferenca;
+        }
       }
     }
 
@@ -429,4 +453,5 @@ const Dashboard = ({ cteData = {} }) => {
 };
 
 export default Dashboard;
+
 
