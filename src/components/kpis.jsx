@@ -18,8 +18,10 @@ const KPIs = ({ data }) => {
   };
 
   const totalEmissoes = resumo.total_emissoes || 0;
+  const totalCancelamentos = resumo.total_cancelamentos || 0;
+  const totalEmissoesValidas = Math.max(0, totalEmissoes - totalCancelamentos);
   const totalUsuarios = emissoes_por_usuario.length || 1;
-  const produtividadeMedia = Math.round(totalEmissoes / totalUsuarios);
+  const produtividadeMedia = resumo.produtividade_media ?? Math.round(totalEmissoesValidas / totalUsuarios);
 
   const kpis = [
     {
@@ -27,7 +29,7 @@ const KPIs = ({ data }) => {
       value: resumo.total_emissoes,
       trend: formatarTendencia(tendenciaEmissoes.variacao),
       trendUp: tendenciaEmissoes.subiu,
-      detail: `(${resumo.total_emissoes - resumo.total_cancelamentos} válidos)`,
+      detail: `(${totalEmissoesValidas} válidos)`,
       icon: '📄',
       color: 'purple' // Isso vai virar kpi-purple
     },
@@ -96,4 +98,3 @@ const KPIs = ({ data }) => {
 };
 
 export default KPIs;
-
