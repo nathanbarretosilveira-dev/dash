@@ -34,22 +34,29 @@ function App() {
       return resposta.json();
     };
 
+       const carregarMetadados = async () => {
+      try {
+        return await carregarDadosDaApi('/api/cte-data-metadata');
+      } catch {
+        return null;
+      }
+    };
+
     const carregarDados = async () => {
       setLoadingData(true);
       setErrorData('');
 
       try {
-        let dados;
-
-        try {
-          dados = await carregarDadosDaApi('/api/cte-data');
-        } catch (erroLocal) {
-          if (!import.meta.env.DEV) throw erroLocal;
-          dados = await carregarDadosDaApi('http://localhost:7067/api/cte-data');
-        }
+        const [dados, metadata] = await Promise.all([
+          carregarDadosDaApi('/api/cte-data'),
+          carregarMetadados()
+        ]);
 
         if (ativo) {
-          setCteData(dados);
+          setCteData({
+            ...dados,
+            atualizado_em: metadata?.atualizadoEm || dados?.atualizado_em || dados?.criado_em
+          });
         }
       } catch (erro) {
         if (ativo) {
@@ -91,3 +98,4 @@ function App() {
 }
  
 export default App;
+
