@@ -12,18 +12,6 @@ const port = process.env.PORT || 7067;
  
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(204);
-  }
-
-  return next();
-});
-
 const cteSpreadsheetPath = path.join(__dirname, 'src', 'data', 'J1BNFE.xlsx');
 const cteJsonPath = path.join(__dirname, 'src', 'data', 'cte_data.json');
 const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
@@ -50,7 +38,7 @@ const formatarDataBr = (data) => {
 };
 
 const formatarDataHoraBr = (data) => {
-    const formatter = new Intl.DateTimeFormat('pt-BR', {
+  const formatter = new Intl.DateTimeFormat('pt-BR', {
     timeZone: BRASILIA_TIMEZONE,
     year: 'numeric',
     month: '2-digit',
@@ -291,12 +279,13 @@ const obterFonteAtiva = () => {
 
 const carregarDadosCte = () => {
   const fonte = obterFonteAtiva();
- 
+
   const anexarAtualizacao = (dadosBase, caminhoFonte) => {
     const stats = fs.statSync(caminhoFonte);
     return {
       ...dadosBase,
       atualizado_em: stats.mtime?.toISOString?.() || null,
+      atualizado_em_br: formatarDataHoraBr(stats.mtime),
       criado_em: dadosBase?.criado_em || formatarDataHoraBr(stats.mtime)
     };
   };
@@ -359,6 +348,3 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
-
-
-
