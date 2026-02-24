@@ -364,6 +364,8 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       }
     }
 
+    const totalEmissõesLiquidas = Math . max ( 0 , totalEmissões - totalCancelamentos);
+
     return {
       resumo: {
         total_emissoes: totalEmissoes,
@@ -373,7 +375,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
         taxa_eficiencia:
           totalEmissoes > 0 ? ((totalEmissoes - totalCancelamentos) / totalEmissoes) * 100 : 0,
         produtividade_media:
-          usuariosFiltrados.length > 0 ? Math.round(totalEmissoes / usuariosFiltrados.length) : 0
+          usuariosFiltrados.length > 0 ? Math.round(totalEmissoesLiquidas / usuariosFiltrados.length) : 0
       },
       emissoes_por_usuario: usuariosFiltrados,
       cancelamentos_por_usuario: cancelamentosUsuarios,
@@ -523,12 +525,3 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
-
-
-
-
-
-
-
-
-
