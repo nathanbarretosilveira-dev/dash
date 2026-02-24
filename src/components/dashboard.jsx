@@ -246,6 +246,10 @@ const Dashboard = ({ cteData = {} }) => {
     const totalEmissoes = selectedUser ? totalEmissoesFiltradas : totalBasePeriodo;
     const totalCancelamentos = selectedUser ? totalCancelamentosFiltrados : totalBaseCancelamentos;
 
+        const totalEfetivoPeriodo = Math.max(0, periodo.emissoes - periodo.cancelamentos);
+    const totalEfetivoUsuarios = Math.max(0, totalEmissoesFiltradas - totalCancelamentosFiltrados);
+    const totalEfetivoTurnoEsperado = selectedUser ? totalEfetivoUsuarios : totalEfetivoPeriodo;
+
     const fatorPeriodo = (rawData.resumo?.total_emissoes || 0) > 0
       ? totalEmissoes / (rawData.resumo?.total_emissoes || 1)
       : 0;
@@ -283,7 +287,7 @@ const turnoFiltradoPorUsuarioTimeline = timelineDetalhada.reduce((acc, item) => 
       return acc;
     }, { antes_14h: 0, depois_14h: 0 });
 
-    const turno = (selectedUser && temTimelineDetalhada)
+    const turnoBase = (selectedUser && temTimelineDetalhada)
       ? turnoFiltradoPorUsuarioTimeline
       : temTurnoPorDia
         ? turnoFiltradoPorDia
@@ -291,6 +295,14 @@ const turnoFiltradoPorUsuarioTimeline = timelineDetalhada.reduce((acc, item) => 
             antes_14h: Math.round((rawData.emissoes_por_turno?.antes_14h || 0) * fatorPeriodo),
             depois_14h: Math.round((rawData.emissoes_por_turno?.depois_14h || 0) * fatorPeriodo)
           };
+
+    const totalTurnoCalculado = (turnoBase.antes_14h || 0) + (turnoBase.depois_14h || 0);
+    const diferencaTurno = Math.max(0, totalEfetivoTurnoEsperado - totalTurnoCalculado);
+
+    const turno = {
+      antes_14h: (turnoBase.antes_14h || 0) + diferencaTurno,
+      depois_14h: turnoBase.depois_14h || 0
+    };
 
     let timelineFiltrada = [];
 
@@ -496,6 +508,7 @@ const turnoFiltradoPorUsuarioTimeline = timelineDetalhada.reduce((acc, item) => 
 };
 
 export default Dashboard;
+
 
 
 
