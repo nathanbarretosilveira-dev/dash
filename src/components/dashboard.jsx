@@ -217,7 +217,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
         const emissoesLiquidas = Number(usuario.emissoes) || 0;
         const cancelamentosUsuario = Number(usuario.cancelamentos) || 0;
 
-        atual.emissoes += emissoesLiquidas + cancelamentosUsuario;
+        atual.emissoes += emissoesLiquidas;
         atual.total += cancelamentosUsuario;
       });
     });
@@ -523,6 +523,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
+
 
 
 
