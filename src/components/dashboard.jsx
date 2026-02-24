@@ -411,6 +411,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
         tendencia_taxa_cancelamento_7d: tendenciaTaxaCancelamento,
         taxa_eficiencia:
           totalEmissoes > 0 ? ((totalEmissoesLiquidas) / totalEmissoes) * 100 : 0,
+        produtividade_media:
           usuariosFiltrados.length > 0 ? Math.round(totalEmissoesLiquidas / usuariosFiltrados.length) : 0
       },
       emissoes_por_usuario: usuariosFiltrados,
@@ -561,4 +562,5 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
+
 
