@@ -57,10 +57,96 @@ const formatarDataHoraBr = (data) => {
   return `${parts.day}/${parts.month}/${parts.year} ${parts.hour}:${parts.minute}:${parts.second}`;
 };
 
+const parseDataHoraFlex = (valor) => {
+  if (!valor) return null;
+
+  const dataIso = new Date(valor);
+  if (!Number.isNaN(dataIso.getTime())) return dataIso;
+
+  const matchBr = String(valor)
+    .trim()
+    .match(/^(\d{2})\/(\d{2})\/(\d{2,4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/);
+
+  if (!matchBr) return null;
+
+  const [, dd, mm, yyyyRaw, hh = '00', mi = '00', ss = '00'] = matchBr;
+  const yyyy = yyyyRaw.length === 2 ? `20${yyyyRaw}` : yyyyRaw;
+
+  const dataBr = new Date(`${yyyy}-${mm}-${dd}T${hh}:${mi}:${ss}`);
+  return Number.isNaN(dataBr.getTime()) ? null : dataBr;
+};
+
+const obterAtualizacaoPorStat = (caminhoArquivo) => {
+  const stats = fs.statSync(caminhoArquivo);
+  const dataRef = stats.mtime;
+  return {
+    atualizadoEmIso: dataRef?.toISOString?.() || null,
+    atualizadoEmBr: dataRef ? formatarDataHoraBr(dataRef) : null
+  };
+};
+
 const lerEntradaXlsx = (xlsxPath, entryName) => execFileSync('unzip', ['-p', xlsxPath, entryName], {
   encoding: 'utf8',
   maxBuffer: 20 * 1024 * 1024
 });
+
+const obterAtualizacaoDoCoreXlsx = (xlsxPath) => {
+  try {
+    const coreXml = lerEntradaXlsx(xlsxPath, 'docProps/core.xml');
+    const modified = coreXml.match(/<dcterms:modified[^>]*>([^<]+)<\/dcterms:modified>/i)?.[1];
+    const created = coreXml.match(/<dcterms:created[^>]*>([^<]+)<\/dcterms:created>/i)?.[1];
+    const dataRef = parseDataHoraFlex(modified) || parseDataHoraFlex(created);
+
+    if (!dataRef) return null;
+
+    return {
+      atualizadoEmIso: dataRef.toISOString(),
+      atualizadoEmBr: formatarDataHoraBr(dataRef)
+    };
+  } catch {
+    return null;
+  }
+};
+
+const obterAtualizacaoDoJson = (jsonPath) => {
+  try {
+    const conteudo = fs.readFileSync(jsonPath, 'utf8');
+    const dados = JSON.parse(conteudo);
+    const campos = [
+      dados?.atualizado_em,
+      dados?.atualizadoEm,
+      dados?.atualizado_em_br,
+      dados?.criado_em,
+      dados?.criadoEm
+    ];
+
+    for (const campo of campos) {
+      const dataRef = parseDataHoraFlex(campo);
+      if (!dataRef) continue;
+
+      return {
+        atualizadoEmIso: dataRef.toISOString(),
+        atualizadoEmBr: formatarDataHoraBr(dataRef)
+      };
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+const obterAtualizacaoFonte = (fonte) => {
+  if (fonte?.tipo === 'planilha') {
+    return obterAtualizacaoDoCoreXlsx(fonte.caminho) || obterAtualizacaoPorStat(fonte.caminho);
+  }
+
+  if (fonte?.tipo === 'json') {
+    return obterAtualizacaoDoJson(fonte.caminho) || obterAtualizacaoPorStat(fonte.caminho);
+  }
+
+  return obterAtualizacaoPorStat(fonte.caminho);
+};
 
 const lerSharedStrings = (xlsxPath) => {
   const xml = lerEntradaXlsx(xlsxPath, 'xl/sharedStrings.xml');
@@ -279,47 +365,41 @@ const obterFonteAtiva = () => {
 
 const carregarDadosCte = () => {
   const fonte = obterFonteAtiva();
+  const atualizacaoFonte = obterAtualizacaoFonte(fonte);
 
-  const anexarAtualizacao = (dadosBase, caminhoFonte) => {
-    const stats = fs.statSync(caminhoFonte);
-    return {
-      ...dadosBase,
-      atualizado_em: stats.mtime?.toISOString?.() || null,
-      atualizado_em_br: formatarDataHoraBr(stats.mtime),
-      criado_em: dadosBase?.criado_em || formatarDataHoraBr(stats.mtime)
-    };
-  };
+  const anexarAtualizacao = (dadosBase) => ({
+    ...dadosBase,
+    atualizado_em: atualizacaoFonte.atualizadoEmIso || null,
+    atualizado_em_br: atualizacaoFonte.atualizadoEmBr || null,
+    criado_em: dadosBase?.criado_em || atualizacaoFonte.atualizadoEmBr || null
+  });
 
   if (fonte.tipo === 'planilha') {
     try {
-      return anexarAtualizacao(montarDadosPlanilha(fonte.caminho), fonte.caminho);
+      return anexarAtualizacao(montarDadosPlanilha(fonte.caminho));
     } catch (error) {
       if (fs.existsSync(cteJsonPath)) {
         console.warn(`Falha ao processar planilha (${error.message}). Usando fallback cte_data.json.`);
-        return anexarAtualizacao(carregarDadosJson(), fonte.caminho);
+        return anexarAtualizacao(carregarDadosJson());
       }
       throw error;
     }
   }
 
-  return anexarAtualizacao(carregarDadosJson(), fonte.caminho);
+  return anexarAtualizacao(carregarDadosJson());
 };
 
 app.get('/api/cte-data-metadata', (_req, res) => {
   try {
     const fonte = obterFonteAtiva();
-    fs.stat(fonte.caminho, (err, stats) => {
-      if (err) {
-        res.status(500).json({ error: `Não foi possível obter metadados do arquivo ${fonte.arquivo}.` });
-        return;
-      }
+    const stats = fs.statSync(fonte.caminho);
+    const atualizacaoFonte = obterAtualizacaoFonte(fonte);
 
-      res.json({
-        arquivo: fonte.arquivo,
-        criadoEm: stats.birthtime?.toISOString?.() || null,
-        atualizadoEm: stats.mtime?.toISOString?.() || null,
-        atualizadoEmBr: stats.mtime ? formatarDataHoraBr(stats.mtime) : null
-      });
+    res.json({
+      arquivo: fonte.arquivo,
+      criadoEm: stats.birthtime?.toISOString?.() || null,
+      atualizadoEm: atualizacaoFonte.atualizadoEmIso || null,
+      atualizadoEmBr: atualizacaoFonte.atualizadoEmBr || null
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -348,4 +428,5 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
+
 
