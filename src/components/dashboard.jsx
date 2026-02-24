@@ -2,7 +2,6 @@ import React, { useMemo, useRef, useState, useEffect } from 'react';
 import './dashboard.css';
 import KPIs from './kpis';
 import Charts from './charts';
-import cteData from '../data/cte_data.json';
 import { getHoje, getSemana, somarPeriodo } from '../utils/dataRange.js';
 
 const MESES = [
@@ -75,7 +74,7 @@ const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   return dadosCompletos.slice(inicio, indiceReferencia + 1);
 };
 
-const Dashboard = () => {
+const Dashboard = ({ cteData = {} }) => {
   const [activeFilter, setActiveFilter] = useState('todos');
   const [dateFilter, setDateFilter] = useState('');
   const [isMonthListOpen, setIsMonthListOpen] = useState(false);
@@ -176,8 +175,6 @@ const Dashboard = () => {
         const emissoesLiquidas = Number(usuario.emissoes) || 0;
         const cancelamentosUsuario = Number(usuario.cancelamentos) || 0;
 
-        // Emissões no JSON de resumo já consideram os documentos cancelados.
-        // Para manter consistência em TODOS os filtros, somamos ambos aqui.
         atual.emissoes += emissoesLiquidas + cancelamentosUsuario;
         atual.total += cancelamentosUsuario;
       });
@@ -318,7 +315,7 @@ const Dashboard = () => {
             Todos
           </button>
 
-          <div className="dropdown-wrapper" ref={monthRef}>
+                    <div className="dropdown-wrapper" ref={monthRef}>
             <button
               className={`filter-btn ${activeFilter === 'mes' ? 'active' : ''}`}
               onClick={() => {
@@ -432,3 +429,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
