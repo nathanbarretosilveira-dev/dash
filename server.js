@@ -12,6 +12,18 @@ const port = process.env.PORT || 7067;
  
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
+  return next();
+});
+
 const cteSpreadsheetPath = path.join(__dirname, 'src', 'data', 'J1BNFE.xlsx');
 const cteJsonPath = path.join(__dirname, 'src', 'data', 'cte_data.json');
 const BRASILIA_TIMEZONE = 'America/Sao_Paulo';
@@ -38,7 +50,7 @@ const formatarDataBr = (data) => {
 };
 
 const formatarDataHoraBr = (data) => {
-  const formatter = new Intl.DateTimeFormat('pt-BR', {
+    const formatter = new Intl.DateTimeFormat('pt-BR', {
     timeZone: BRASILIA_TIMEZONE,
     year: 'numeric',
     month: '2-digit',
@@ -80,7 +92,137 @@ const lerSharedStrings = (xlsxPath) => {
 };
 
 const parseLinhasPlanilha = (xlsxPath) => {
-@@ -203,119 +214,132 @@ const montarDadosPlanilha = (xlsxPath) => {
+  const sharedStrings = lerSharedStrings(xlsxPath);
+  const sheetXml = lerEntradaXlsx(xlsxPath, 'xl/worksheets/sheet1.xml');
+
+  const rows = [];
+  const rowRegex = /<row[^>]*>([\s\S]*?)<\/row>/g;
+  const cellRegex = /<c([^>]*)r="([A-Z]+)(\d+)"[^>]*(?:\/>|>([\s\S]*?)<\/c>)/g;
+
+  for (const rowMatch of sheetXml.matchAll(rowRegex)) {
+    const rowXml = rowMatch[1] || '';
+    const row = {};
+
+    for (const cellMatch of rowXml.matchAll(cellRegex)) {
+      const cellXml = cellMatch[0] || '';
+      const col = cellMatch[2];
+      const cellBody = cellMatch[4] || '';
+      const typeMatch = cellXml.match(/t="([^"]+)"/);
+      const type = typeMatch ? typeMatch[1] : '';
+      const vMatch = cellBody.match(/<v[^>]*>([\s\S]*?)<\/v>/);
+      const tMatch = cellBody.match(/<t[^>]*>([\s\S]*?)<\/t>/);
+      let value = '';
+
+      if (type === 's' && vMatch) {
+        const idx = Number(vMatch[1]);
+        value = Number.isFinite(idx) ? (sharedStrings[idx] || '') : '';
+      } else if (tMatch) {
+        value = decodeXml(tMatch[1]);
+      } else if (vMatch) {
+        value = decodeXml(vMatch[1]);
+      }
+
+      row[col] = String(value).trim();
+    }
+
+    rows.push(row);
+  }
+
+  return rows;
+};
+
+const montarDadosPlanilha = (xlsxPath) => {
+  const rows = parseLinhasPlanilha(xlsxPath);
+  if (rows.length === 0) {
+    throw new Error('A planilha não possui linhas.');
+  }
+
+  const headersRaw = rows[0];
+  const headerCols = Object.keys(headersRaw).sort();
+  const headerByColumn = new Map(headerCols.map((col) => [col, normalizarTitulo(headersRaw[col])]));
+
+  const registros = [];
+  for (const row of rows.slice(1)) {
+    const registro = {};
+
+    for (const [col, key] of headerByColumn.entries()) {
+      registro[key] = row[col] || '';
+    }
+
+    if (!registro.n_documento && !registro.numero_de_nota_fiscal_eletronica && !registro.criado_por) {
+      continue;
+    }
+
+    const dataRaw = registro.data_de_criacao;
+    const horaRaw = registro.hora_processamento;
+    const criadoPor = registro.criado_por || 'Não informado';
+    const estornado = String(registro.estornado || '').toUpperCase() === 'X';
+
+    const dataObj = dataRaw ? new Date(String(dataRaw).replace(' ', 'T')) : null;
+    const dataKey = dataObj && !Number.isNaN(dataObj.getTime()) ? formatarDataBr(dataObj) : 'Sem data';
+
+    let hora = String(horaRaw || '').slice(0, 8);
+    if (!/^\d{2}:\d{2}:\d{2}$/.test(hora)) {
+      hora = '00:00:00';
+    }
+
+    registros.push({
+      data: dataKey,
+      hora,
+      criadoPor,
+      estornado
+    });
+  }
+
+  const porUsuario = new Map();
+  const porDia = new Map();
+  const porDiaUsuario = new Map();
+  const porDiaTurno = new Map();
+  const timelineHora = new Map();
+  const timelineOperacaoDetalhada = [];
+
+  for (const r of registros) {
+    if (!porUsuario.has(r.criadoPor)) porUsuario.set(r.criadoPor, { nome: r.criadoPor, emissoes: 0, cancelamentos: 0 });
+    const pu = porUsuario.get(r.criadoPor);
+    pu.emissoes += 1;
+    if (r.estornado) pu.cancelamentos += 1;
+
+    if (!porDia.has(r.data)) porDia.set(r.data, { data: r.data, emissoes: 0, cancelamentos: 0 });
+    const pd = porDia.get(r.data);
+    pd.emissoes += 1;
+    if (r.estornado) pd.cancelamentos += 1;
+
+    if (!porDiaUsuario.has(r.data)) porDiaUsuario.set(r.data, new Map());
+    const mapaUsuarios = porDiaUsuario.get(r.data);
+    if (!mapaUsuarios.has(r.criadoPor)) mapaUsuarios.set(r.criadoPor, { nome: r.criadoPor, emissoes: 0, cancelamentos: 0 });
+    const pdu = mapaUsuarios.get(r.criadoPor);
+    pdu.emissoes += 1;
+    if (r.estornado) pdu.cancelamentos += 1;
+
+    if (!porDiaTurno.has(r.data)) porDiaTurno.set(r.data, { data: r.data, antes_14h: 0, depois_14h: 0 });
+    if (!r.estornado && r.hora !== '00:00:00') {
+      const horaNum = Number(r.hora.split(':')[0]);
+      const t = porDiaTurno.get(r.data);
+      if (horaNum < 14) t.antes_14h += 1;
+      else t.depois_14h += 1;
+
+      const faixaHora = `${String(horaNum).padStart(2, '0')}:00`;
+      timelineHora.set(faixaHora, (timelineHora.get(faixaHora) || 0) + 1);
+      timelineOperacaoDetalhada.push({
+        data: r.data,
+        hora: r.hora,
+        usuario: r.criadoPor
+      });
+    }
+  }
+
+  const ordenarPorDataBr = (a, b) => {
+    const [da, ma, aa] = a.data.split('/').map(Number);
+    const [db, mb, ab] = b.data.split('/').map(Number);
+    return new Date(2000 + aa, ma - 1, da) - new Date(2000 + ab, mb - 1, db);
+  };
+
+  const dados_por_dia = Array.from(porDia.values()).sort(ordenarPorDataBr);
   const emissoes_por_turno_por_dia = Array.from(porDiaTurno.values()).sort(ordenarPorDataBr);
   const emissoes_por_usuario_por_dia = Array.from(porDiaUsuario.entries())
     .map(([data, usuariosMap]) => ({
@@ -149,7 +291,7 @@ const obterFonteAtiva = () => {
 
 const carregarDadosCte = () => {
   const fonte = obterFonteAtiva();
-
+ 
   const anexarAtualizacao = (dadosBase, caminhoFonte) => {
     const stats = fs.statSync(caminhoFonte);
     return {
@@ -213,3 +355,10 @@ app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
  
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+});
+
+
+
