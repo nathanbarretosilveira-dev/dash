@@ -6,7 +6,8 @@ const KPIs = ({ data }) => {
 
   const {
     resumo,
-    emissoes_por_usuario = []
+    emissoes_por_usuario = [],
+    cancelamentos_por_usuario = []
   } = data;
 
   const tendenciaEmissoes = resumo.tendencia_emissoes_7d || { variacao: 0, subiu: false };
@@ -21,9 +22,24 @@ const KPIs = ({ data }) => {
   const totalCancelamentos = resumo.total_cancelamentos || 0;
   const totalEmissoesValidas = Math.max(0, totalEmissoes - totalCancelamentos);
   const totalUsuarios = emissoes_por_usuario.length || 1;
+  
+  const cancelamentosPorUsuario = new Map(
+    cancelamentos_por_usuario.map((usuario) => [usuario.nome, Number(usuario.total) || 0])
+  );
+
+  const produtividadeMediaFallback = emissoes_por_usuario.length > 0
+    ? Math.round(
+      emissoes_por_usuario.reduce((acc, usuario) => {
+        const emissoesUsuario = Number(usuario.emissoes) || 0;
+        const cancelamentosUsuario = cancelamentosPorUsuario.get(usuario.nome) || 0;
+        return acc + Math.max(0, emissoesUsuario - cancelamentosUsuario);
+      }, 0) / emissoes_por_usuario.length
+    )
+    : 0;
+  
   const produtividadeMedia = Number.isFinite(resumo.produtividade_media)
     ? resumo.produtividade_media
-    : 0;
+    : produtividadeMediaFallback;
 
   const kpis = [
     {
@@ -100,6 +116,7 @@ const KPIs = ({ data }) => {
 };
 
 export default KPIs;
+
 
 
 
