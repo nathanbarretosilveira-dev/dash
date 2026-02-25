@@ -30,9 +30,23 @@ const Charts = ({ data }) => {
     percentAntes,
     percentDepois,
     maxTimeline,
-    filteredTimeline
+    filteredTimeline,
+    produtividadePorUsuario
   } = useMemo(() => {
-    const mEmissoes = Math.max(1, ...emissoes_por_usuario.map((i) => toNumber(i.emissoes)));
+    const cancelamentosPorUsuario = new Map(
+      cancelamentos_por_usuario.map((item) => [item.nome, toNumber(item.total)])
+    );
+
+    const produtividadeUsuarios = emissoes_por_usuario.map((item) => {
+      const emissoes = toNumber(item.emissoes);
+      const cancelamentos = cancelamentosPorUsuario.get(item.nome) || 0;
+      return {
+        ...item,
+        produtividade: Math.max(0, emissoes - cancelamentos)
+      };
+    });
+
+    const mEmissoes = Math.max(1, ...produtividadeUsuarios.map((i) => i.produtividade));
     const mCancelamentos = Math.max(1, ...cancelamentos_por_usuario.map((i) => toNumber(i.total)));
     const antesTurno = toNumber(volume_por_turno.antes_14h);
     const depoisTurno = toNumber(volume_por_turno.depois_14h);
@@ -55,7 +69,8 @@ const Charts = ({ data }) => {
       percentAntes: pAntes,
       percentDepois: pDepois,
       maxTimeline: mTimeline,
-      filteredTimeline: timelineFiltrada
+      filteredTimeline: timelineFiltrada,
+      produtividadePorUsuario: produtividadeUsuarios
     };
   }, [emissoes_por_usuario, cancelamentos_por_usuario, volume_por_turno, timeline]);
 
@@ -71,16 +86,16 @@ const Charts = ({ data }) => {
         <div className="chart-card">
           <h3>Produtividade</h3>
           <div className="chart-content horizontal-bars">
-            {emissoes_por_usuario.map((item, idx) => (
+            {produtividadePorUsuario.map((item, idx) => (
               <div key={idx} className="bar-item">
                 <div className="bar-header">
                   <span className="bar-label">{item.nome}</span>
-                  <span className="bar-metric">{item.emissoes}</span>
+                  <span className="bar-metric">{item.produtividade}</span>
                 </div>
                 <div className="bar-wrapper">
                   <div
                     className="bar-fill produtividade"
-                    style={{ width: `${(item.emissoes / maxEmissoes) * 100}%` }}
+                    style={{ width: `${(item.produtividade / maxEmissoes) * 100}%` }}
                   />
                 </div>
               </div>
