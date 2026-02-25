@@ -97,7 +97,8 @@ const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   return dadosOrdenados.slice(inicio, indiceReferencia + 1);
 };
 
-const TV_FILTER_CYCLE_MS = 1 * 60 * 1000;
+const TV_FILTER_SWITCH_MS = 1 * 60 * 1000;
+const TV_RELOAD_MS = 10 * 60 * 1000;
 const TV_MODE_FILTER_KEY = 'dashboard_tv_active_filter';
 
 const Dashboard = ({ cteData = {}, isTvMode = false }) => {
@@ -107,7 +108,8 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
   const [isUserListOpen, setIsUserListOpen] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedUser, setSelectedUser] = useState('');
-  const tvCycleRemainingMsRef = useRef(TV_FILTER_CYCLE_MS);
+  const tvFilterSwitchRemainingMsRef = useRef(TV_FILTER_SWITCH_MS);
+  const tvReloadRemainingMsRef = useRef(TV_RELOAD_MS);
 
   const monthRef = useRef(null);
   const userRef = useRef(null);
@@ -137,11 +139,13 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 
   useEffect(() => {
     if (!isTvMode) {
-      tvCycleRemainingMsRef.current = TV_FILTER_CYCLE_MS;
+      tvFilterSwitchRemainingMsRef.current = TV_FILTER_SWITCH_MS;
+      tvReloadRemainingMsRef.current = TV_RELOAD_MS;
       return undefined;
     }
 
-    tvCycleRemainingMsRef.current = TV_FILTER_CYCLE_MS;
+    tvFilterSwitchRemainingMsRef.current = TV_FILTER_SWITCH_MS;
+    tvReloadRemainingMsRef.current = TV_RELOAD_MS;
 
     const alternarFiltrosTv = () => {
       const proximoFiltro = activeFilterRef.current === 'todos' ? 'hoje' : 'todos';
@@ -153,16 +157,25 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       setSelectedUser('');
       setIsMonthListOpen(false);
       setIsUserListOpen(false);
-
+    };
+    
+    const recarregarPaginaTv = () => {
       window.location.reload();
     };
 
     const intervalo = setInterval(() => {
-      if (tvCycleRemainingMsRef.current <= 1000) {
+      if (tvFilterSwitchRemainingMsRef.current <= 1000) {
         alternarFiltrosTv();
-        tvCycleRemainingMsRef.current = TV_FILTER_CYCLE_MS;
+        tvFilterSwitchRemainingMsRef.current = TV_FILTER_SWITCH_MS;
       } else {
-        tvCycleRemainingMsRef.current -= 1000;
+        tvFilterSwitchRemainingMsRef.current -= 1000;
+      }
+
+      if (tvReloadRemainingMsRef.current <= 1000) {
+        recarregarPaginaTv();
+        tvReloadRemainingMsRef.current = TV_RELOAD_MS;
+      } else {
+        tvReloadRemainingMsRef.current -= 1000;
       }
     }, 1000);
 
