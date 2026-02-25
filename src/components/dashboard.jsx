@@ -53,26 +53,6 @@ const obterTimestampData = (dataDiaMesAno) => {
 
 const ordenarPorData = (a, b) => obterTimestampData(a?.data) - obterTimestampData(b?.data);
 
-const calcularVariacaoSemanal14d = (dadosPorDia, selector) => {
-  if (!Array.isArray(dadosPorDia) || dadosPorDia.length < 14) {
-    return { variacao: 0, subiu: false };
-  }
-
-  const serie = dadosPorDia.map((dia) => Number(selector(dia)) || 0);
-  const janelaAtual = serie.slice(-7);
-  const janelaAnterior = serie.slice(-14, -7);
-
-  const totalAtual = janelaAtual.reduce((acc, val) => acc + val, 0);
-  const totalAnterior = janelaAnterior.reduce((acc, val) => acc + val, 0);
-
-  const variacao = totalAtual - totalAnterior;
-
-  return {
-    variacao: Number(variacao.toFixed(1)),
-    subiu: variacao >= 0
-  };
-};
-
 const calcularVariacaoPercentual14d = (dadosPorDia, selector) => {
   if (!Array.isArray(dadosPorDia) || dadosPorDia.length < 14) {
     return { variacao: 0, subiu: false };
@@ -242,7 +222,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       mesesDistintosNaBase === 1;
 
     const baseTendencia = montarJanelaTendencia(rawData.dados_por_dia || [], diasFiltrados);
-    const tendenciaEmissoes = calcularVariacaoSemanal14d(
+    const tendenciaEmissoes = calcularVariacaoPercentual14d(
       baseTendencia,
       (dia) => Number(dia.emissoes) || 0
     );
@@ -596,5 +576,6 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
+
 
 
