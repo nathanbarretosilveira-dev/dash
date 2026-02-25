@@ -96,7 +96,7 @@ const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
   return dadosOrdenados.slice(inicio, indiceReferencia + 1);
 };
 
-const TV_FILTER_CYCLE_MS = 1 * 60 * 1000;
+const TV_FILTER_CYCLE_MS = 5 * 60 * 1000;
 const TV_MODE_FILTER_KEY = 'dashboard_tv_active_filter';
 
 const Dashboard = ({ cteData = {}, isTvMode = false }) => {
@@ -401,7 +401,20 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       }
     }
 
+    const cancelamentosPorUsuario = new Map(
+      cancelamentosUsuarios.map((usuario) => [usuario.nome, Number(usuario.total) || 0])
+    );
+
+    const totalEmissoesLiquidasUsuarios = usuariosFiltrados.reduce((acc, usuario) => {
+      const emissoesUsuario = Number(usuario.emissoes) || 0;
+      const cancelamentosUsuario = cancelamentosPorUsuario.get(usuario.nome) || 0;
+      return acc + Math.max(0, emissoesUsuario - cancelamentosUsuario);
+    }, 0);
+
     const totalEmissoesLiquidas = Math.max(0, totalEmissoes - totalCancelamentos);
+    const produtividadeMediaBase = usuariosFiltrados.length > 0
+      ? Math.round(totalEmissoesLiquidasUsuarios / usuariosFiltrados.length)
+      : 0;
 
     return {
       resumo: {
@@ -410,9 +423,8 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
         tendencia_emissoes_7d: tendenciaEmissoes,
         tendencia_taxa_cancelamento_7d: tendenciaTaxaCancelamento,
         taxa_eficiencia:
-          totalEmissoes > 0 ? ((totalEmissoes - totalCancelamentos) / totalEmissoes) * 100 : 0,
-        produtividade_media:
-          usuariosFiltrados.length > 0 ? Math.round(totalEmissoes / usuariosFiltrados.length) : 0
+          totalEmissoes > 0 ? ((totalEmissoesLiquidas) / totalEmissoes) * 100 : 0,
+        produtividade_media: produtividadeMediaBase
       },
       emissoes_por_usuario: usuariosFiltrados,
       cancelamentos_por_usuario: cancelamentosUsuarios,
@@ -562,7 +574,3 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
-
-
-
-
