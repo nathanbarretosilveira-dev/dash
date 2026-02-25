@@ -18,8 +18,12 @@ const KPIs = ({ data }) => {
   };
 
   const totalEmissoes = resumo.total_emissoes || 0;
+  const totalCancelamentos = resumo.total_cancelamentos || 0;
+  const totalEmissoesValidas = Math.max(0, totalEmissoes - totalCancelamentos);
   const totalUsuarios = emissoes_por_usuario.length || 1;
-  const produtividadeMedia = Math.round(totalEmissoes / totalUsuarios);
+  const produtividadeMedia = Number.isFinite(resumo.produtividade_media)
+    ? resumo.produtividade_media
+    : 0;
 
   const kpis = [
     {
@@ -96,5 +100,6 @@ const KPIs = ({ data }) => {
 };
 
 export default KPIs;
+
 
 
