@@ -53,7 +53,7 @@ const obterTimestampData = (dataDiaMesAno) => {
 
 const ordenarPorData = (a, b) => obterTimestampData(a?.data) - obterTimestampData(b?.data);
 
-const calcularVariacaoMediaMovel7d = (dadosPorDia, selector) => {
+const calcularVariacaoSemanal14d = (dadosPorDia, selector) => {
   if (!Array.isArray(dadosPorDia) || dadosPorDia.length < 14) {
     return { variacao: 0, subiu: false };
   }
@@ -62,14 +62,35 @@ const calcularVariacaoMediaMovel7d = (dadosPorDia, selector) => {
   const janelaAtual = serie.slice(-7);
   const janelaAnterior = serie.slice(-14, -7);
 
-  const mediaAtual = janelaAtual.reduce((acc, val) => acc + val, 0) / 7;
-  const mediaAnterior = janelaAnterior.reduce((acc, val) => acc + val, 0) / 7;
+  const totalAtual = janelaAtual.reduce((acc, val) => acc + val, 0);
+  const totalAnterior = janelaAnterior.reduce((acc, val) => acc + val, 0);
 
-  if (mediaAnterior === 0) {
-    return { variacao: 0, subiu: mediaAtual > 0 };
+  const variacao = totalAtual - totalAnterior;
+
+  return {
+    variacao: Number(variacao.toFixed(1)),
+    subiu: variacao >= 0
+  };
+};
+
+const calcularVariacaoPercentual14d = (dadosPorDia, selector) => {
+  if (!Array.isArray(dadosPorDia) || dadosPorDia.length < 14) {
+    return { variacao: 0, subiu: false };
   }
 
-  const variacao = ((mediaAtual - mediaAnterior) / mediaAnterior) * 100;
+  const serie = dadosPorDia.map((dia) => Number(selector(dia)) || 0);
+  const janelaAtual = serie.slice(-7);
+  const janelaAnterior = serie.slice(-14, -7);
+
+  const totalAtual = janelaAtual.reduce((acc, val) => acc + val, 0);
+  const totalAnterior = janelaAnterior.reduce((acc, val) => acc + val, 0);
+
+  if (totalAnterior === 0) {
+    return { variacao: 0, subiu: totalAtual > 0 };
+  }
+
+  const variacao = ((totalAtual - totalAnterior) / totalAnterior) * 100;
+
   return {
     variacao: Number(variacao.toFixed(1)),
     subiu: variacao >= 0
@@ -221,11 +242,11 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       mesesDistintosNaBase === 1;
 
     const baseTendencia = montarJanelaTendencia(rawData.dados_por_dia || [], diasFiltrados);
-    const tendenciaEmissoes = calcularVariacaoMediaMovel7d(
+    const tendenciaEmissoes = calcularVariacaoSemanal14d(
       baseTendencia,
-      (dia) => (Number(dia.emissoes) || 0) + (Number(dia.cancelamentos) || 0)
+      (dia) => Number(dia.emissoes) || 0
     );
-    const tendenciaTaxaCancelamento = calcularVariacaoMediaMovel7d(baseTendencia, (dia) => dia.cancelamentos);
+    const tendenciaTaxaCancelamento = calcularVariacaoPercentual14d(baseTendencia, (dia) => dia.cancelamentos);
 
     const periodo = somarPeriodo(diasFiltrados);
     const datasPeriodo = new Set(diasFiltrados.map((dia) => normalizarData(dia.data)));
