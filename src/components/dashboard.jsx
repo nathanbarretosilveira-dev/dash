@@ -412,8 +412,9 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
     }, 0);
 
     const totalEmissoesLiquidas = Math.max(0, totalEmissoes - totalCancelamentos);
+    const totalLiquidoProdutividade = Math.min(totalEmissoesLiquidasUsuarios, totalEmissoesLiquidas);
     const produtividadeMediaBase = usuariosFiltrados.length > 0
-      ? Math.round(totalEmissoesLiquidasUsuarios / usuariosFiltrados.length)
+      ? Math.round(totalLiquidoProdutividade / usuariosFiltrados.length)
       : 0;
 
     return {
@@ -574,3 +575,4 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
+
