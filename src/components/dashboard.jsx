@@ -53,6 +53,22 @@ const obterTimestampData = (dataDiaMesAno) => {
 
 const ordenarPorData = (a, b) => obterTimestampData(a?.data) - obterTimestampData(b?.data);
 
+const normalizarHora = (hora) => {
+  const horaTexto = String(hora || '').trim();
+  const matchHora = horaTexto.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
+  if (!matchHora) return null;
+
+  const [, hhRaw, mmRaw, ssRaw = '00'] = matchHora;
+  const hh = Number(hhRaw);
+  const mm = Number(mmRaw);
+  const ss = Number(ssRaw);
+
+  const horaValida = hh >= 0 && hh <= 23 && mm >= 0 && mm <= 59 && ss >= 0 && ss <= 59;
+  if (!horaValida) return null;
+
+  return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+};
+
 const calcularVariacaoPercentual14d = (dadosPorDia, selector) => {
   if (!Array.isArray(dadosPorDia) || dadosPorDia.length < 14) {
     return { variacao: 0, subiu: false };
@@ -341,11 +357,10 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
       if (!deveConsiderarData(item.data)) return acc;
       if (selectedUser && item.usuario !== selectedUser) return acc;
 
-      const horaBruta = String(item.hora || '');
-      if (!/^\d{2}:\d{2}:\d{2}$/.test(horaBruta)) return acc;
+      const horaNormalizada = normalizarHora(item.hora);
+      if (!horaNormalizada) return acc;
 
-      const horaNum = Number(horaBruta.slice(0, 2));
-      if (!Number.isFinite(horaNum)) return acc;
+      const horaNum = Number(horaNormalizada.slice(0, 2));
 
       if (horaNum < 14) acc.antes_14h += 1;
       else acc.depois_14h += 1;
@@ -379,10 +394,10 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
         if (!deveConsiderarData(item.data)) return;
         if (selectedUser && item.usuario !== selectedUser) return;
 
-        const horaBruta = String(item.hora || '');
-        if (!/^\d{2}:\d{2}:\d{2}$/.test(horaBruta)) return;
+        const horaNormalizada = normalizarHora(item.hora);
+        if (!horaNormalizada) return;
 
-        const faixaHora = `${horaBruta.slice(0, 2)}:00`;
+        const faixaHora = `${horaNormalizada.slice(0, 2)}:00`;
         timelinePorHora.set(faixaHora, (timelinePorHora.get(faixaHora) || 0) + 1);
       });
 
@@ -589,6 +604,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
+
 
 
 
