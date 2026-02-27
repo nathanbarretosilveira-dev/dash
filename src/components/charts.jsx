@@ -57,7 +57,7 @@ const Charts = ({ data }) => {
 
     const timelineFiltrada = timeline.filter((item) => {
       const hora = getHour(item?.hora);
-      return hora !== null && hora >= 7 && hora <= 23;
+      return hora !== null && hora >= 0 && hora <= 23;
     });
 
     const mTimeline = Math.max(1, ...timelineFiltrada.map((i) => toNumber(i?.valorEfetivo)));
