@@ -111,7 +111,7 @@
   text-align: left;
   font-size: 0.78rem;
   color: #e2e8f0;
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -304,8 +304,8 @@
 }
 
 .timeline-label {
-  font-size: 0.58rem;
-  color: #94a3b8;
+  font-size: 0.8rem;
+  color: #cbd5e1;
   margin-top: 10px;
   font-weight: 600;
 }
@@ -351,4 +351,5 @@
     height: 156px;
   }
 }
+
 
