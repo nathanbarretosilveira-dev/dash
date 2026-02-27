@@ -307,7 +307,7 @@
   font-size: 0.8rem;
   color: #cbd5e1;
   margin-top: 10px;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .timeline-label.is-muted {
@@ -351,5 +351,6 @@
     height: 156px;
   }
 }
+
 
 
