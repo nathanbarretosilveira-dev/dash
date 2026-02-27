@@ -41,6 +41,7 @@ const Charts = ({ data }) => {
     percentDepois,
     maxTimeline,
     filteredTimeline,
+    peakLevelByIndex,
     produtividadePorUsuario
   } = useMemo(() => {
     const cancelamentosPorUsuario = new Map(
@@ -74,7 +75,17 @@ const Charts = ({ data }) => {
       });
 
     const mTimeline = Math.max(1, ...timelineFiltrada.map((i) => toNumber(i?.valorEfetivo)));
+    const destaquesTimeline = timelineFiltrada
+        .map((item, index) => ({ index, valor: toNumber(item?.valorEfetivo) }))
+        .filter((item) => item.valor > 0)
+        .sort((a, b) => b.valor - a.valor || a.index - b.index)
+        .slice(0, 2)
+        .map((item) => item.index);
 
+    const destaquePorIndice = new Map(
+      destaquesTimeline.map((index, posicao) => [index, posicao + 1])
+    );
+    
     return {
       maxEmissoes: mEmissoes,
       maxCancelamentos: mCancelamentos,
@@ -83,6 +94,7 @@ const Charts = ({ data }) => {
       percentDepois: pDepois,
       maxTimeline: mTimeline,
       filteredTimeline: timelineFiltrada,
+      peakLevelByIndex: destaquePorIndice,
       produtividadePorUsuario: produtividadeUsuarios
     };
   }, [emissoes_por_usuario, cancelamentos_por_usuario, volume_por_turno, timeline]);
@@ -176,11 +188,15 @@ const Charts = ({ data }) => {
             <div className="timeline-container">
               {filteredTimeline.map((item, index) => {
                 const valor = item.valorEfetivo ?? 0;
-                const isPico = valor === maxTimeline && valor > 0;
+                const peakLevel = peakLevelByIndex.get(index);
+                const isPico = Boolean(peakLevel);
                 const alturaBarra = `${(valor / maxTimeline) * 100}%`;
 
                 return (
-                  <div key={index} className={`timeline-item ${isPico ? 'pico' : ''}`}>
+                  <div
+                    key={index}
+                    className={`timeline-item ${isPico ? 'pico' : ''} ${peakLevel === 1 ? 'pico-principal' : ''} ${peakLevel === 2 ? 'pico-secundario' : ''}`}
+                  >
                     <div className="timeline-bar-track">
                       <span className="timeline-value" style={{ bottom: `calc(${alturaBarra} + 6px)` }}>{valor}</span>
                       <div className="timeline-bar" style={{ height: alturaBarra }} />
@@ -198,6 +214,5 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
-
 
 
