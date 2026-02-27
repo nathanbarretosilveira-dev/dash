@@ -1,9 +1,9 @@
 {
-  "criado_em": "27/02/2026 09:00:28",
+  "criado_em": "27/02/2026 11:24:27",
   "resumo": {
-    "total_emissoes": 489,
-    "total_cancelamentos": 54,
-    "taxa_eficiencia": 88.96
+    "total_emissoes": 491,
+    "total_cancelamentos": 55,
+    "taxa_eficiencia": 88.8
   },
   "emissoes_por_usuario": [
     {
@@ -33,8 +33,8 @@
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 135,
-      "cancelamentos": 16
+      "emissoes": 137,
+      "cancelamentos": 17
     }
   ],
   "cancelamentos_por_usuario": [
@@ -60,12 +60,12 @@
     },
     {
       "nome": "WENDRYO.G",
-      "total": 16
+      "total": 17
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 184,
-    "depois_14h": 249
+    "antes_14h": 186,
+    "depois_14h": 248
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -156,7 +156,7 @@
     {
       "data": "18/02/26",
       "antes_14h": 10,
-      "depois_14h": 18
+      "depois_14h": 17
     },
     {
       "data": "19/02/26",
@@ -200,7 +200,7 @@
     },
     {
       "data": "27/02/26",
-      "antes_14h": 2,
+      "antes_14h": 4,
       "depois_14h": 0
     }
   ],
@@ -219,11 +219,11 @@
     },
     {
       "hora": "09:00",
-      "emissoes": 35
+      "emissoes": 36
     },
     {
       "hora": "10:00",
-      "emissoes": 31
+      "emissoes": 32
     },
     {
       "hora": "11:00",
@@ -251,7 +251,7 @@
     },
     {
       "hora": "17:00",
-      "emissoes": 33
+      "emissoes": 32
     },
     {
       "hora": "18:00",
@@ -366,8 +366,8 @@
     },
     {
       "data": "18/02/26",
-      "emissoes": 28,
-      "cancelamentos": 9
+      "emissoes": 27,
+      "cancelamentos": 10
     },
     {
       "data": "19/02/26",
@@ -411,7 +411,7 @@
     },
     {
       "data": "27/02/26",
-      "emissoes": 2,
+      "emissoes": 4,
       "cancelamentos": 0
     }
   ],
@@ -771,8 +771,8 @@
         },
         {
           "nome": "WENDRYO.G",
-          "emissoes": 9,
-          "cancelamentos": 3
+          "emissoes": 8,
+          "cancelamentos": 4
         }
       ]
     },
@@ -956,7 +956,7 @@
       "usuarios": [
         {
           "nome": "WENDRYO.G",
-          "emissoes": 2,
+          "emissoes": 4,
           "cancelamentos": 0
         }
       ]
