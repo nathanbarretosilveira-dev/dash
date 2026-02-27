@@ -57,6 +57,25 @@ const formatarDataHoraBr = (data) => {
   return `${parts.day}/${parts.month}/${parts.year} ${parts.hour}:${parts.minute}:${parts.second}`;
 };
 
+const normalizarHoraProcessamento = (valor) => {
+  const horaTexto = String(valor || '').trim();
+
+  const matchHora = horaTexto.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
+  if (matchHora) {
+    const [, hhRaw, mmRaw, ssRaw = '00'] = matchHora;
+    const hh = Number(hhRaw);
+    const mm = Number(mmRaw);
+    const ss = Number(ssRaw);
+
+    const horaValida = hh >= 0 && hh <= 23 && mm >= 0 && mm <= 59 && ss >= 0 && ss <= 59;
+    if (horaValida) {
+      return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+    }
+  }
+
+  return '00:00:00';
+};
+
 const parseDataHoraFlex = (valor) => {
   if (!valor) return null;
 
@@ -235,10 +254,7 @@ const montarDadosPlanilha = (xlsxPath) => {
     const dataObj = dataRaw ? new Date(String(dataRaw).replace(' ', 'T')) : null;
     const dataKey = dataObj && !Number.isNaN(dataObj.getTime()) ? formatarDataBr(dataObj) : 'Sem data';
 
-    let hora = String(horaRaw || '').slice(0, 8);
-    if (!/^\d{2}:\d{2}:\d{2}$/.test(hora)) {
-      hora = '00:00:00';
-    }
+    const hora = normalizarHoraProcessamento(horaRaw);
 
     registros.push({
       data: dataKey,
@@ -441,5 +457,6 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
+
 
 
