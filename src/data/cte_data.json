@@ -1,9 +1,9 @@
 {
-  "criado_em": "27/02/2026 11:24:27",
+  "criado_em": "27/02/2026 12:33:43",
   "resumo": {
-    "total_emissoes": 491,
+    "total_emissoes": 495,
     "total_cancelamentos": 55,
-    "taxa_eficiencia": 88.8
+    "taxa_eficiencia": 88.89
   },
   "emissoes_por_usuario": [
     {
@@ -33,7 +33,7 @@
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 137,
+      "emissoes": 141,
       "cancelamentos": 17
     }
   ],
@@ -64,7 +64,7 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 186,
+    "antes_14h": 190,
     "depois_14h": 248
   },
   "emissoes_por_turno_por_dia": [
@@ -200,7 +200,7 @@
     },
     {
       "data": "27/02/26",
-      "antes_14h": 4,
+      "antes_14h": 8,
       "depois_14h": 0
     }
   ],
@@ -227,11 +227,11 @@
     },
     {
       "hora": "11:00",
-      "emissoes": 41
+      "emissoes": 43
     },
     {
       "hora": "12:00",
-      "emissoes": 31
+      "emissoes": 33
     },
     {
       "hora": "13:00",
@@ -411,7 +411,7 @@
     },
     {
       "data": "27/02/26",
-      "emissoes": 4,
+      "emissoes": 8,
       "cancelamentos": 0
     }
   ],
@@ -956,7 +956,7 @@
       "usuarios": [
         {
           "nome": "WENDRYO.G",
-          "emissoes": 4,
+          "emissoes": 8,
           "cancelamentos": 0
         }
       ]
