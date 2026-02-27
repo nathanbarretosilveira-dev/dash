@@ -13,6 +13,14 @@ const getHour = (hora) => {
   return Number.isFinite(parsed) ? parsed : null;
 };
 
+const getTimelineSortHour = (hora) => {
+  const parsedHour = getHour(hora);
+  if (parsedHour === null) return null;
+
+  // Mantém a madrugada (00–06) no fim para ficar à direita de 23:00.
+  return parsedHour < 7 ? parsedHour + 24 : parsedHour;
+};
+
 const Charts = ({ data }) => {
   if (!data) return null;
 
@@ -55,10 +63,16 @@ const Charts = ({ data }) => {
     const pAntes = Math.round((antesTurno / tTurno) * 100);
     const pDepois = Math.round((depoisTurno / tTurno) * 100);
 
-    const timelineFiltrada = timeline.filter((item) => {
-      const hora = getHour(item?.hora);
-      return hora !== null && hora >= 0 && hora <= 23;
-    });
+    const timelineFiltrada = timeline
+      .filter((item) => {
+        const hora = getHour(item?.hora);
+        return hora !== null && hora >= 0 && hora <= 23;
+      })
+      .sort((a, b) => {
+        const horaA = getTimelineSortHour(a?.hora) ?? Number.POSITIVE_INFINITY;
+        const horaB = getTimelineSortHour(b?.hora) ?? Number.POSITIVE_INFINITY;
+        return horaA - horaB;
+      });
 
     const mTimeline = Math.max(1, ...timelineFiltrada.map((i) => toNumber(i?.valorEfetivo)));
 
@@ -185,4 +199,5 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
+
 
