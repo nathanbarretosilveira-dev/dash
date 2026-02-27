@@ -1,9 +1,9 @@
 {
-  "criado_em": "27/02/2026 15:23:19",
+  "criado_em": "27/02/2026 17:05:04",
   "resumo": {
-    "total_emissoes": 502,
-    "total_cancelamentos": 55,
-    "taxa_eficiencia": 89.04
+    "total_emissoes": 503,
+    "total_cancelamentos": 56,
+    "taxa_eficiencia": 88.87
   },
   "emissoes_por_usuario": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 139,
+      "emissoes": 140,
       "cancelamentos": 10
     },
     {
@@ -34,7 +34,7 @@
     {
       "nome": "WENDRYO.G",
       "emissoes": 143,
-      "cancelamentos": 17
+      "cancelamentos": 18
     }
   ],
   "cancelamentos_por_usuario": [
@@ -60,7 +60,7 @@
     },
     {
       "nome": "WENDRYO.G",
-      "total": 17
+      "total": 18
     }
   ],
   "emissoes_por_turno": {
@@ -191,7 +191,7 @@
     {
       "data": "25/02/26",
       "antes_14h": 11,
-      "depois_14h": 9
+      "depois_14h": 8
     },
     {
       "data": "26/02/26",
@@ -201,7 +201,7 @@
     {
       "data": "27/02/26",
       "antes_14h": 9,
-      "depois_14h": 6
+      "depois_14h": 7
     }
   ],
   "timeline_operacao": [
@@ -239,7 +239,7 @@
     },
     {
       "hora": "14:00",
-      "emissoes": 46
+      "emissoes": 45
     },
     {
       "hora": "15:00",
@@ -247,7 +247,7 @@
     },
     {
       "hora": "16:00",
-      "emissoes": 31
+      "emissoes": 32
     },
     {
       "hora": "17:00",
@@ -401,8 +401,8 @@
     },
     {
       "data": "25/02/26",
-      "emissoes": 20,
-      "cancelamentos": 3
+      "emissoes": 19,
+      "cancelamentos": 4
     },
     {
       "data": "26/02/26",
@@ -411,7 +411,7 @@
     },
     {
       "data": "27/02/26",
-      "emissoes": 15,
+      "emissoes": 16,
       "cancelamentos": 0
     }
   ],
@@ -921,8 +921,8 @@
         },
         {
           "nome": "WENDRYO.G",
-          "emissoes": 8,
-          "cancelamentos": 2
+          "emissoes": 7,
+          "cancelamentos": 3
         }
       ]
     },
@@ -961,7 +961,7 @@
         },
         {
           "nome": "CLEITON.C",
-          "emissoes": 2,
+          "emissoes": 3,
           "cancelamentos": 0
         },
         {
