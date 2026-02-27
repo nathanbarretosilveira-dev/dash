@@ -275,23 +275,22 @@ const montarDadosPlanilha = (xlsxPath) => {
 
     if (!porDiaTurno.has(r.data)) porDiaTurno.set(r.data, { data: r.data, antes_14h: 0, depois_14h: 0 });
 
-    timelineOperacaoDetalhada.push({
-      data: r.data,
-      hora: r.hora,
-      usuario: r.criadoPor,
-      estornado: r.estornado
-    });
-
     const horaNum = Number(r.hora.split(':')[0]);
     const horaValida = Number.isFinite(horaNum);
 
-    if (horaValida && r.hora !== '00:00:00') {
-      const faixaHora = `${String(horaNum).padStart(2, '0')}:00`;
-      timelineHora.set(faixaHora, (timelineHora.get(faixaHora) || 0) + 1);
-    }
-
     if (!r.estornado) {
       const t = porDiaTurno.get(r.data);
+
+      timelineOperacaoDetalhada.push({
+        data: r.data,
+        hora: r.hora,
+        usuario: r.criadoPor
+      });
+
+      if (horaValida) {
+        const faixaHora = `${String(horaNum).padStart(2, '0')}:00`;
+        timelineHora.set(faixaHora, (timelineHora.get(faixaHora) || 0) + 1);
+      }
 
       if (!horaValida || r.hora === '00:00:00') {
         // Sem horário confiável: mantém contabilização no turno da manhã para preservar total efetivo.
@@ -442,7 +441,5 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
-
-
 
 
