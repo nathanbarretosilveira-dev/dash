@@ -1,14 +1,14 @@
 {
-  "criado_em": "02/03/2026 08:05:16",
+  "criado_em": "02/03/2026 12:59:43",
   "resumo": {
-    "total_emissoes": 531,
-    "total_cancelamentos": 59,
-    "taxa_eficiencia": 88.89
+    "total_emissoes": 537,
+    "total_cancelamentos": 60,
+    "taxa_eficiencia": 88.83
   },
   "emissoes_por_usuario": [
     {
       "nome": "ANA.V",
-      "emissoes": 100,
+      "emissoes": 102,
       "cancelamentos": 13
     },
     {
@@ -33,8 +33,8 @@
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 146,
-      "cancelamentos": 18
+      "emissoes": 150,
+      "cancelamentos": 19
     }
   ],
   "cancelamentos_por_usuario": [
@@ -60,11 +60,11 @@
     },
     {
       "nome": "WENDRYO.G",
-      "total": 18
+      "total": 19
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 200,
+    "antes_14h": 205,
     "depois_14h": 270
   },
   "emissoes_por_turno_por_dia": [
@@ -212,6 +212,11 @@
       "data": "01/03/26",
       "antes_14h": 2,
       "depois_14h": 1
+    },
+    {
+      "data": "02/03/26",
+      "antes_14h": 5,
+      "depois_14h": 0
     }
   ],
   "timeline_operacao": [
@@ -229,15 +234,15 @@
     },
     {
       "hora": "09:00",
-      "emissoes": 37
+      "emissoes": 39
     },
     {
       "hora": "10:00",
-      "emissoes": 35
+      "emissoes": 36
     },
     {
       "hora": "11:00",
-      "emissoes": 44
+      "emissoes": 46
     },
     {
       "hora": "12:00",
@@ -433,6 +438,11 @@
       "data": "01/03/26",
       "emissoes": 3,
       "cancelamentos": 0
+    },
+    {
+      "data": "02/03/26",
+      "emissoes": 5,
+      "cancelamentos": 1
     }
   ],
   "emissoes_por_usuario_por_dia": [
@@ -1013,6 +1023,21 @@
           "nome": "WENDRYO.G",
           "emissoes": 3,
           "cancelamentos": 0
+        }
+      ]
+    },
+    {
+      "data": "02/03/26",
+      "usuarios": [
+        {
+          "nome": "ANA.V",
+          "emissoes": 2,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 3,
+          "cancelamentos": 1
         }
       ]
     }
