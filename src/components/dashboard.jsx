@@ -116,6 +116,14 @@ const montarJanelaTendencia = (dadosCompletos, diasFiltrados) => {
 const TV_FILTER_SWITCH_MS = 1 * 60 * 1000;
 const TV_RELOAD_MS = 10 * 60 * 1000;
 const TV_MODE_FILTER_KEY = 'dashboard_tv_active_filter';
+const TV_FILTER_SEQUENCE = ['todos', 'mes_atual', 'hoje'];
+
+const obterMesAtualBrasilia = () => {
+  return new Intl.DateTimeFormat('pt-BR', {
+    timeZone: 'America/Sao_Paulo',
+    month: '2-digit'
+  }).format(new Date());
+};
 
 const Dashboard = ({ cteData = {}, isTvMode = false }) => {
   const [activeFilter, setActiveFilter] = useState('todos');
@@ -142,7 +150,10 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
     if (!isTvMode) return;
 
     const filtroSalvo = window.localStorage.getItem(TV_MODE_FILTER_KEY);
-    if (filtroSalvo === 'todos' || filtroSalvo === 'hoje') {
+    if (filtroSalvo === 'mes_atual') {
+      setActiveFilter('mes');
+      setSelectedMonth(obterMesAtualBrasilia());
+    } else if (filtroSalvo === 'todos' || filtroSalvo === 'hoje') {
       setActiveFilter(filtroSalvo);
     }
   }, [isTvMode]);
@@ -164,12 +175,22 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
     tvReloadRemainingMsRef.current = TV_RELOAD_MS;
 
     const alternarFiltrosTv = () => {
-      const proximoFiltro = activeFilterRef.current === 'todos' ? 'hoje' : 'todos';
+      const filtroAtual =
+        activeFilterRef.current === 'mes' && selectedMonth ? 'mes_atual' : activeFilterRef.current;
+      const indiceAtual = TV_FILTER_SEQUENCE.indexOf(filtroAtual);
+      const proximoFiltro = TV_FILTER_SEQUENCE[(indiceAtual + 1) % TV_FILTER_SEQUENCE.length];
 
       window.localStorage.setItem(TV_MODE_FILTER_KEY, proximoFiltro);
-      setActiveFilter(proximoFiltro);
+
+      if (proximoFiltro === 'mes_atual') {
+        setActiveFilter('mes');
+        setSelectedMonth(obterMesAtualBrasilia());
+      } else {
+        setActiveFilter(proximoFiltro);
+        setSelectedMonth('');
+      }
+
       setDateFilter('');
-      setSelectedMonth('');
       setSelectedUser('');
       setIsMonthListOpen(false);
       setIsUserListOpen(false);
@@ -196,7 +217,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
     }, 1000);
 
     return () => clearInterval(intervalo);
-  }, [isTvMode]);
+  }, [isTvMode, selectedMonth]);
 
   useEffect(() => {
     const onClickOutside = (event) => {
@@ -604,6 +625,7 @@ const Dashboard = ({ cteData = {}, isTvMode = false }) => {
 };
 
 export default Dashboard;
+
 
 
 
