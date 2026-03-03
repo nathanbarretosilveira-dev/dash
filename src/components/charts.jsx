@@ -48,14 +48,18 @@ const Charts = ({ data }) => {
       cancelamentos_por_usuario.map((item) => [item.nome, toNumber(item.total)])
     );
 
-    const produtividadeUsuarios = emissoes_por_usuario.map((item) => {
-      const emissoes = toNumber(item.emissoes);
-      const cancelamentos = cancelamentosPorUsuario.get(item.nome) || 0;
-      return {
-        ...item,
-        produtividade: Math.max(0, emissoes - cancelamentos)
-      };
-    });
+    const produtividadeUsuarios = emissoes_por_usuario
+      .map((item, index) => {
+        const emissoes = toNumber(item.emissoes);
+        const cancelamentos = cancelamentosPorUsuario.get(item.nome) || 0;
+        return {
+          ...item,
+          produtividade: Math.max(0, emissoes - cancelamentos),
+          ordemOriginal: index
+        };
+      })
+      .sort((a, b) => b.produtividade - a.produtividade || a.ordemOriginal - b.ordemOriginal)
+      .map(({ ordemOriginal, ...item }) => item);
 
     const mEmissoes = Math.max(1, ...produtividadeUsuarios.map((i) => i.produtividade));
     const mCancelamentos = Math.max(1, ...cancelamentos_por_usuario.map((i) => toNumber(i.total)));
@@ -214,5 +218,6 @@ const Charts = ({ data }) => {
 };
 
 export default Charts;
+
 
 
