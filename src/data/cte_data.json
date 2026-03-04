@@ -1,20 +1,20 @@
 {
-  "criado_em": "04/03/2026 16:15:59",
+  "criado_em": "04/03/2026 18:00:08",
   "resumo": {
-    "total_emissoes": 577,
-    "total_cancelamentos": 62,
-    "taxa_eficiencia": 89.25
+    "total_emissoes": 585,
+    "total_cancelamentos": 65,
+    "taxa_eficiencia": 88.89
   },
   "emissoes_por_usuario": [
     {
       "nome": "ANA.V",
-      "emissoes": 111,
+      "emissoes": 112,
       "cancelamentos": 14
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 169,
-      "cancelamentos": 14
+      "emissoes": 174,
+      "cancelamentos": 17
     },
     {
       "nome": "IURI.C",
@@ -33,7 +33,7 @@
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 165,
+      "emissoes": 167,
       "cancelamentos": 19
     }
   ],
@@ -44,7 +44,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "total": 14
+      "total": 17
     },
     {
       "nome": "IURI.C",
@@ -65,7 +65,7 @@
   ],
   "emissoes_por_turno": {
     "antes_14h": 221,
-    "depois_14h": 292
+    "depois_14h": 297
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -226,7 +226,7 @@
     {
       "data": "04/03/26",
       "antes_14h": 4,
-      "depois_14h": 4
+      "depois_14h": 9
     }
   ],
   "timeline_operacao": [
@@ -272,11 +272,11 @@
     },
     {
       "hora": "16:00",
-      "emissoes": 39
+      "emissoes": 41
     },
     {
       "hora": "17:00",
-      "emissoes": 37
+      "emissoes": 40
     },
     {
       "hora": "18:00",
@@ -461,8 +461,8 @@
     },
     {
       "data": "04/03/26",
-      "emissoes": 8,
-      "cancelamentos": 0
+      "emissoes": 13,
+      "cancelamentos": 3
     }
   ],
   "emissoes_por_usuario_por_dia": [
@@ -1096,17 +1096,17 @@
       "usuarios": [
         {
           "nome": "ANA.V",
-          "emissoes": 4,
+          "emissoes": 5,
           "cancelamentos": 0
         },
         {
           "nome": "CLEITON.C",
-          "emissoes": 1,
-          "cancelamentos": 0
+          "emissoes": 3,
+          "cancelamentos": 3
         },
         {
           "nome": "WENDRYO.G",
-          "emissoes": 3,
+          "emissoes": 5,
           "cancelamentos": 0
         }
       ]
