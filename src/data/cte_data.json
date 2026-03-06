@@ -1,14 +1,14 @@
 {
-  "criado_em": "06/03/2026 07:55:20",
+  "criado_em": "06/03/2026 12:58:56",
   "resumo": {
-    "total_emissoes": 622,
+    "total_emissoes": 630,
     "total_cancelamentos": 68,
-    "taxa_eficiencia": 89.07
+    "taxa_eficiencia": 89.21
   },
   "emissoes_por_usuario": [
     {
       "nome": "ANA.V",
-      "emissoes": 122,
+      "emissoes": 123,
       "cancelamentos": 14
     },
     {
@@ -28,12 +28,12 @@
     },
     {
       "nome": "NATHAN.B",
-      "emissoes": 94,
+      "emissoes": 96,
       "cancelamentos": 10
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 177,
+      "emissoes": 182,
       "cancelamentos": 20
     }
   ],
@@ -64,7 +64,7 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 232,
+    "antes_14h": 240,
     "depois_14h": 320
   },
   "emissoes_por_turno_por_dia": [
@@ -235,7 +235,7 @@
     },
     {
       "data": "06/03/26",
-      "antes_14h": 1,
+      "antes_14h": 9,
       "depois_14h": 0
     }
   ],
@@ -250,23 +250,23 @@
     },
     {
       "hora": "08:00",
-      "emissoes": 31
+      "emissoes": 32
     },
     {
       "hora": "09:00",
-      "emissoes": 44
+      "emissoes": 47
     },
     {
       "hora": "10:00",
-      "emissoes": 39
+      "emissoes": 41
     },
     {
       "hora": "11:00",
-      "emissoes": 50
+      "emissoes": 51
     },
     {
       "hora": "12:00",
-      "emissoes": 38
+      "emissoes": 39
     },
     {
       "hora": "13:00",
@@ -481,7 +481,7 @@
     },
     {
       "data": "06/03/26",
-      "emissoes": 1,
+      "emissoes": 9,
       "cancelamentos": 0
     }
   ],
@@ -1160,8 +1160,18 @@
       "data": "06/03/26",
       "usuarios": [
         {
-          "nome": "WENDRYO.G",
+          "nome": "ANA.V",
           "emissoes": 1,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "NATHAN.B",
+          "emissoes": 2,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 6,
           "cancelamentos": 0
         }
       ]
