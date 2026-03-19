@@ -1,9 +1,9 @@
 {
-  "criado_em": "18/03/2026 18:35:19",
+  "criado_em": "19/03/2026 08:12:31",
   "resumo": {
-    "total_emissoes": 895,
-    "total_cancelamentos": 89,
-    "taxa_eficiencia": 90.06
+    "total_emissoes": 903,
+    "total_cancelamentos": 90,
+    "taxa_eficiencia": 90.03
   },
   "emissoes_por_usuario": [
     {
@@ -13,8 +13,8 @@
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 300,
-      "cancelamentos": 25
+      "emissoes": 306,
+      "cancelamentos": 26
     },
     {
       "nome": "IURI.C",
@@ -23,7 +23,7 @@
     },
     {
       "nome": "MANOEL.F",
-      "emissoes": 38,
+      "emissoes": 40,
       "cancelamentos": 4
     },
     {
@@ -44,7 +44,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "total": 25
+      "total": 26
     },
     {
       "nome": "IURI.C",
@@ -65,7 +65,7 @@
   ],
   "emissoes_por_turno": {
     "antes_14h": 333,
-    "depois_14h": 470
+    "depois_14h": 477
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -296,7 +296,7 @@
     {
       "data": "18/03/26",
       "antes_14h": 17,
-      "depois_14h": 11
+      "depois_14h": 18
     }
   ],
   "timeline_operacao": [
@@ -350,23 +350,23 @@
     },
     {
       "hora": "18:00",
-      "emissoes": 59
+      "emissoes": 60
     },
     {
       "hora": "19:00",
-      "emissoes": 30
-    },
-    {
-      "hora": "20:00",
       "emissoes": 33
     },
     {
-      "hora": "21:00",
+      "hora": "20:00",
       "emissoes": 34
     },
     {
+      "hora": "21:00",
+      "emissoes": 35
+    },
+    {
       "hora": "22:00",
-      "emissoes": 26
+      "emissoes": 27
     },
     {
       "hora": "23:00",
@@ -601,8 +601,8 @@
     },
     {
       "data": "18/03/26",
-      "emissoes": 28,
-      "cancelamentos": 1
+      "emissoes": 35,
+      "cancelamentos": 2
     }
   ],
   "emissoes_por_usuario_por_dia": [
@@ -1511,7 +1511,12 @@
         },
         {
           "nome": "CLEITON.C",
-          "emissoes": 7,
+          "emissoes": 12,
+          "cancelamentos": 1
+        },
+        {
+          "nome": "MANOEL.F",
+          "emissoes": 2,
           "cancelamentos": 0
         },
         {
