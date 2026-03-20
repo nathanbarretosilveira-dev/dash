@@ -1,19 +1,19 @@
 {
-  "criado_em": "19/03/2026 16:33:32",
+  "criado_em": "20/03/2026 08:06:24",
   "resumo": {
-    "total_emissoes": 916,
+    "total_emissoes": 927,
     "total_cancelamentos": 91,
-    "taxa_eficiencia": 90.07
+    "taxa_eficiencia": 90.18
   },
   "emissoes_por_usuario": [
     {
       "nome": "ANA.V",
-      "emissoes": 155,
+      "emissoes": 156,
       "cancelamentos": 17
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 308,
+      "emissoes": 315,
       "cancelamentos": 27
     },
     {
@@ -28,12 +28,12 @@
     },
     {
       "nome": "NATHAN.B",
-      "emissoes": 102,
+      "emissoes": 103,
       "cancelamentos": 11
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 306,
+      "emissoes": 308,
       "cancelamentos": 31
     }
   ],
@@ -64,8 +64,8 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 341,
-    "depois_14h": 481
+    "antes_14h": 343,
+    "depois_14h": 490
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -301,13 +301,18 @@
     {
       "data": "19/03/26",
       "antes_14h": 8,
-      "depois_14h": 5
+      "depois_14h": 14
+    },
+    {
+      "data": "20/03/26",
+      "antes_14h": 2,
+      "depois_14h": 0
     }
   ],
   "timeline_operacao": [
     {
       "hora": "06:00",
-      "emissoes": 6
+      "emissoes": 8
     },
     {
       "hora": "07:00",
@@ -347,15 +352,15 @@
     },
     {
       "hora": "16:00",
-      "emissoes": 70
+      "emissoes": 71
     },
     {
       "hora": "17:00",
-      "emissoes": 64
+      "emissoes": 67
     },
     {
       "hora": "18:00",
-      "emissoes": 60
+      "emissoes": 63
     },
     {
       "hora": "19:00",
@@ -367,7 +372,7 @@
     },
     {
       "hora": "21:00",
-      "emissoes": 35
+      "emissoes": 37
     },
     {
       "hora": "22:00",
@@ -611,7 +616,12 @@
     },
     {
       "data": "19/03/26",
-      "emissoes": 13,
+      "emissoes": 22,
+      "cancelamentos": 0
+    },
+    {
+      "data": "20/03/26",
+      "emissoes": 2,
       "cancelamentos": 0
     }
   ],
@@ -1546,22 +1556,32 @@
       "usuarios": [
         {
           "nome": "ANA.V",
-          "emissoes": 1,
-          "cancelamentos": 0
-        },
-        {
-          "nome": "CLEITON.C",
           "emissoes": 2,
           "cancelamentos": 0
         },
         {
+          "nome": "CLEITON.C",
+          "emissoes": 9,
+          "cancelamentos": 0
+        },
+        {
           "nome": "NATHAN.B",
-          "emissoes": 3,
+          "emissoes": 4,
           "cancelamentos": 0
         },
         {
           "nome": "WENDRYO.G",
           "emissoes": 7,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
+      "data": "20/03/26",
+      "usuarios": [
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 2,
           "cancelamentos": 0
         }
       ]
