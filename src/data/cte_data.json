@@ -1,9 +1,9 @@
 {
-  "criado_em": "24/03/2026 17:41:45",
+  "criado_em": "25/03/2026 08:06:16",
   "resumo": {
-    "total_emissoes": 1027,
+    "total_emissoes": 1033,
     "total_cancelamentos": 94,
-    "taxa_eficiencia": 90.85
+    "taxa_eficiencia": 90.9
   },
   "emissoes_por_usuario": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 359,
+      "emissoes": 365,
       "cancelamentos": 27
     },
     {
@@ -65,7 +65,7 @@
   ],
   "emissoes_por_turno": {
     "antes_14h": 387,
-    "depois_14h": 543
+    "depois_14h": 549
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -326,7 +326,7 @@
     {
       "data": "24/03/26",
       "antes_14h": 14,
-      "depois_14h": 9
+      "depois_14h": 15
     }
   ],
   "timeline_operacao": [
@@ -376,11 +376,11 @@
     },
     {
       "hora": "17:00",
-      "emissoes": 76
+      "emissoes": 77
     },
     {
       "hora": "18:00",
-      "emissoes": 65
+      "emissoes": 68
     },
     {
       "hora": "19:00",
@@ -388,7 +388,7 @@
     },
     {
       "hora": "20:00",
-      "emissoes": 39
+      "emissoes": 41
     },
     {
       "hora": "21:00",
@@ -661,7 +661,7 @@
     },
     {
       "data": "24/03/26",
-      "emissoes": 23,
+      "emissoes": 29,
       "cancelamentos": 1
     }
   ],
@@ -1696,7 +1696,7 @@
         },
         {
           "nome": "CLEITON.C",
-          "emissoes": 7,
+          "emissoes": 13,
           "cancelamentos": 0
         },
         {
