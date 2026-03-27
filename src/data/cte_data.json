@@ -1,9 +1,9 @@
 {
-  "criado_em": "26/03/2026 17:32:48",
+  "criado_em": "27/03/2026 07:59:13",
   "resumo": {
-    "total_emissoes": 1083,
+    "total_emissoes": 1090,
     "total_cancelamentos": 100,
-    "taxa_eficiencia": 90.77
+    "taxa_eficiencia": 90.83
   },
   "emissoes_por_usuario": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 385,
+      "emissoes": 391,
       "cancelamentos": 31
     },
     {
@@ -33,7 +33,7 @@
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 371,
+      "emissoes": 372,
       "cancelamentos": 33
     }
   ],
@@ -64,8 +64,8 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 406,
-    "depois_14h": 573
+    "antes_14h": 407,
+    "depois_14h": 579
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -336,13 +336,18 @@
     {
       "data": "26/03/26",
       "antes_14h": 10,
-      "depois_14h": 9
+      "depois_14h": 15
+    },
+    {
+      "data": "27/03/26",
+      "antes_14h": 1,
+      "depois_14h": 0
     }
   ],
   "timeline_operacao": [
     {
       "hora": "06:00",
-      "emissoes": 10
+      "emissoes": 11
     },
     {
       "hora": "07:00",
@@ -386,11 +391,11 @@
     },
     {
       "hora": "17:00",
-      "emissoes": 79
+      "emissoes": 81
     },
     {
       "hora": "18:00",
-      "emissoes": 70
+      "emissoes": 72
     },
     {
       "hora": "19:00",
@@ -402,11 +407,11 @@
     },
     {
       "hora": "21:00",
-      "emissoes": 44
+      "emissoes": 45
     },
     {
       "hora": "22:00",
-      "emissoes": 30
+      "emissoes": 31
     },
     {
       "hora": "23:00",
@@ -681,7 +686,12 @@
     },
     {
       "data": "26/03/26",
-      "emissoes": 19,
+      "emissoes": 25,
+      "cancelamentos": 0
+    },
+    {
+      "data": "27/03/26",
+      "emissoes": 1,
       "cancelamentos": 0
     }
   ],
@@ -1766,12 +1776,22 @@
         },
         {
           "nome": "CLEITON.C",
-          "emissoes": 7,
+          "emissoes": 13,
           "cancelamentos": 0
         },
         {
           "nome": "WENDRYO.G",
           "emissoes": 9,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
+      "data": "27/03/26",
+      "usuarios": [
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 1,
           "cancelamentos": 0
         }
       ]
