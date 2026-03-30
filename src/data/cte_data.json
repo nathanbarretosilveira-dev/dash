@@ -1,20 +1,20 @@
 {
-  "criado_em": "30/03/2026 08:14:58",
+  "criado_em": "30/03/2026 17:06:22",
   "resumo": {
-    "total_emissoes": 1131,
-    "total_cancelamentos": 101,
-    "taxa_eficiencia": 91.07
+    "total_emissoes": 1147,
+    "total_cancelamentos": 104,
+    "taxa_eficiencia": 90.93
   },
   "emissoes_por_usuario": [
     {
       "nome": "ANA.V",
-      "emissoes": 179,
-      "cancelamentos": 18
+      "emissoes": 180,
+      "cancelamentos": 20
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 413,
-      "cancelamentos": 31
+      "emissoes": 417,
+      "cancelamentos": 32
     },
     {
       "nome": "IURI.C",
@@ -28,23 +28,23 @@
     },
     {
       "nome": "NATHAN.B",
-      "emissoes": 107,
+      "emissoes": 109,
       "cancelamentos": 13
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 387,
+      "emissoes": 396,
       "cancelamentos": 34
     }
   ],
   "cancelamentos_por_usuario": [
     {
       "nome": "ANA.V",
-      "total": 18
+      "total": 20
     },
     {
       "nome": "CLEITON.C",
-      "total": 31
+      "total": 32
     },
     {
       "nome": "IURI.C",
@@ -64,8 +64,8 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 425,
-    "depois_14h": 601
+    "antes_14h": 431,
+    "depois_14h": 608
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -345,18 +345,18 @@
     },
     {
       "data": "28/03/26",
-      "antes_14h": 10,
+      "antes_14h": 9,
       "depois_14h": 11
     },
     {
       "data": "29/03/26",
-      "antes_14h": 2,
+      "antes_14h": 0,
       "depois_14h": 1
     },
     {
       "data": "30/03/26",
-      "antes_14h": 1,
-      "depois_14h": 0
+      "antes_14h": 10,
+      "depois_14h": 7
     }
   ],
   "timeline_operacao": [
@@ -374,35 +374,35 @@
     },
     {
       "hora": "09:00",
-      "emissoes": 84
+      "emissoes": 87
     },
     {
       "hora": "10:00",
-      "emissoes": 69
+      "emissoes": 71
     },
     {
       "hora": "11:00",
-      "emissoes": 81
+      "emissoes": 82
     },
     {
       "hora": "12:00",
-      "emissoes": 73
+      "emissoes": 74
     },
     {
       "hora": "13:00",
-      "emissoes": 33
+      "emissoes": 32
     },
     {
       "hora": "14:00",
-      "emissoes": 101
+      "emissoes": 105
     },
     {
       "hora": "15:00",
-      "emissoes": 85
+      "emissoes": 86
     },
     {
       "hora": "16:00",
-      "emissoes": 87
+      "emissoes": 89
     },
     {
       "hora": "17:00",
@@ -711,17 +711,17 @@
     },
     {
       "data": "28/03/26",
-      "emissoes": 21,
-      "cancelamentos": 1
+      "emissoes": 20,
+      "cancelamentos": 2
     },
     {
       "data": "29/03/26",
-      "emissoes": 3,
-      "cancelamentos": 0
+      "emissoes": 1,
+      "cancelamentos": 2
     },
     {
       "data": "30/03/26",
-      "emissoes": 1,
+      "emissoes": 17,
       "cancelamentos": 0
     }
   ],
@@ -1841,8 +1841,8 @@
       "usuarios": [
         {
           "nome": "CLEITON.C",
-          "emissoes": 14,
-          "cancelamentos": 0
+          "emissoes": 13,
+          "cancelamentos": 1
         },
         {
           "nome": "WENDRYO.G",
@@ -1856,8 +1856,8 @@
       "usuarios": [
         {
           "nome": "ANA.V",
-          "emissoes": 3,
-          "cancelamentos": 0
+          "emissoes": 1,
+          "cancelamentos": 2
         }
       ]
     },
@@ -1865,8 +1865,23 @@
       "data": "30/03/26",
       "usuarios": [
         {
-          "nome": "WENDRYO.G",
+          "nome": "ANA.V",
           "emissoes": 1,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "CLEITON.C",
+          "emissoes": 4,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "NATHAN.B",
+          "emissoes": 2,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 10,
           "cancelamentos": 0
         }
       ]
