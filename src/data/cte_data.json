@@ -1,9 +1,9 @@
 {
-  "criado_em": "01/04/2026 17:46:37",
+  "criado_em": "02/04/2026 08:05:39",
   "resumo": {
-    "total_emissoes": 1204,
+    "total_emissoes": 1206,
     "total_cancelamentos": 111,
-    "taxa_eficiencia": 90.78
+    "taxa_eficiencia": 90.8
   },
   "emissoes_por_usuario": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 444,
+      "emissoes": 445,
       "cancelamentos": 34
     },
     {
@@ -33,7 +33,7 @@
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 422,
+      "emissoes": 423,
       "cancelamentos": 39
     }
   ],
@@ -64,8 +64,8 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 448,
-    "depois_14h": 641
+    "antes_14h": 449,
+    "depois_14h": 642
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -366,7 +366,12 @@
     {
       "data": "01/04/26",
       "antes_14h": 9,
-      "depois_14h": 2
+      "depois_14h": 3
+    },
+    {
+      "data": "02/04/26",
+      "antes_14h": 1,
+      "depois_14h": 0
     }
   ],
   "timeline_operacao": [
@@ -376,7 +381,7 @@
     },
     {
       "hora": "07:00",
-      "emissoes": 20
+      "emissoes": 21
     },
     {
       "hora": "08:00",
@@ -428,7 +433,7 @@
     },
     {
       "hora": "20:00",
-      "emissoes": 47
+      "emissoes": 48
     },
     {
       "hora": "21:00",
@@ -741,8 +746,13 @@
     },
     {
       "data": "01/04/26",
-      "emissoes": 11,
+      "emissoes": 12,
       "cancelamentos": 1
+    },
+    {
+      "data": "02/04/26",
+      "emissoes": 1,
+      "cancelamentos": 0
     }
   ],
   "emissoes_por_usuario_por_dia": [
@@ -1941,13 +1951,23 @@
         },
         {
           "nome": "CLEITON.C",
-          "emissoes": 2,
+          "emissoes": 3,
           "cancelamentos": 0
         },
         {
           "nome": "WENDRYO.G",
           "emissoes": 8,
           "cancelamentos": 1
+        }
+      ]
+    },
+    {
+      "data": "02/04/26",
+      "usuarios": [
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 1,
+          "cancelamentos": 0
         }
       ]
     }
