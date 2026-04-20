@@ -1,20 +1,20 @@
 {
-  "criado_em": "17/04/2026 08:02:20",
+  "criado_em": "20/04/2026 08:13:26",
   "resumo": {
-    "total_emissoes": 1521,
-    "total_cancelamentos": 129,
-    "taxa_eficiencia": 91.52
+    "total_emissoes": 1563,
+    "total_cancelamentos": 130,
+    "taxa_eficiencia": 91.68
   },
   "emissoes_por_usuario": [
     {
       "nome": "ANA.V",
-      "emissoes": 209,
+      "emissoes": 212,
       "cancelamentos": 21
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 595,
-      "cancelamentos": 40
+      "emissoes": 616,
+      "cancelamentos": 41
     },
     {
       "nome": "IURI.C",
@@ -28,12 +28,12 @@
     },
     {
       "nome": "NATHAN.B",
-      "emissoes": 127,
+      "emissoes": 130,
       "cancelamentos": 17
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 545,
+      "emissoes": 560,
       "cancelamentos": 46
     }
   ],
@@ -44,7 +44,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "total": 40
+      "total": 41
     },
     {
       "nome": "IURI.C",
@@ -64,8 +64,8 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 568,
-    "depois_14h": 820
+    "antes_14h": 587,
+    "depois_14h": 842
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -445,7 +445,17 @@
     },
     {
       "data": "17/04/26",
-      "antes_14h": 1,
+      "antes_14h": 7,
+      "depois_14h": 19
+    },
+    {
+      "data": "18/04/26",
+      "antes_14h": 10,
+      "depois_14h": 3
+    },
+    {
+      "data": "19/04/26",
+      "antes_14h": 3,
       "depois_14h": 0
     }
   ],
@@ -456,55 +466,55 @@
     },
     {
       "hora": "07:00",
-      "emissoes": 30
+      "emissoes": 31
     },
     {
       "hora": "08:00",
-      "emissoes": 73
+      "emissoes": 75
     },
     {
       "hora": "09:00",
-      "emissoes": 108
-    },
-    {
-      "hora": "10:00",
-      "emissoes": 93
-    },
-    {
-      "hora": "11:00",
-      "emissoes": 107
-    },
-    {
-      "hora": "12:00",
-      "emissoes": 95
-    },
-    {
-      "hora": "13:00",
-      "emissoes": 40
-    },
-    {
-      "hora": "14:00",
-      "emissoes": 132
-    },
-    {
-      "hora": "15:00",
-      "emissoes": 111
-    },
-    {
-      "hora": "16:00",
-      "emissoes": 113
-    },
-    {
-      "hora": "17:00",
       "emissoes": 114
     },
     {
+      "hora": "10:00",
+      "emissoes": 95
+    },
+    {
+      "hora": "11:00",
+      "emissoes": 111
+    },
+    {
+      "hora": "12:00",
+      "emissoes": 98
+    },
+    {
+      "hora": "13:00",
+      "emissoes": 41
+    },
+    {
+      "hora": "14:00",
+      "emissoes": 137
+    },
+    {
+      "hora": "15:00",
+      "emissoes": 117
+    },
+    {
+      "hora": "16:00",
+      "emissoes": 116
+    },
+    {
+      "hora": "17:00",
+      "emissoes": 118
+    },
+    {
       "hora": "18:00",
-      "emissoes": 104
+      "emissoes": 107
     },
     {
       "hora": "19:00",
-      "emissoes": 60
+      "emissoes": 61
     },
     {
       "hora": "20:00",
@@ -901,7 +911,17 @@
     },
     {
       "data": "17/04/26",
-      "emissoes": 1,
+      "emissoes": 26,
+      "cancelamentos": 0
+    },
+    {
+      "data": "18/04/26",
+      "emissoes": 13,
+      "cancelamentos": 1
+    },
+    {
+      "data": "19/04/26",
+      "emissoes": 3,
       "cancelamentos": 0
     }
   ],
@@ -2385,8 +2405,43 @@
       "data": "17/04/26",
       "usuarios": [
         {
+          "nome": "CLEITON.C",
+          "emissoes": 12,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "NATHAN.B",
+          "emissoes": 3,
+          "cancelamentos": 0
+        },
+        {
           "nome": "WENDRYO.G",
-          "emissoes": 1,
+          "emissoes": 11,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
+      "data": "18/04/26",
+      "usuarios": [
+        {
+          "nome": "CLEITON.C",
+          "emissoes": 8,
+          "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 5,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
+      "data": "19/04/26",
+      "usuarios": [
+        {
+          "nome": "ANA.V",
+          "emissoes": 3,
           "cancelamentos": 0
         }
       ]
