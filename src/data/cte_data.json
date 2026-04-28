@@ -1,14 +1,14 @@
 {
-  "criado_em": "28/04/2026 08:10:24",
+  "criado_em": "28/04/2026 14:13:41",
   "resumo": {
-    "total_emissoes": 1715,
+    "total_emissoes": 1719,
     "total_cancelamentos": 138,
-    "taxa_eficiencia": 91.95
+    "taxa_eficiencia": 91.97
   },
   "emissoes_por_usuario": [
     {
       "nome": "ANA.V",
-      "emissoes": 228,
+      "emissoes": 229,
       "cancelamentos": 22
     },
     {
@@ -33,7 +33,7 @@
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 615,
+      "emissoes": 618,
       "cancelamentos": 52
     }
   ],
@@ -64,7 +64,7 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 653,
+    "antes_14h": 657,
     "depois_14h": 919
   },
   "emissoes_por_turno_por_dia": [
@@ -497,6 +497,11 @@
       "data": "27/04/26",
       "antes_14h": 7,
       "depois_14h": 19
+    },
+    {
+      "data": "28/04/26",
+      "antes_14h": 4,
+      "depois_14h": 0
     }
   ],
   "timeline_operacao": [
@@ -514,11 +519,11 @@
     },
     {
       "hora": "09:00",
-      "emissoes": 124
+      "emissoes": 125
     },
     {
       "hora": "10:00",
-      "emissoes": 104
+      "emissoes": 105
     },
     {
       "hora": "11:00",
@@ -526,11 +531,11 @@
     },
     {
       "hora": "12:00",
-      "emissoes": 113
+      "emissoes": 114
     },
     {
       "hora": "13:00",
-      "emissoes": 46
+      "emissoes": 47
     },
     {
       "hora": "14:00",
@@ -1002,6 +1007,11 @@
     {
       "data": "27/04/26",
       "emissoes": 26,
+      "cancelamentos": 0
+    },
+    {
+      "data": "28/04/26",
+      "emissoes": 4,
       "cancelamentos": 0
     }
   ],
@@ -2667,6 +2677,21 @@
         {
           "nome": "WENDRYO.G",
           "emissoes": 5,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
+      "data": "28/04/26",
+      "usuarios": [
+        {
+          "nome": "ANA.V",
+          "emissoes": 1,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 3,
           "cancelamentos": 0
         }
       ]
