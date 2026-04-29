@@ -1,19 +1,19 @@
 {
-  "criado_em": "29/04/2026 08:15:02",
+  "criado_em": "29/04/2026 14:46:58",
   "resumo": {
-    "total_emissoes": 1732,
+    "total_emissoes": 1741,
     "total_cancelamentos": 138,
-    "taxa_eficiencia": 92.03
+    "taxa_eficiencia": 92.07
   },
   "emissoes_por_usuario": [
     {
       "nome": "ANA.V",
-      "emissoes": 229,
+      "emissoes": 231,
       "cancelamentos": 22
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 685,
+      "emissoes": 687,
       "cancelamentos": 42
     },
     {
@@ -33,7 +33,7 @@
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 623,
+      "emissoes": 628,
       "cancelamentos": 52
     }
   ],
@@ -64,8 +64,8 @@
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 662,
-    "depois_14h": 927
+    "antes_14h": 668,
+    "depois_14h": 930
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -505,8 +505,8 @@
     },
     {
       "data": "29/04/26",
-      "antes_14h": 5,
-      "depois_14h": 0
+      "antes_14h": 11,
+      "depois_14h": 3
     }
   ],
   "timeline_operacao": [
@@ -520,11 +520,11 @@
     },
     {
       "hora": "08:00",
-      "emissoes": 84
+      "emissoes": 85
     },
     {
       "hora": "09:00",
-      "emissoes": 125
+      "emissoes": 127
     },
     {
       "hora": "10:00",
@@ -540,11 +540,11 @@
     },
     {
       "hora": "13:00",
-      "emissoes": 47
+      "emissoes": 50
     },
     {
       "hora": "14:00",
-      "emissoes": 153
+      "emissoes": 156
     },
     {
       "hora": "15:00",
@@ -1021,7 +1021,7 @@
     },
     {
       "data": "29/04/26",
-      "emissoes": 5,
+      "emissoes": 14,
       "cancelamentos": 0
     }
   ],
@@ -2715,8 +2715,18 @@
       "data": "29/04/26",
       "usuarios": [
         {
+          "nome": "ANA.V",
+          "emissoes": 2,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "CLEITON.C",
+          "emissoes": 2,
+          "cancelamentos": 0
+        },
+        {
           "nome": "WENDRYO.G",
-          "emissoes": 5,
+          "emissoes": 10,
           "cancelamentos": 0
         }
       ]
