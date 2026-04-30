@@ -1,9 +1,9 @@
 {
-  "criado_em": "29/04/2026 14:46:58",
+  "criado_em": "30/04/2026 08:08:23",
   "resumo": {
-    "total_emissoes": 1741,
+    "total_emissoes": 1753,
     "total_cancelamentos": 138,
-    "taxa_eficiencia": 92.07
+    "taxa_eficiencia": 92.13
   },
   "emissoes_por_usuario": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 687,
+      "emissoes": 696,
       "cancelamentos": 42
     },
     {
@@ -33,7 +33,7 @@
     },
     {
       "nome": "WENDRYO.G",
-      "emissoes": 628,
+      "emissoes": 631,
       "cancelamentos": 52
     }
   ],
@@ -65,7 +65,7 @@
   ],
   "emissoes_por_turno": {
     "antes_14h": 668,
-    "depois_14h": 930
+    "depois_14h": 942
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -506,7 +506,7 @@
     {
       "data": "29/04/26",
       "antes_14h": 11,
-      "depois_14h": 3
+      "depois_14h": 15
     }
   ],
   "timeline_operacao": [
@@ -548,23 +548,23 @@
     },
     {
       "hora": "15:00",
-      "emissoes": 126
+      "emissoes": 130
     },
     {
       "hora": "16:00",
-      "emissoes": 134
+      "emissoes": 137
     },
     {
       "hora": "17:00",
-      "emissoes": 127
+      "emissoes": 129
     },
     {
       "hora": "18:00",
-      "emissoes": 117
+      "emissoes": 118
     },
     {
       "hora": "19:00",
-      "emissoes": 71
+      "emissoes": 72
     },
     {
       "hora": "20:00",
@@ -572,7 +572,7 @@
     },
     {
       "hora": "21:00",
-      "emissoes": 63
+      "emissoes": 64
     },
     {
       "hora": "22:00",
@@ -1021,7 +1021,7 @@
     },
     {
       "data": "29/04/26",
-      "emissoes": 14,
+      "emissoes": 26,
       "cancelamentos": 0
     }
   ],
@@ -2721,12 +2721,12 @@
         },
         {
           "nome": "CLEITON.C",
-          "emissoes": 2,
+          "emissoes": 11,
           "cancelamentos": 0
         },
         {
           "nome": "WENDRYO.G",
-          "emissoes": 10,
+          "emissoes": 13,
           "cancelamentos": 0
         }
       ]
