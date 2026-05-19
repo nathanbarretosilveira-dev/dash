@@ -1,9 +1,9 @@
 {
-  "criado_em": "18/05/2026 15:56:38",
+  "criado_em": "19/05/2026 08:21:15",
   "resumo": {
-    "total_emissoes": 2067,
-    "total_cancelamentos": 158,
-    "taxa_eficiencia": 92.36
+    "total_emissoes": 2078,
+    "total_cancelamentos": 159,
+    "taxa_eficiencia": 92.35
   },
   "emissoes_por_usuario": [
     {
@@ -13,8 +13,8 @@
     },
     {
       "nome": "CLEITON.C",
-      "emissoes": 828,
-      "cancelamentos": 49
+      "emissoes": 839,
+      "cancelamentos": 50
     },
     {
       "nome": "IURI.C",
@@ -44,7 +44,7 @@
     },
     {
       "nome": "CLEITON.C",
-      "total": 49
+      "total": 50
     },
     {
       "nome": "IURI.C",
@@ -65,7 +65,7 @@
   ],
   "emissoes_por_turno": {
     "antes_14h": 817,
-    "depois_14h": 1087
+    "depois_14h": 1097
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -596,7 +596,7 @@
     {
       "data": "18/05/26",
       "antes_14h": 2,
-      "depois_14h": 12
+      "depois_14h": 22
     }
   ],
   "timeline_operacao": [
@@ -642,23 +642,23 @@
     },
     {
       "hora": "16:00",
-      "emissoes": 154
+      "emissoes": 156
     },
     {
       "hora": "17:00",
-      "emissoes": 146
+      "emissoes": 148
     },
     {
       "hora": "18:00",
-      "emissoes": 137
+      "emissoes": 140
     },
     {
       "hora": "19:00",
-      "emissoes": 83
+      "emissoes": 84
     },
     {
       "hora": "20:00",
-      "emissoes": 73
+      "emissoes": 74
     },
     {
       "hora": "21:00",
@@ -666,7 +666,7 @@
     },
     {
       "hora": "22:00",
-      "emissoes": 55
+      "emissoes": 56
     },
     {
       "hora": "23:00",
@@ -1201,8 +1201,8 @@
     },
     {
       "data": "18/05/26",
-      "emissoes": 14,
-      "cancelamentos": 0
+      "emissoes": 24,
+      "cancelamentos": 1
     }
   ],
   "emissoes_por_usuario_por_dia": [
@@ -3226,8 +3226,8 @@
         },
         {
           "nome": "CLEITON.C",
-          "emissoes": 2,
-          "cancelamentos": 0
+          "emissoes": 12,
+          "cancelamentos": 1
         },
         {
           "nome": "NATHAN.B",
