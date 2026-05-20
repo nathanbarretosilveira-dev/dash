@@ -1,9 +1,9 @@
 {
-  "criado_em": "20/05/2026 14:43:45",
+  "criado_em": "20/05/2026 14:45:08",
   "resumo": {
-    "total_emissoes": 1414,
-    "total_cancelamentos": 101,
-    "taxa_eficiencia": 92.86
+    "total_emissoes": 2144,
+    "total_cancelamentos": 160,
+    "taxa_eficiencia": 92.54
   },
   "emissoes_por_usuario": [
     {
@@ -35,6 +35,11 @@
       "nome": "NATHAN.B",
       "emissoes": 222,
       "cancelamentos": 20
+    },
+    {
+      "nome": "WENDRYO.G",
+      "emissoes": 730,
+      "cancelamentos": 59
     }
   ],
   "cancelamentos_por_usuario": [
@@ -61,11 +66,15 @@
     {
       "nome": "NATHAN.B",
       "total": 20
+    },
+    {
+      "nome": "WENDRYO.G",
+      "total": 59
     }
   ],
   "emissoes_por_turno": {
-    "antes_14h": 364,
-    "depois_14h": 945
+    "antes_14h": 857,
+    "depois_14h": 1122
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -75,33 +84,33 @@
     },
     {
       "data": "02/02/26",
-      "antes_14h": 3,
-      "depois_14h": 10
+      "antes_14h": 5,
+      "depois_14h": 12
     },
     {
       "data": "03/02/26",
-      "antes_14h": 7,
+      "antes_14h": 8,
       "depois_14h": 16
     },
     {
       "data": "04/02/26",
-      "antes_14h": 4,
+      "antes_14h": 6,
       "depois_14h": 11
     },
     {
       "data": "05/02/26",
-      "antes_14h": 9,
-      "depois_14h": 6
+      "antes_14h": 10,
+      "depois_14h": 8
     },
     {
       "data": "06/02/26",
-      "antes_14h": 6,
+      "antes_14h": 7,
       "depois_14h": 15
     },
     {
       "data": "07/02/26",
-      "antes_14h": 1,
-      "depois_14h": 6
+      "antes_14h": 4,
+      "depois_14h": 7
     },
     {
       "data": "08/02/26",
@@ -110,28 +119,28 @@
     },
     {
       "data": "09/02/26",
-      "antes_14h": 2,
-      "depois_14h": 10
+      "antes_14h": 6,
+      "depois_14h": 15
     },
     {
       "data": "10/02/26",
-      "antes_14h": 1,
-      "depois_14h": 10
+      "antes_14h": 6,
+      "depois_14h": 14
     },
     {
       "data": "11/02/26",
-      "antes_14h": 3,
-      "depois_14h": 6
+      "antes_14h": 8,
+      "depois_14h": 8
     },
     {
       "data": "12/02/26",
-      "antes_14h": 1,
-      "depois_14h": 13
+      "antes_14h": 7,
+      "depois_14h": 17
     },
     {
       "data": "13/02/26",
-      "antes_14h": 8,
-      "depois_14h": 14
+      "antes_14h": 11,
+      "depois_14h": 15
     },
     {
       "data": "14/02/26",
@@ -145,8 +154,8 @@
     },
     {
       "data": "16/02/26",
-      "antes_14h": 2,
-      "depois_14h": 11
+      "antes_14h": 3,
+      "depois_14h": 14
     },
     {
       "data": "17/02/26",
@@ -155,23 +164,23 @@
     },
     {
       "data": "18/02/26",
-      "antes_14h": 6,
-      "depois_14h": 13
+      "antes_14h": 10,
+      "depois_14h": 17
     },
     {
       "data": "19/02/26",
-      "antes_14h": 6,
+      "antes_14h": 9,
       "depois_14h": 8
     },
     {
       "data": "20/02/26",
-      "antes_14h": 3,
-      "depois_14h": 11
+      "antes_14h": 5,
+      "depois_14h": 12
     },
     {
       "data": "21/02/26",
       "antes_14h": 9,
-      "depois_14h": 0
+      "depois_14h": 9
     },
     {
       "data": "22/02/26",
@@ -180,28 +189,28 @@
     },
     {
       "data": "23/02/26",
-      "antes_14h": 4,
-      "depois_14h": 7
+      "antes_14h": 9,
+      "depois_14h": 8
     },
     {
       "data": "24/02/26",
-      "antes_14h": 5,
-      "depois_14h": 11
+      "antes_14h": 10,
+      "depois_14h": 14
     },
     {
       "data": "25/02/26",
-      "antes_14h": 4,
+      "antes_14h": 11,
       "depois_14h": 8
     },
     {
       "data": "26/02/26",
-      "antes_14h": 3,
-      "depois_14h": 5
+      "antes_14h": 15,
+      "depois_14h": 6
     },
     {
       "data": "27/02/26",
-      "antes_14h": 0,
-      "depois_14h": 14
+      "antes_14h": 9,
+      "depois_14h": 15
     },
     {
       "data": "28/02/26",
@@ -209,34 +218,39 @@
       "depois_14h": 7
     },
     {
-      "data": "02/03/26",
+      "data": "01/03/26",
       "antes_14h": 2,
-      "depois_14h": 7
+      "depois_14h": 1
+    },
+    {
+      "data": "02/03/26",
+      "antes_14h": 6,
+      "depois_14h": 8
     },
     {
       "data": "03/03/26",
-      "antes_14h": 3,
-      "depois_14h": 8
+      "antes_14h": 11,
+      "depois_14h": 10
     },
     {
       "data": "04/03/26",
-      "antes_14h": 2,
-      "depois_14h": 8
+      "antes_14h": 4,
+      "depois_14h": 12
     },
     {
       "data": "05/03/26",
-      "antes_14h": 4,
-      "depois_14h": 19
+      "antes_14h": 10,
+      "depois_14h": 20
     },
     {
       "data": "06/03/26",
-      "antes_14h": 3,
-      "depois_14h": 9
+      "antes_14h": 9,
+      "depois_14h": 13
     },
     {
       "data": "07/03/26",
-      "antes_14h": 3,
-      "depois_14h": 9
+      "antes_14h": 8,
+      "depois_14h": 10
     },
     {
       "data": "08/03/26",
@@ -245,33 +259,33 @@
     },
     {
       "data": "09/03/26",
-      "antes_14h": 1,
-      "depois_14h": 15
+      "antes_14h": 2,
+      "depois_14h": 23
     },
     {
       "data": "10/03/26",
-      "antes_14h": 1,
-      "depois_14h": 10
-    },
-    {
-      "data": "11/03/26",
-      "antes_14h": 1,
+      "antes_14h": 9,
       "depois_14h": 11
     },
     {
+      "data": "11/03/26",
+      "antes_14h": 10,
+      "depois_14h": 13
+    },
+    {
       "data": "12/03/26",
-      "antes_14h": 3,
-      "depois_14h": 8
+      "antes_14h": 10,
+      "depois_14h": 9
     },
     {
       "data": "13/03/26",
-      "antes_14h": 1,
-      "depois_14h": 19
+      "antes_14h": 12,
+      "depois_14h": 20
     },
     {
       "data": "14/03/26",
-      "antes_14h": 7,
-      "depois_14h": 0
+      "antes_14h": 11,
+      "depois_14h": 12
     },
     {
       "data": "15/03/26",
@@ -280,28 +294,28 @@
     },
     {
       "data": "16/03/26",
-      "antes_14h": 0,
-      "depois_14h": 14
+      "antes_14h": 4,
+      "depois_14h": 16
     },
     {
       "data": "17/03/26",
-      "antes_14h": 0,
-      "depois_14h": 11
+      "antes_14h": 7,
+      "depois_14h": 12
     },
     {
       "data": "18/03/26",
-      "antes_14h": 2,
-      "depois_14h": 15
+      "antes_14h": 17,
+      "depois_14h": 17
     },
     {
       "data": "19/03/26",
-      "antes_14h": 4,
-      "depois_14h": 11
+      "antes_14h": 8,
+      "depois_14h": 14
     },
     {
       "data": "20/03/26",
-      "antes_14h": 3,
-      "depois_14h": 19
+      "antes_14h": 14,
+      "depois_14h": 23
     },
     {
       "data": "21/03/26",
@@ -309,33 +323,38 @@
       "depois_14h": 2
     },
     {
+      "data": "22/03/26",
+      "antes_14h": 0,
+      "depois_14h": 1
+    },
+    {
       "data": "23/03/26",
-      "antes_14h": 2,
-      "depois_14h": 15
+      "antes_14h": 11,
+      "depois_14h": 18
     },
     {
       "data": "24/03/26",
-      "antes_14h": 1,
-      "depois_14h": 14
+      "antes_14h": 13,
+      "depois_14h": 15
     },
     {
       "data": "25/03/26",
-      "antes_14h": 1,
-      "depois_14h": 11
+      "antes_14h": 10,
+      "depois_14h": 15
     },
     {
       "data": "26/03/26",
-      "antes_14h": 2,
-      "depois_14h": 14
+      "antes_14h": 10,
+      "depois_14h": 15
     },
     {
       "data": "27/03/26",
-      "antes_14h": 0,
-      "depois_14h": 9
+      "antes_14h": 6,
+      "depois_14h": 10
     },
     {
       "data": "28/03/26",
-      "antes_14h": 2,
+      "antes_14h": 9,
       "depois_14h": 11
     },
     {
@@ -345,23 +364,23 @@
     },
     {
       "data": "30/03/26",
-      "antes_14h": 1,
-      "depois_14h": 11
+      "antes_14h": 9,
+      "depois_14h": 14
     },
     {
       "data": "31/03/26",
-      "antes_14h": 1,
-      "depois_14h": 18
+      "antes_14h": 8,
+      "depois_14h": 23
     },
     {
       "data": "01/04/26",
-      "antes_14h": 1,
+      "antes_14h": 9,
       "depois_14h": 3
     },
     {
       "data": "02/04/26",
-      "antes_14h": 1,
-      "depois_14h": 16
+      "antes_14h": 4,
+      "depois_14h": 20
     },
     {
       "data": "03/04/26",
@@ -371,36 +390,41 @@
     {
       "data": "04/04/26",
       "antes_14h": 7,
-      "depois_14h": 10
+      "depois_14h": 11
+    },
+    {
+      "data": "05/04/26",
+      "antes_14h": 7,
+      "depois_14h": 3
     },
     {
       "data": "06/04/26",
-      "antes_14h": 0,
-      "depois_14h": 9
-    },
-    {
-      "data": "07/04/26",
-      "antes_14h": 11,
-      "depois_14h": 18
-    },
-    {
-      "data": "08/04/26",
-      "antes_14h": 0,
-      "depois_14h": 20
-    },
-    {
-      "data": "09/04/26",
-      "antes_14h": 0,
+      "antes_14h": 4,
       "depois_14h": 12
     },
     {
+      "data": "07/04/26",
+      "antes_14h": 15,
+      "depois_14h": 25
+    },
+    {
+      "data": "08/04/26",
+      "antes_14h": 11,
+      "depois_14h": 27
+    },
+    {
+      "data": "09/04/26",
+      "antes_14h": 4,
+      "depois_14h": 14
+    },
+    {
       "data": "10/04/26",
-      "antes_14h": 0,
+      "antes_14h": 9,
       "depois_14h": 7
     },
     {
       "data": "11/04/26",
-      "antes_14h": 2,
+      "antes_14h": 16,
       "depois_14h": 8
     },
     {
@@ -410,33 +434,33 @@
     },
     {
       "data": "13/04/26",
-      "antes_14h": 0,
-      "depois_14h": 7
+      "antes_14h": 3,
+      "depois_14h": 8
     },
     {
       "data": "14/04/26",
-      "antes_14h": 1,
-      "depois_14h": 16
+      "antes_14h": 12,
+      "depois_14h": 17
     },
     {
       "data": "15/04/26",
-      "antes_14h": 1,
-      "depois_14h": 10
+      "antes_14h": 5,
+      "depois_14h": 11
     },
     {
       "data": "16/04/26",
-      "antes_14h": 0,
+      "antes_14h": 11,
       "depois_14h": 10
     },
     {
       "data": "17/04/26",
-      "antes_14h": 0,
-      "depois_14h": 15
+      "antes_14h": 7,
+      "depois_14h": 19
     },
     {
       "data": "18/04/26",
-      "antes_14h": 8,
-      "depois_14h": 0
+      "antes_14h": 10,
+      "depois_14h": 3
     },
     {
       "data": "19/04/26",
@@ -445,28 +469,33 @@
     },
     {
       "data": "20/04/26",
-      "antes_14h": 1,
-      "depois_14h": 7
+      "antes_14h": 6,
+      "depois_14h": 8
+    },
+    {
+      "data": "21/04/26",
+      "antes_14h": 4,
+      "depois_14h": 6
     },
     {
       "data": "22/04/26",
-      "antes_14h": 0,
-      "depois_14h": 12
+      "antes_14h": 8,
+      "depois_14h": 13
     },
     {
       "data": "23/04/26",
-      "antes_14h": 2,
+      "antes_14h": 7,
       "depois_14h": 11
     },
     {
       "data": "24/04/26",
-      "antes_14h": 13,
-      "depois_14h": 17
+      "antes_14h": 19,
+      "depois_14h": 19
     },
     {
       "data": "25/04/26",
-      "antes_14h": 5,
-      "depois_14h": 0
+      "antes_14h": 10,
+      "depois_14h": 1
     },
     {
       "data": "26/04/26",
@@ -475,22 +504,22 @@
     },
     {
       "data": "27/04/26",
-      "antes_14h": 4,
-      "depois_14h": 17
+      "antes_14h": 7,
+      "depois_14h": 19
     },
     {
       "data": "28/04/26",
-      "antes_14h": 1,
+      "antes_14h": 4,
       "depois_14h": 8
     },
     {
       "data": "29/04/26",
-      "antes_14h": 2,
-      "depois_14h": 11
+      "antes_14h": 11,
+      "depois_14h": 15
     },
     {
       "data": "30/04/26",
-      "antes_14h": 0,
+      "antes_14h": 4,
       "depois_14h": 8
     },
     {
@@ -504,53 +533,58 @@
       "depois_14h": 4
     },
     {
+      "data": "03/05/26",
+      "antes_14h": 5,
+      "depois_14h": 0
+    },
+    {
       "data": "04/05/26",
-      "antes_14h": 0,
+      "antes_14h": 7,
       "depois_14h": 7
     },
     {
       "data": "05/05/26",
-      "antes_14h": 0,
-      "depois_14h": 13
+      "antes_14h": 5,
+      "depois_14h": 16
     },
     {
       "data": "06/05/26",
-      "antes_14h": 7,
+      "antes_14h": 8,
       "depois_14h": 12
     },
     {
       "data": "07/05/26",
-      "antes_14h": 3,
+      "antes_14h": 12,
       "depois_14h": 8
     },
     {
       "data": "08/05/26",
-      "antes_14h": 1,
-      "depois_14h": 13
+      "antes_14h": 12,
+      "depois_14h": 14
     },
     {
       "data": "09/05/26",
-      "antes_14h": 1,
+      "antes_14h": 9,
       "depois_14h": 3
     },
     {
       "data": "11/05/26",
-      "antes_14h": 2,
-      "depois_14h": 11
+      "antes_14h": 7,
+      "depois_14h": 14
     },
     {
       "data": "12/05/26",
-      "antes_14h": 0,
-      "depois_14h": 7
+      "antes_14h": 8,
+      "depois_14h": 8
     },
     {
       "data": "13/05/26",
-      "antes_14h": 1,
+      "antes_14h": 12,
       "depois_14h": 9
     },
     {
       "data": "14/05/26",
-      "antes_14h": 4,
+      "antes_14h": 12,
       "depois_14h": 14
     },
     {
@@ -581,73 +615,77 @@
     {
       "data": "20/05/26",
       "antes_14h": 32,
-      "depois_14h": 17
+      "depois_14h": 18
     }
   ],
   "timeline_operacao": [
     {
+      "hora": "06:00",
+      "emissoes": 24
+    },
+    {
       "hora": "07:00",
-      "emissoes": 4
+      "emissoes": 49
     },
     {
       "hora": "08:00",
-      "emissoes": 32
+      "emissoes": 104
     },
     {
       "hora": "09:00",
-      "emissoes": 69
+      "emissoes": 163
     },
     {
       "hora": "10:00",
-      "emissoes": 65
+      "emissoes": 141
     },
     {
       "hora": "11:00",
-      "emissoes": 79
-    },
-    {
-      "hora": "12:00",
-      "emissoes": 51
-    },
-    {
-      "hora": "13:00",
-      "emissoes": 64
-    },
-    {
-      "hora": "14:00",
       "emissoes": 159
     },
     {
+      "hora": "12:00",
+      "emissoes": 137
+    },
+    {
+      "hora": "13:00",
+      "emissoes": 80
+    },
+    {
+      "hora": "14:00",
+      "emissoes": 213
+    },
+    {
       "hora": "15:00",
-      "emissoes": 111
+      "emissoes": 154
     },
     {
       "hora": "16:00",
-      "emissoes": 131
+      "emissoes": 157
     },
     {
       "hora": "17:00",
-      "emissoes": 134
+      "emissoes": 148
     },
     {
       "hora": "18:00",
-      "emissoes": 128
+      "emissoes": 140
     },
     {
       "hora": "19:00",
-      "emissoes": 76
+      "emissoes": 84
     },
     {
       "hora": "20:00",
-      "emissoes": 66
+      "emissoes": 74
     },
     {
       "hora": "21:00",
-      "emissoes": 64
+      "emissoes": 72
     },
     {
       "hora": "22:00",
-      "emissoes": 52
+      "emissoes": 56
     },
     {
       "hora": "23:00",
@@ -662,33 +700,33 @@
     },
     {
       "data": "02/02/26",
-      "emissoes": 13,
+      "emissoes": 17,
       "cancelamentos": 1
     },
     {
       "data": "03/02/26",
-      "emissoes": 23,
+      "emissoes": 24,
       "cancelamentos": 3
     },
     {
       "data": "04/02/26",
-      "emissoes": 15,
+      "emissoes": 17,
       "cancelamentos": 3
     },
     {
       "data": "05/02/26",
-      "emissoes": 15,
+      "emissoes": 18,
       "cancelamentos": 0
     },
     {
       "data": "06/02/26",
-      "emissoes": 21,
+      "emissoes": 22,
       "cancelamentos": 1
     },
     {
       "data": "07/02/26",
-      "emissoes": 7,
-      "cancelamentos": 1
+      "emissoes": 11,
+      "cancelamentos": 2
     },
     {
       "data": "08/02/26",
@@ -697,28 +735,28 @@
     },
     {
       "data": "09/02/26",
-      "emissoes": 12,
+      "emissoes": 21,
       "cancelamentos": 0
     },
     {
       "data": "10/02/26",
-      "emissoes": 11,
+      "emissoes": 20,
       "cancelamentos": 2
     },
     {
       "data": "11/02/26",
-      "emissoes": 9,
+      "emissoes": 16,
       "cancelamentos": 1
     },
     {
       "data": "12/02/26",
-      "emissoes": 14,
+      "emissoes": 24,
       "cancelamentos": 0
     },
     {
       "data": "13/02/26",
-      "emissoes": 22,
-      "cancelamentos": 2
+      "emissoes": 26,
+      "cancelamentos": 3
     },
     {
       "data": "14/02/26",
@@ -732,7 +770,7 @@
     },
     {
       "data": "16/02/26",
-      "emissoes": 13,
+      "emissoes": 17,
       "cancelamentos": 0
     },
     {
@@ -742,23 +780,23 @@
     },
     {
       "data": "18/02/26",
-      "emissoes": 19,
-      "cancelamentos": 6
+      "emissoes": 27,
+      "cancelamentos": 10
     },
     {
       "data": "19/02/26",
-      "emissoes": 14,
-      "cancelamentos": 0
+      "emissoes": 17,
+      "cancelamentos": 2
     },
     {
       "data": "20/02/26",
-      "emissoes": 14,
-      "cancelamentos": 0
+      "emissoes": 17,
+      "cancelamentos": 1
     },
     {
       "data": "21/02/26",
-      "emissoes": 9,
-      "cancelamentos": 0
+      "emissoes": 18,
+      "cancelamentos": 1
     },
     {
       "data": "22/02/26",
@@ -767,27 +805,27 @@
     },
     {
       "data": "23/02/26",
-      "emissoes": 11,
-      "cancelamentos": 1
-    },
-    {
-      "data": "24/02/26",
-      "emissoes": 16,
+      "emissoes": 17,
       "cancelamentos": 2
     },
     {
+      "data": "24/02/26",
+      "emissoes": 24,
+      "cancelamentos": 5
+    },
+    {
       "data": "25/02/26",
-      "emissoes": 12,
-      "cancelamentos": 1
+      "emissoes": 19,
+      "cancelamentos": 4
     },
     {
       "data": "26/02/26",
-      "emissoes": 9,
-      "cancelamentos": 0
+      "emissoes": 22,
+      "cancelamentos": 1
     },
     {
       "data": "27/02/26",
-      "emissoes": 14,
+      "emissoes": 24,
       "cancelamentos": 2
     },
     {
@@ -796,34 +834,39 @@
       "cancelamentos": 1
     },
     {
+      "data": "01/03/26",
+      "emissoes": 3,
+      "cancelamentos": 0
+    },
+    {
       "data": "02/03/26",
-      "emissoes": 9,
-      "cancelamentos": 1
+      "emissoes": 14,
+      "cancelamentos": 2
     },
     {
       "data": "03/03/26",
-      "emissoes": 11,
+      "emissoes": 21,
       "cancelamentos": 1
     },
     {
       "data": "04/03/26",
-      "emissoes": 10,
-      "cancelamentos": 4
+      "emissoes": 16,
+      "cancelamentos": 5
     },
     {
       "data": "05/03/26",
-      "emissoes": 23,
+      "emissoes": 30,
       "cancelamentos": 1
     },
     {
       "data": "06/03/26",
-      "emissoes": 12,
+      "emissoes": 22,
       "cancelamentos": 0
     },
     {
       "data": "07/03/26",
-      "emissoes": 12,
-      "cancelamentos": 1
+      "emissoes": 18,
+      "cancelamentos": 2
     },
     {
       "data": "08/03/26",
@@ -832,33 +875,33 @@
     },
     {
       "data": "09/03/26",
-      "emissoes": 16,
-      "cancelamentos": 1
-    },
-    {
-      "data": "10/03/26",
-      "emissoes": 12,
+      "emissoes": 25,
       "cancelamentos": 3
     },
     {
+      "data": "10/03/26",
+      "emissoes": 21,
+      "cancelamentos": 5
+    },
+    {
       "data": "11/03/26",
-      "emissoes": 13,
-      "cancelamentos": 1
+      "emissoes": 24,
+      "cancelamentos": 5
     },
     {
       "data": "12/03/26",
-      "emissoes": 11,
+      "emissoes": 19,
       "cancelamentos": 1
     },
     {
       "data": "13/03/26",
-      "emissoes": 20,
+      "emissoes": 32,
       "cancelamentos": 1
     },
     {
       "data": "14/03/26",
-      "emissoes": 7,
-      "cancelamentos": 0
+      "emissoes": 23,
+      "cancelamentos": 1
     },
     {
       "data": "15/03/26",
@@ -867,28 +910,28 @@
     },
     {
       "data": "16/03/26",
-      "emissoes": 14,
+      "emissoes": 20,
       "cancelamentos": 0
     },
     {
       "data": "17/03/26",
-      "emissoes": 11,
+      "emissoes": 19,
       "cancelamentos": 2
     },
     {
       "data": "18/03/26",
-      "emissoes": 17,
-      "cancelamentos": 2
+      "emissoes": 34,
+      "cancelamentos": 3
     },
     {
       "data": "19/03/26",
-      "emissoes": 15,
+      "emissoes": 22,
       "cancelamentos": 0
     },
     {
       "data": "20/03/26",
-      "emissoes": 22,
-      "cancelamentos": 0
+      "emissoes": 37,
+      "cancelamentos": 1
     },
     {
       "data": "21/03/26",
@@ -896,34 +939,39 @@
       "cancelamentos": 0
     },
     {
-      "data": "23/03/26",
-      "emissoes": 17,
+      "data": "22/03/26",
+      "emissoes": 1,
       "cancelamentos": 0
     },
     {
+      "data": "23/03/26",
+      "emissoes": 29,
+      "cancelamentos": 1
+    },
+    {
       "data": "24/03/26",
-      "emissoes": 15,
+      "emissoes": 28,
       "cancelamentos": 2
     },
     {
       "data": "25/03/26",
-      "emissoes": 12,
+      "emissoes": 25,
       "cancelamentos": 5
     },
     {
       "data": "26/03/26",
-      "emissoes": 16,
+      "emissoes": 25,
       "cancelamentos": 0
     },
     {
       "data": "27/03/26",
-      "emissoes": 9,
+      "emissoes": 16,
       "cancelamentos": 0
     },
     {
       "data": "28/03/26",
-      "emissoes": 13,
-      "cancelamentos": 1
+      "emissoes": 20,
+      "cancelamentos": 2
     },
     {
       "data": "29/03/26",
@@ -932,23 +980,23 @@
     },
     {
       "data": "30/03/26",
-      "emissoes": 12,
+      "emissoes": 23,
       "cancelamentos": 2
     },
     {
       "data": "31/03/26",
-      "emissoes": 19,
-      "cancelamentos": 2
+      "emissoes": 31,
+      "cancelamentos": 6
     },
     {
       "data": "01/04/26",
-      "emissoes": 4,
-      "cancelamentos": 0
+      "emissoes": 12,
+      "cancelamentos": 1
     },
     {
       "data": "02/04/26",
-      "emissoes": 17,
-      "cancelamentos": 3
+      "emissoes": 24,
+      "cancelamentos": 5
     },
     {
       "data": "03/04/26",
@@ -957,37 +1005,42 @@
     },
     {
       "data": "04/04/26",
-      "emissoes": 17,
+      "emissoes": 18,
+      "cancelamentos": 1
+    },
+    {
+      "data": "05/04/26",
+      "emissoes": 10,
       "cancelamentos": 1
     },
     {
       "data": "06/04/26",
-      "emissoes": 9,
+      "emissoes": 16,
       "cancelamentos": 0
     },
     {
       "data": "07/04/26",
-      "emissoes": 29,
+      "emissoes": 40,
       "cancelamentos": 1
     },
     {
       "data": "08/04/26",
-      "emissoes": 20,
-      "cancelamentos": 0
+      "emissoes": 38,
+      "cancelamentos": 1
     },
     {
       "data": "09/04/26",
-      "emissoes": 12,
-      "cancelamentos": 0
+      "emissoes": 18,
+      "cancelamentos": 1
     },
     {
       "data": "10/04/26",
-      "emissoes": 7,
-      "cancelamentos": 0
+      "emissoes": 16,
+      "cancelamentos": 2
     },
     {
       "data": "11/04/26",
-      "emissoes": 10,
+      "emissoes": 24,
       "cancelamentos": 0
     },
     {
@@ -997,32 +1050,32 @@
     },
     {
       "data": "13/04/26",
-      "emissoes": 7,
+      "emissoes": 11,
       "cancelamentos": 3
     },
     {
       "data": "14/04/26",
-      "emissoes": 17,
+      "emissoes": 29,
       "cancelamentos": 0
     },
     {
       "data": "15/04/26",
-      "emissoes": 11,
+      "emissoes": 16,
       "cancelamentos": 0
     },
     {
       "data": "16/04/26",
-      "emissoes": 10,
+      "emissoes": 21,
       "cancelamentos": 0
     },
     {
       "data": "17/04/26",
-      "emissoes": 15,
+      "emissoes": 26,
       "cancelamentos": 0
     },
     {
       "data": "18/04/26",
-      "emissoes": 8,
+      "emissoes": 13,
       "cancelamentos": 1
     },
     {
@@ -1032,28 +1085,33 @@
     },
     {
       "data": "20/04/26",
-      "emissoes": 8,
+      "emissoes": 14,
+      "cancelamentos": 0
+    },
+    {
+      "data": "21/04/26",
+      "emissoes": 10,
       "cancelamentos": 0
     },
     {
       "data": "22/04/26",
-      "emissoes": 12,
-      "cancelamentos": 0
+      "emissoes": 21,
+      "cancelamentos": 1
     },
     {
       "data": "23/04/26",
-      "emissoes": 13,
-      "cancelamentos": 0
+      "emissoes": 18,
+      "cancelamentos": 1
     },
     {
       "data": "24/04/26",
-      "emissoes": 30,
-      "cancelamentos": 1
+      "emissoes": 38,
+      "cancelamentos": 4
     },
     {
       "data": "25/04/26",
-      "emissoes": 5,
-      "cancelamentos": 1
+      "emissoes": 11,
+      "cancelamentos": 2
     },
     {
       "data": "26/04/26",
@@ -1062,22 +1120,22 @@
     },
     {
       "data": "27/04/26",
-      "emissoes": 21,
+      "emissoes": 26,
       "cancelamentos": 0
     },
     {
       "data": "28/04/26",
-      "emissoes": 9,
+      "emissoes": 12,
       "cancelamentos": 0
     },
     {
       "data": "29/04/26",
-      "emissoes": 13,
+      "emissoes": 26,
       "cancelamentos": 0
     },
     {
       "data": "30/04/26",
-      "emissoes": 8,
+      "emissoes": 12,
       "cancelamentos": 4
     },
     {
@@ -1091,53 +1149,58 @@
       "cancelamentos": 2
     },
     {
-      "data": "04/05/26",
-      "emissoes": 7,
+      "data": "03/05/26",
+      "emissoes": 5,
       "cancelamentos": 0
     },
     {
+      "data": "04/05/26",
+      "emissoes": 14,
+      "cancelamentos": 2
+    },
+    {
       "data": "05/05/26",
-      "emissoes": 13,
+      "emissoes": 21,
       "cancelamentos": 0
     },
     {
       "data": "06/05/26",
-      "emissoes": 19,
+      "emissoes": 20,
       "cancelamentos": 2
     },
     {
       "data": "07/05/26",
-      "emissoes": 11,
+      "emissoes": 20,
       "cancelamentos": 0
     },
     {
       "data": "08/05/26",
-      "emissoes": 14,
-      "cancelamentos": 1
+      "emissoes": 26,
+      "cancelamentos": 2
     },
     {
       "data": "09/05/26",
-      "emissoes": 4,
-      "cancelamentos": 0
+      "emissoes": 12,
+      "cancelamentos": 1
     },
     {
       "data": "11/05/26",
-      "emissoes": 13,
+      "emissoes": 21,
       "cancelamentos": 0
     },
     {
       "data": "12/05/26",
-      "emissoes": 7,
-      "cancelamentos": 1
+      "emissoes": 16,
+      "cancelamentos": 2
     },
     {
       "data": "13/05/26",
-      "emissoes": 10,
-      "cancelamentos": 1
+      "emissoes": 23,
+      "cancelamentos": 3
     },
     {
       "data": "14/05/26",
-      "emissoes": 18,
+      "emissoes": 26,
       "cancelamentos": 1
     },
     {
@@ -1209,6 +1272,11 @@
           "nome": "NATHAN.B",
           "emissoes": 6,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 4,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1224,6 +1292,11 @@
           "nome": "NATHAN.B",
           "emissoes": 22,
           "cancelamentos": 3
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 1,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1239,6 +1312,11 @@
           "nome": "NATHAN.B",
           "emissoes": 14,
           "cancelamentos": 3
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 2,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1253,6 +1331,11 @@
         {
           "nome": "NATHAN.B",
           "emissoes": 14,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 3,
           "cancelamentos": 0
         }
       ]
@@ -1269,6 +1352,11 @@
           "nome": "NATHAN.B",
           "emissoes": 14,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 1,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1283,6 +1371,11 @@
         {
           "nome": "NATHAN.B",
           "emissoes": 3,
+          "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 4,
           "cancelamentos": 1
         }
       ]
@@ -1314,6 +1407,11 @@
           "nome": "NATHAN.B",
           "emissoes": 3,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 9,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1334,6 +1432,11 @@
           "nome": "NATHAN.B",
           "emissoes": 2,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 9,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1344,6 +1447,11 @@
           "nome": "CLEITON.C",
           "emissoes": 9,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 7,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1363,6 +1471,11 @@
         {
           "nome": "MANOEL.F",
           "emissoes": 2,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 10,
           "cancelamentos": 0
         }
       ]
@@ -1384,6 +1497,11 @@
           "nome": "MANOEL.F",
           "emissoes": 3,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 4,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1434,6 +1552,11 @@
           "nome": "CLEITON.C",
           "emissoes": 9,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 4,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1464,6 +1587,11 @@
           "nome": "CLEITON.C",
           "emissoes": 13,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
+          "cancelamentos": 4
         }
       ]
     },
@@ -1484,6 +1612,11 @@
           "nome": "MANOEL.F",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 3,
+          "cancelamentos": 2
         }
       ]
     },
@@ -1499,6 +1632,11 @@
           "nome": "CLEITON.C",
           "emissoes": 9,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 3,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1514,6 +1652,11 @@
           "nome": "MANOEL.F",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 9,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1549,6 +1692,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 6,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1564,6 +1712,11 @@
           "nome": "CLEITON.C",
           "emissoes": 7,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
+          "cancelamentos": 3
         }
       ]
     },
@@ -1584,6 +1737,11 @@
           "nome": "MANOEL.F",
           "emissoes": 1,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 7,
+          "cancelamentos": 3
         }
       ]
     },
@@ -1604,6 +1762,11 @@
           "nome": "MANOEL.F",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 13,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1619,6 +1782,11 @@
           "nome": "CLEITON.C",
           "emissoes": 10,
           "cancelamentos": 2
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 10,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1638,6 +1806,16 @@
       ]
     },
     {
+      "data": "01/03/26",
+      "usuarios": [
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 3,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
       "data": "02/03/26",
       "usuarios": [
         {
@@ -1647,6 +1825,11 @@
         },
         {
           "nome": "CLEITON.C",
+          "emissoes": 5,
+          "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
           "emissoes": 5,
           "cancelamentos": 1
         }
@@ -1669,6 +1852,11 @@
           "nome": "NATHAN.B",
           "emissoes": 2,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 10,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1684,6 +1872,11 @@
           "nome": "CLEITON.C",
           "emissoes": 5,
           "cancelamentos": 4
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 6,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1703,6 +1896,11 @@
         {
           "nome": "NATHAN.B",
           "emissoes": 1,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 7,
           "cancelamentos": 0
         }
       ]
@@ -1724,6 +1922,11 @@
           "nome": "NATHAN.B",
           "emissoes": 2,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 10,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1733,6 +1936,11 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 12,
+          "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 6,
           "cancelamentos": 1
         }
       ]
@@ -1759,6 +1967,11 @@
           "nome": "CLEITON.C",
           "emissoes": 15,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 9,
+          "cancelamentos": 2
         }
       ]
     },
@@ -1772,6 +1985,11 @@
         },
         {
           "nome": "CLEITON.C",
+          "emissoes": 9,
+          "cancelamentos": 2
+        },
+        {
+          "nome": "WENDRYO.G",
           "emissoes": 9,
           "cancelamentos": 2
         }
@@ -1789,6 +2007,11 @@
           "nome": "CLEITON.C",
           "emissoes": 10,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 11,
+          "cancelamentos": 4
         }
       ]
     },
@@ -1809,6 +2032,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1829,6 +2057,11 @@
           "nome": "MANOEL.F",
           "emissoes": 4,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 12,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1839,6 +2072,11 @@
           "nome": "ANA.V",
           "emissoes": 7,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 16,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1864,6 +2102,11 @@
           "nome": "CLEITON.C",
           "emissoes": 13,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 6,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1879,6 +2122,11 @@
           "nome": "CLEITON.C",
           "emissoes": 10,
           "cancelamentos": 2
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
+          "cancelamentos": 0
         }
       ]
     },
@@ -1904,6 +2152,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 17,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1923,6 +2176,11 @@
         {
           "nome": "NATHAN.B",
           "emissoes": 4,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 7,
           "cancelamentos": 0
         }
       ]
@@ -1944,6 +2202,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 15,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1963,6 +2226,16 @@
       ]
     },
     {
+      "data": "22/03/26",
+      "usuarios": [
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 1,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
       "data": "23/03/26",
       "usuarios": [
         {
@@ -1974,6 +2247,11 @@
           "nome": "CLEITON.C",
           "emissoes": 14,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 12,
+          "cancelamentos": 1
         }
       ]
     },
@@ -1994,6 +2272,11 @@
           "nome": "NATHAN.B",
           "emissoes": 0,
           "cancelamentos": 2
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 13,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2014,6 +2297,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 13,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2028,6 +2316,11 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 13,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 9,
           "cancelamentos": 0
         }
       ]
@@ -2044,6 +2337,11 @@
           "nome": "CLEITON.C",
           "emissoes": 8,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 7,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2053,6 +2351,11 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 13,
+          "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 7,
           "cancelamentos": 1
         }
       ]
@@ -2084,6 +2387,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 2
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 11,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2104,6 +2412,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 12,
+          "cancelamentos": 4
         }
       ]
     },
@@ -2119,6 +2432,11 @@
           "nome": "CLEITON.C",
           "emissoes": 3,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
+          "cancelamentos": 1
         }
       ]
     },
@@ -2139,6 +2457,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 7,
+          "cancelamentos": 2
         }
       ]
     },
@@ -2164,6 +2487,21 @@
           "nome": "CLEITON.C",
           "emissoes": 11,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 1,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
+      "data": "05/04/26",
+      "usuarios": [
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 10,
+          "cancelamentos": 1
         }
       ]
     },
@@ -2173,6 +2511,11 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 9,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 7,
           "cancelamentos": 0
         }
       ]
@@ -2189,6 +2532,11 @@
           "nome": "NATHAN.B",
           "emissoes": 11,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 11,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2209,6 +2557,11 @@
           "nome": "NATHAN.B",
           "emissoes": 2,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 18,
+          "cancelamentos": 1
         }
       ]
     },
@@ -2224,6 +2577,11 @@
           "nome": "CLEITON.C",
           "emissoes": 11,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 6,
+          "cancelamentos": 1
         }
       ]
     },
@@ -2234,6 +2592,11 @@
           "nome": "CLEITON.C",
           "emissoes": 7,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 9,
+          "cancelamentos": 2
         }
       ]
     },
@@ -2243,6 +2606,11 @@
         {
           "nome": "ANA.V",
           "emissoes": 10,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 14,
           "cancelamentos": 0
         }
       ]
@@ -2274,6 +2642,11 @@
           "nome": "NATHAN.B",
           "emissoes": 0,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 4,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2288,6 +2661,11 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 15,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 12,
           "cancelamentos": 0
         }
       ]
@@ -2304,6 +2682,11 @@
           "nome": "CLEITON.C",
           "emissoes": 10,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 5,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2318,6 +2701,11 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 7,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 11,
           "cancelamentos": 0
         }
       ]
@@ -2334,6 +2722,11 @@
           "nome": "NATHAN.B",
           "emissoes": 3,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 11,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2344,6 +2737,11 @@
           "nome": "CLEITON.C",
           "emissoes": 8,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 5,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2369,6 +2767,21 @@
           "nome": "CLEITON.C",
           "emissoes": 7,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 6,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
+      "data": "21/04/26",
+      "usuarios": [
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 10,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2384,6 +2797,11 @@
           "nome": "CLEITON.C",
           "emissoes": 11,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 9,
+          "cancelamentos": 1
         }
       ]
     },
@@ -2404,6 +2822,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 5,
+          "cancelamentos": 1
         }
       ]
     },
@@ -2424,6 +2847,11 @@
           "nome": "NATHAN.B",
           "emissoes": 19,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
+          "cancelamentos": 3
         }
       ]
     },
@@ -2433,6 +2861,11 @@
         {
           "nome": "ANA.V",
           "emissoes": 5,
+          "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 6,
           "cancelamentos": 1
         }
       ]
@@ -2459,6 +2892,11 @@
           "nome": "CLEITON.C",
           "emissoes": 17,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 5,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2474,6 +2912,11 @@
           "nome": "CLEITON.C",
           "emissoes": 8,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 3,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2488,6 +2931,11 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 11,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 13,
           "cancelamentos": 0
         }
       ]
@@ -2509,6 +2957,11 @@
           "nome": "NATHAN.B",
           "emissoes": 0,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 4,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2538,6 +2991,16 @@
       ]
     },
     {
+      "data": "03/05/26",
+      "usuarios": [
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 5,
+          "cancelamentos": 0
+        }
+      ]
+    },
+    {
       "data": "04/05/26",
       "usuarios": [
         {
@@ -2549,6 +3012,11 @@
           "nome": "NATHAN.B",
           "emissoes": 4,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 7,
+          "cancelamentos": 2
         }
       ]
     },
@@ -2568,6 +3036,11 @@
         {
           "nome": "NATHAN.B",
           "emissoes": 1,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
           "cancelamentos": 0
         }
       ]
@@ -2589,6 +3062,11 @@
           "nome": "NATHAN.B",
           "emissoes": 2,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 1,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2603,6 +3081,11 @@
         {
           "nome": "NATHAN.B",
           "emissoes": 3,
+          "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 9,
           "cancelamentos": 0
         }
       ]
@@ -2619,6 +3102,11 @@
           "nome": "NATHAN.B",
           "emissoes": 1,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 12,
+          "cancelamentos": 1
         }
       ]
     },
@@ -2629,6 +3117,11 @@
           "nome": "CLEITON.C",
           "emissoes": 4,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
+          "cancelamentos": 1
         }
       ]
     },
@@ -2639,6 +3132,11 @@
           "nome": "CLEITON.C",
           "emissoes": 13,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
+          "cancelamentos": 0
         }
       ]
     },
@@ -2648,6 +3146,11 @@
         {
           "nome": "CLEITON.C",
           "emissoes": 7,
+          "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 9,
           "cancelamentos": 1
         }
       ]
@@ -2664,6 +3167,11 @@
           "nome": "NATHAN.B",
           "emissoes": 2,
           "cancelamentos": 0
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 13,
+          "cancelamentos": 2
         }
       ]
     },
@@ -2684,6 +3192,11 @@
           "nome": "NATHAN.B",
           "emissoes": 7,
           "cancelamentos": 1
+        },
+        {
+          "nome": "WENDRYO.G",
+          "emissoes": 8,
+          "cancelamentos": 0
         }
       ]
     },
