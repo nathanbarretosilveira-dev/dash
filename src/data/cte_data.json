@@ -1,9 +1,9 @@
 {
-  "criado_em": "20/05/2026 14:36:53",
+  "criado_em": "20/05/2026 14:43:45",
   "resumo": {
-    "total_emissoes": 1412,
+    "total_emissoes": 1414,
     "total_cancelamentos": 101,
-    "taxa_eficiencia": 92.85
+    "taxa_eficiencia": 92.86
   },
   "emissoes_por_usuario": [
     {
@@ -18,7 +18,7 @@
     },
     {
       "nome": "GABRIELLE.X",
-      "emissoes": 14,
+      "emissoes": 16,
       "cancelamentos": 0
     },
     {
@@ -65,7 +65,7 @@
   ],
   "emissoes_por_turno": {
     "antes_14h": 364,
-    "depois_14h": 944
+    "depois_14h": 945
   },
   "emissoes_por_turno_por_dia": [
     {
@@ -581,7 +581,7 @@
     {
       "data": "20/05/26",
       "antes_14h": 32,
-      "depois_14h": 16
+      "depois_14h": 17
     }
   ],
   "timeline_operacao": [
@@ -615,7 +615,7 @@
     },
     {
       "hora": "14:00",
-      "emissoes": 158
+      "emissoes": 159
     },
     {
       "hora": "15:00",
@@ -1167,7 +1167,7 @@
     },
     {
       "data": "20/05/26",
-      "emissoes": 48,
+      "emissoes": 50,
       "cancelamentos": 0
     }
   ],
@@ -2787,7 +2787,7 @@
         },
         {
           "nome": "GABRIELLE.X",
-          "emissoes": 14,
+          "emissoes": 16,
           "cancelamentos": 0
         },
         {
